@@ -15,25 +15,14 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import MailIcon from '@material-ui/icons/Mail';
 import FeedbackIcon from '@material-ui/icons/Feedback';
 import { useEffect } from "react";
-import { authorizationRequest } from "../../views/Home/homeActions";
-import { useDispatch } from "react-redux";
-import { AuthContext } from "../../auth/auth.js";
+import { useSelector } from "react-redux";
+import LocalShippingIcon from '@material-ui/icons/LocalShipping';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 function MainDrawer(props) {
   const classes = useStyles();
   const { width } = props;
-  const dispatch = useDispatch();
-  const user = useContext(AuthContext);
-  useEffect(()=>{
-    if (user==null){
-
-    }
-    else{
-        console.log("User - ",user.currentUser.uid,user.currentUser.email)
-        dispatch(authorizationRequest({uID:user.currentUser.uid,email:user.currentUser.email}))
-    }
-  },[dispatch,user])
-
+  const userRole= useSelector((state)=>state.homeReducer.role);
   const drawer = (
     <div style={{ height: "100%", fontFamily: "Poppins !important" }}>
       <div className={classes.logocontainer}> 
@@ -48,6 +37,8 @@ function MainDrawer(props) {
         style={{ fontFamily: "Poppins !important" }}
         className={classes.HoverEffect}
       >
+        {userRole=="postmaster"?(
+          <div>
         <NavLink
           to="/dashboard"
           style={{
@@ -266,7 +257,160 @@ function MainDrawer(props) {
               Feedback
             </label>
           </ListItem>
-        </NavLink>
+        </NavLink></div>):(
+          userRole=="supervisor"?
+            (<div>
+              <NavLink
+                to="/dashboard"
+                style={{
+                  color: "#f7f3f2",
+                  textDecoration: "none",
+                  fontFamily: "Mulish",
+                  fontWeight: "bold",
+                  fontSize: "16px",
+                  fontStyle: "normal",
+                }}
+                activeStyle={{
+                  color: "#63231c",
+                  backgroundColor: "#de8071",
+                  fontWeight: "bold",
+                  
+                }}
+              >
+                <ListItem
+                  button
+                  className={classes.listItem}
+                  style={{
+                    backgroundColor: "inherit",
+                    fontFamily: "Poppins !important",
+                  }}
+                >
+                  <ListItemIcon>
+                    <Badge color="secondary" variant="dot" invisible={true}>
+                    <DashboardIcon style={{color:"white"}} activeStyle={{color:"red"}}/>
+                    </Badge>
+                  </ListItemIcon>
+                  <label
+                    style={{ fontFamily: "Poppins !important" }}
+                    className={classes.DrawerLables}
+                  >
+                    Dashboard
+                  </label>
+                </ListItem>
+              </NavLink>
+
+              <NavLink
+                to="/receipts"
+                style={{
+                  color: "#f7f3f2",
+                  textDecoration: "none",
+                  fontFamily: "Mulish",
+                  fontWeight: "bold",
+                  fontSize: "16px",
+                  fontStyle: "normal",
+                }}
+                activeStyle={{
+                  color: "#63231c",
+                  backgroundColor: "#de8071",
+                  fontWeight: "bold",
+                  
+                }}
+              >
+                <ListItem
+                  button
+                  className={classes.listItem}
+                  style={{
+                    backgroundColor: "inherit",
+                    fontFamily: "Poppins !important",
+                  }}
+                >
+                  <ListItemIcon style={{ position: "relative" }}>
+                    <PersonAddIcon/>
+                  </ListItemIcon>
+                  <label
+                    style={{ fontFamily: "Poppins !important" }}
+                    className={classes.DrawerLables}
+                  >
+                    Registration
+                  </label>
+                </ListItem>
+              </NavLink>
+
+              <NavLink
+                to="/receipts"
+                style={{
+                  color: "#f7f3f2",
+                  textDecoration: "none",
+                  fontFamily: "Mulish",
+                  fontWeight: "bold",
+                  fontSize: "16px",
+                  fontStyle: "normal",
+                }}
+                activeStyle={{
+                  color: "#63231c",
+                  backgroundColor: "#de8071",
+                  fontWeight: "bold",
+                  
+                }}
+              >
+                <ListItem
+                  button
+                  className={classes.listItem}
+                  style={{
+                    backgroundColor: "inherit",
+                    fontFamily: "Poppins !important",
+                  }}
+                >
+                  <ListItemIcon style={{ position: "relative" }}>
+                    <AssignmentIcon/>
+                  </ListItemIcon>
+                  <label
+                    style={{ fontFamily: "Poppins !important" }}
+                    className={classes.DrawerLables}
+                  >
+                    Mail Assignment
+                  </label>
+                </ListItem>
+              </NavLink>
+
+              <NavLink
+                to="/receipts"
+                style={{
+                  color: "#f7f3f2",
+                  textDecoration: "none",
+                  fontFamily: "Mulish",
+                  fontWeight: "bold",
+                  fontSize: "16px",
+                  fontStyle: "normal",
+                }}
+                activeStyle={{
+                  color: "#63231c",
+                  backgroundColor: "#de8071",
+                  fontWeight: "bold",
+                  
+                }}
+              >
+                <ListItem
+                  button
+                  className={classes.listItem}
+                  style={{
+                    backgroundColor: "inherit",
+                    fontFamily: "Poppins !important",
+                  }}
+                >
+                  <ListItemIcon style={{ position: "relative" }}>
+                    <LocalShippingIcon/>
+                  </ListItemIcon>
+                  <label
+                    style={{ fontFamily: "Poppins !important" }}
+                    className={classes.DrawerLables}
+                  >
+                    Mail transfers
+                  </label>
+                </ListItem>
+              </NavLink>
+            </div>):null
+        )}
 
       </List>
 
