@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
 import { logoutRequest } from "../../views/Login/loginActions.js";
 
-export default function TopBar() {
+export default function TopBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -21,6 +21,7 @@ export default function TopBar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const dispatch = useDispatch();
+ // console.log("page-",page)
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -61,7 +62,7 @@ export default function TopBar() {
         <Toolbar>
           
           <Typography className={classes.title} variant="h6" noWrap>
-            DASHBOARD
+            {props.page}
           </Typography>
           
           <div className={classes.grow} />

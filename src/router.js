@@ -11,7 +11,9 @@ import { useSelector } from 'react-redux';
 import AuthError from "./views/Error/authError";
 import { CircularProgress, Grid } from "@material-ui/core";
 import SupervisorDashboard from "./views/Home/SupervisorDashboard/dashboard";
-
+import LiveDelivery from "./views/LiveDelivery/liveDelivery";
+import Registration from "./views/Registration/registration";
+import Statistics from "./views/Statistics/statistics";
 
 function Authorization() {
     const dispatch = useDispatch();
@@ -35,8 +37,27 @@ function Authorization() {
             <Route exact path="/dashboard" component={
                 userRole? 
                 (userRole=="postmaster"?(PostmasterDashboard):
-                (userRole=="supervisor"?(SupervisorDashboard):
+                (userRole=="supervisor"?(PostmasterDashboard):
                 (userRole=="receptionist"?null:null)))
+                :AuthError
+            } />
+            <Route exact path="/live-delivery" component={
+                userRole? 
+                (userRole=="postmaster"?(LiveDelivery):
+                AuthError)
+                :AuthError
+            } />
+            <Route exact path="/registration" component={
+                userRole? 
+                (userRole=="postmaster"?(Registration):
+                (userRole=="supervisor"?(Registration):
+                AuthError))
+                :AuthError
+            } />
+            <Route exact path="/statistics" component={
+                userRole? 
+                (userRole=="postmaster"?(Statistics):
+                AuthError)
                 :AuthError
             } />
             <Route exact path="/">
