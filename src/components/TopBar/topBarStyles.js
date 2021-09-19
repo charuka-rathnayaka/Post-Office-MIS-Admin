@@ -10,9 +10,9 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         color:"black",
-        fontFamily:"bold",
-        fontWeight:"900",
-        fontSize:"22px",
+        fontFamily:"Rubik, sans-serif",
+        fontWeight:"bold",
+        fontSize:"24px",
       display: 'none',
       [theme.breakpoints.up('sm')]: {
         display: 'block',
@@ -35,7 +35,9 @@ const useStyles = makeStyles((theme) => ({
     userName:{
         color:"black",
         fontSize:"20px",
-        paddingLeft:"10px"
+        paddingLeft:"10px",
+        fontFamily:"Rubik, sans-serif",
+        fontWeight:"normal"
     }
     
   }));

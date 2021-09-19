@@ -34,17 +34,18 @@ function MainDrawer(props) {
       </div>
 
       <List
-        style={{ fontFamily: "Poppins !important" }}
+        style={{ fontFamily: "Rubik, sans-serif" }}
         className={classes.HoverEffect}
       >
         {userRole=="postmaster"?(
           <div>
         <NavLink
           to="/dashboard"
+
           style={{
             color: "#f7f3f2",
             textDecoration: "none",
-            fontFamily: "Mulish",
+            fontFamily: "Rubik, sans-serif",
             fontWeight: "bold",
             fontSize: "16px",
             fontStyle: "normal",
@@ -55,14 +56,12 @@ function MainDrawer(props) {
             fontWeight: "bold",
             
           }}
+          className={classes.NavButton}
         >
           <ListItem
             button
             className={classes.listItem}
-            style={{
-              backgroundColor: "inherit",
-              fontFamily: "Poppins !important",
-            }}
+           
           >
             <ListItemIcon>
               <Badge color="secondary" variant="dot" invisible={true}>
@@ -78,11 +77,11 @@ function MainDrawer(props) {
           </ListItem>
         </NavLink>
         <NavLink
-          to="/shops"
+          to="/live-delivery"
           style={{
             color: "#f7f3f2",
             textDecoration: "none",
-            fontFamily: "Mulish",
+            fontFamily: "Rubik, sans-serif",
             fontWeight: "bold",
             fontSize: "16px",
             fontStyle: "normal",
@@ -93,6 +92,7 @@ function MainDrawer(props) {
             fontWeight: "bold",
             
           }}
+          className={classes.NavButton}
         >
           <ListItem
             button
@@ -102,7 +102,7 @@ function MainDrawer(props) {
               <DirectionsBikeIcon/>
             </ListItemIcon>
             <label
-              style={{ fontFamily: "Poppins" }}
+              style={{ fontFamily: "Rubik, sans-serif" }}
               className={classes.DrawerLables}
             >
               Live Delivery
@@ -111,7 +111,7 @@ function MainDrawer(props) {
         </NavLink>
 
         <NavLink
-          to="/invoices"
+          to="/statistics"
           style={{
             color: "#f7f3f2",
             textDecoration: "none",
@@ -126,14 +126,12 @@ function MainDrawer(props) {
             fontWeight: "bold",
             
           }}
+          className={classes.NavButton}
         >
           <ListItem
             button
             className={classes.listItem}
-            style={{
-              backgroundColor: "inherit",
-              fontFamily: "Poppins !important",
-            }}
+            
           >
             <ListItemIcon style={{ position: "relative" }}>
               <EqualizerIcon/>
@@ -148,7 +146,7 @@ function MainDrawer(props) {
         </NavLink>
 
         <NavLink
-          to="/receipts"
+          to="/registration"
           style={{
             color: "#f7f3f2",
             textDecoration: "none",
@@ -163,14 +161,12 @@ function MainDrawer(props) {
             fontWeight: "bold",
             
           }}
+          className={classes.NavButton}
         >
           <ListItem
             button
             className={classes.listItem}
-            style={{
-              backgroundColor: "inherit",
-              fontFamily: "Poppins !important",
-            }}
+            
           >
             <ListItemIcon style={{ position: "relative" }}>
               <PersonAddIcon/>
@@ -184,42 +180,7 @@ function MainDrawer(props) {
           </ListItem>
         </NavLink>
 
-        <NavLink
-          to="/settings"
-          style={{
-            color: "#f7f3f2",
-            textDecoration: "none",
-            fontFamily: "Mulish",
-            fontWeight: "bold",
-            fontSize: "16px",
-            fontStyle: "normal",
-          }}
-          activeStyle={{
-            color: "#63231c",
-            backgroundColor: "#de8071",
-            fontWeight: "bold",
-            
-          }}
-        >
-          <ListItem
-            button
-            className={classes.listItem}
-            style={{
-              backgroundColor: "inherit",
-              fontFamily: "Poppins !important",
-            }}
-          >
-            <ListItemIcon style={{ position: "relative" }}>
-              <MailIcon/>
-            </ListItemIcon>
-            <label
-              style={{ fontFamily: "Poppins !important" }}
-              className={classes.DrawerLables}
-            >
-              Mail Details
-            </label>
-          </ListItem>
-        </NavLink>
+        
 
 
         <NavLink
@@ -238,14 +199,12 @@ function MainDrawer(props) {
             fontWeight: "bold",
             
           }}
+          className={classes.NavButton}
         >
           <ListItem
             button
             className={classes.listItem}
-            style={{
-              backgroundColor: "inherit",
-              fontFamily: "Poppins !important",
-            }}
+          
           >
             <ListItemIcon style={{ position: "relative" }}>
               <FeedbackIcon/>
@@ -276,6 +235,7 @@ function MainDrawer(props) {
                   fontWeight: "bold",
                   
                 }}
+                className={classes.NavButton}
               >
                 <ListItem
                   button
@@ -300,7 +260,7 @@ function MainDrawer(props) {
               </NavLink>
 
               <NavLink
-                to="/receipts"
+                to="/registration"
                 style={{
                   color: "#f7f3f2",
                   textDecoration: "none",
@@ -315,14 +275,12 @@ function MainDrawer(props) {
                   fontWeight: "bold",
                   
                 }}
+                className={classes.NavButton}
               >
                 <ListItem
                   button
                   className={classes.listItem}
-                  style={{
-                    backgroundColor: "inherit",
-                    fontFamily: "Poppins !important",
-                  }}
+                  
                 >
                   <ListItemIcon style={{ position: "relative" }}>
                     <PersonAddIcon/>
@@ -352,14 +310,12 @@ function MainDrawer(props) {
                   fontWeight: "bold",
                   
                 }}
+                className={classes.NavButton}
               >
                 <ListItem
                   button
                   className={classes.listItem}
-                  style={{
-                    backgroundColor: "inherit",
-                    fontFamily: "Poppins !important",
-                  }}
+                  
                 >
                   <ListItemIcon style={{ position: "relative" }}>
                     <AssignmentIcon/>
@@ -389,14 +345,12 @@ function MainDrawer(props) {
                   fontWeight: "bold",
                   
                 }}
+                className={classes.NavButton}
               >
                 <ListItem
                   button
                   className={classes.listItem}
-                  style={{
-                    backgroundColor: "inherit",
-                    fontFamily: "Poppins !important",
-                  }}
+                  
                 >
                   <ListItemIcon style={{ position: "relative" }}>
                     <LocalShippingIcon/>

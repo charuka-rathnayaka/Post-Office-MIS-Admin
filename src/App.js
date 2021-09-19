@@ -14,7 +14,6 @@ function App() {
         <Router>
             <Route exact path="/login" component={Login} />
             <PrivateRoute path ="/" component={Authorization}></PrivateRoute>
-            
         </Router>
       </div>
     </AuthProvider>
