@@ -2,7 +2,7 @@ import { GoogleMap, InfoWindow, Marker, withGoogleMap, withScriptjs } from "reac
 import * as React from "react";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-
+import dateFormat from "dateformat";
 
 const { MarkerWithLabel } = require("react-google-maps/lib/components/addons/MarkerWithLabel");
 
@@ -10,58 +10,80 @@ const GoogleMapLive = withScriptjs(
   withGoogleMap(
     ({
       liveLocations,
-      showLabels,
+      postmen,
       defaultZoom,
       defaultCenter,
-      newestLiveLocations,
-      allLiveLocations
-    }) => {
+      postOfficeLocation
       
-     const locationList=[
-         {
-             index:1,
-             lat: 6.04020749350331, 
-             lng:  80.21514699867778
+    }) => {
+      const lengthOfLiveLocationList = liveLocations.length;
+      const [isInfoWindowShowing, setInfoWindowShowing] = React.useState(
+        new Array(lengthOfLiveLocationList).fill(false)
+      );
+      
+      React.useEffect(() => {
+        setInfoWindowShowing(new Array(lengthOfLiveLocationList).fill(false));
+      }, []);
 
-         },
-         {
-            index:1,
-            lat: 6.14020749350331, 
-            lng:  80.29514699867778
-
-        },
-        {
-            index:1,
-            lat: 6.09020749350331, 
-            lng:  80.01514699867778
-
-        },
-        {
-            index:1,
-            lat: 6.24020749350331, 
-            lng:  80.31514699867778
-
-        }
-     ]
-
-     
-
-      // console.log("new 5 - ",newestLiveLocations);
-      // console.log("others  - ",liveLocations)
+      const postmanIcon={
+          url: `http://maps.google.com/mapfiles/ms/micons/police.png`,
+          scaledSize: new window.google.maps.Size(28, 28),
+          labelOrigin: new window.google.maps.Point(19, 12)
+        };
+      const postOfficeIcon={
+          url: `http://maps.google.com/mapfiles/ms/micons/rangerstation.png`,
+          scaledSize: new window.google.maps.Size(42, 42),
+          labelOrigin: new window.google.maps.Point(19, 12)
+      }
       
       return (
         <div >
           <GoogleMap options={{ fullscreenControl: false }} defaultCenter={defaultCenter} defaultZoom={defaultZoom}>
-          {locationList.map((marker,index)=>{
-              return(
-                <Marker
-                position={{ lat: marker.lat, lng:  marker.lng}}
-                  
-                />)
-          })}
-          <Marker
-            position={{ lat: 6.04020749350331, lng:  80.21514699867778}}
+            <Marker
+              position={{ lat: postOfficeLocation._lat, lng:  postOfficeLocation._long}}
+              icon={postOfficeIcon}
             />
+
+          {liveLocations.map((postman,index)=>{
+            const postmanDetails=postmen.filter((e) => e.userDocumentID === postman.userDocumentID)[0];
+              return(
+    
+                <Marker
+                  key={index}
+                  position={{ lat: postman.location.lat, lng:  postman.location.lng}}
+                  icon={postmanIcon}
+                  onClick={() => {
+                    isInfoWindowShowing[index] = !isInfoWindowShowing[index];
+                    setInfoWindowShowing(JSON.parse(JSON.stringify(isInfoWindowShowing)));
+                  }}
+                >
+                  {isInfoWindowShowing[index] && (
+                    <InfoWindow
+                    options={{
+                          backgroundColor:"red",
+                          boxStyle: {
+                              boxShadow: `3px 3px 10px rgba(0,0,0,0.6)`
+                          },
+                          
+                      }}
+                      onCloseClick={() => {
+                        isInfoWindowShowing[index] = false;
+                        setInfoWindowShowing(JSON.parse(JSON.stringify(isInfoWindowShowing)));
+                      }}
+                    >
+                      <div >
+                        <p style={{fontWeight:"bold"}}>Name: {postmanDetails.firstName+" "+postmanDetails.lastName}</p>
+                        <p >Email: {postmanDetails.email}</p>
+                        <p >Contact Number: {postmanDetails.contactNumber}</p>
+                        <p >Last seen: {dateFormat(new Date(postman.timeStamp), "dd/mm/yyyy hh:MM TT")}</p>
+                        
+                      </div>
+                    </InfoWindow>
+                  )}
+                </Marker>  
+                  )
+          })}
+         
           </GoogleMap>
         </div>
       );
