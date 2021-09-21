@@ -6,38 +6,26 @@ import AcceptedServiceTypesLineChart from "../../components/Charts/AcceptedServi
 import { useStyles } from "./statisticsStyles";
 import {Grid} from "@material-ui/core";
 import { TextField } from "@material-ui/core";
+import DateFramePicker from "../../components/DatePicker/dateFramePicker";
 export default function Statistics(){
    const classes=useStyles()
    const [startDate,setStartDate]= React.useState(new Date());
    const [endDate,setEndDate]= React.useState(new Date())
    // <RevenueChart/>  
+   console.log("dates - ",startDate,endDate)
     return(
         <div>
             <Nav>
                 <TopBar page="Statistics"/>
                 <div>
-                <form className={classes.container} noValidate>
-                    <TextField
-                        id="date"
-                        label="Start Date"
-                        type="date"
-                        defaultValue={startDate}
-                        className={classes.textField}
-                        InputLabelProps={{
-                        shrink: true,
-                        }}
+                    <DateFramePicker
+                        startDate={startDate}
+                        setStartDate={setStartDate}
+                        startLabel="Start Date"
+                        endDate={endDate}
+                        setEndDate={setEndDate}
+                        endLabel="End Date"
                     />
-                    <TextField
-                        id="date"
-                        label="End Date"
-                        type="date"
-                        defaultValue="2017-05-24"
-                        className={classes.textField}
-                        InputLabelProps={{
-                        shrink: true,
-                        }}
-                    />
-                </form>
                 </div>
                 <div style={{marginTop:"80px"}}>
                     <AcceptedServiceTypesLineChart/>

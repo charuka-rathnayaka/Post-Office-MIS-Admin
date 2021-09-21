@@ -12,6 +12,7 @@ async function getUserDetails(uID,email){
         .get()
         .then((doc)=>{
             var userData=doc.data();
+            //console.log("post office ",userData.postOffice.id)
             return userData;
         })
         .catch((e)=>{
@@ -26,7 +27,8 @@ export function* getUserDetailsSaga(data){
     // console.log("saga -",currentUserEmail,currentUserID)
     try {
         let result = yield call(getUserDetails,currentUserID,currentUserEmail);
-        console.log("res ",result)
+        // console.log("res ",result)
+        
         //const userHierarchy = getAllowedUserHierarchy(result);
         yield put(authorizationSuccess(result));
   } catch (e) {
