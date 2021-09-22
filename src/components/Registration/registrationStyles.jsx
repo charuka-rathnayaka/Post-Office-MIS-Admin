@@ -25,7 +25,7 @@ export const useStyles = makeStyles(() => ({
         paddingTop:"50px",
         marginLeft:"30px",
         marginRight:"30px",
-        margenBottom:"60px"
+        paddingBottom:"60px"
       },
       password: {
         marginBottom: "16px",
@@ -46,6 +46,33 @@ export const useStyles = makeStyles(() => ({
         color: "#6e0603",
         float: "left",
         marginLeft: "4px",
+        fontFamily: "Poppins",
+        fontStyle: "normal",
+        fontWeight: 600,
+      },
+      successText: {
+        fontSize: "16px",
+        color: "green",
+        float: "left",
+        marginLeft: "40%",
+        fontFamily: "Poppins",
+        fontStyle: "normal",
+        fontWeight: 600,
+      },
+      loadingText: {
+        fontSize: "16px",
+        color: "orange",
+        float: "left",
+        marginLeft: "40%",
+        fontFamily: "Poppins",
+        fontStyle: "normal",
+        fontWeight: 600,
+      },
+      errorTextMsg: {
+        fontSize: "16px",
+        color: "#6e0603",
+        float: "left",
+        marginLeft: "35%",
         fontFamily: "Poppins",
         fontStyle: "normal",
         fontWeight: 600,

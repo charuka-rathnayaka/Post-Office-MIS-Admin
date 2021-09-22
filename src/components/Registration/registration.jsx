@@ -12,13 +12,18 @@ import {
   import { useDispatch, useSelector } from "react-redux";
   import { useFormik } from "formik";
   import {useStyles,styles,LoginButton} from "./registrationStyles";
-import {addEmployee} from "../../views/Registration/registrationAction";
+  import {addEmployee} from "../../views/Registration/registrationAction";
+  import { MenuItem } from '@material-ui/core';
 
-function RegistrationForm(){
+
+function RegistrationForm(data){
     const classes=useStyles()
     const newClasses=styles()
     const { error } = [];
     const dispatch = useDispatch();
+    const userID = useSelector((state) => state.homeReducer.currentUserID);
+    const registrationReducer = useSelector((state) => state.registrationReducer);     
+    const postOffice = useSelector((state) => state.homeReducer.postOffice); 
     const [showPassword1, setShowPassword1] = useState(false);
     const handleClickShowPassword1 = () => setShowPassword1(!showPassword1);
     const handleMouseDownPassword1 = () => setShowPassword1(!showPassword1);
@@ -52,6 +57,9 @@ function RegistrationForm(){
         if(values.password2!=values.password1){
             errors.password2 = "Password confirmation is incorrect";
         }
+        if(!values.role){
+            errors.role = "Employee role is required";
+        }
         
         if (!values.password1) {
           errors.password1 = "Password field is required";
@@ -71,7 +79,10 @@ function RegistrationForm(){
           lastName:"",
           contactNumber:"",
           nic:"",
-          password2:"111111"
+          password2:"111111",
+          postOffice:postOffice,
+          role:"",
+          userID:userID
         },
         validate,
         onSubmit: (values) => {
@@ -82,6 +93,7 @@ function RegistrationForm(){
           formik.touched.contactNumber=false;
           formik.touched.nic=false;
           formik.touched.password2=false;
+          formik.touched.role=false;
           dispatch(addEmployee(values));
         },
       });
@@ -148,6 +160,42 @@ function RegistrationForm(){
                                     <p className={classes.errorText}>{formik.errors.lastName}</p>
                                 ) : null}
                                 {formik.errors.lastName === undefined && !formik.touched.lastName ? (
+                                    <p className={classes.errorText}>{error}</p>
+                                ) : null}
+                                </span>
+                            </Grid>
+
+                        </Grid>
+
+
+                        <Grid container direction ="row" spacing={5} className={classes.InputLine}>
+                            <Grid item className={classes.InputLabel}>
+                                    <div>Employee Type</div>
+                            </Grid>
+                            <Grid item className={classes.Input} >
+                                <TextField
+                                    fullWidth 
+                                    id="outlined-basic"
+                                    variant="outlined"                    
+                                    name="role"                                 
+                                    onChange={formik.handleChange}
+                                    select 
+                                    label="Employee Type" 
+                                >
+                                    {data.employeeTypes.map((option) => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </TextField>
+                            </Grid>
+
+                            <Grid item className={classes.ErrorText}>
+                                <span>
+                                {formik.touched.role && formik.errors.role !== undefined ? (
+                                    <p className={classes.errorText}>{formik.errors.role}</p>
+                                ) : null}
+                                {formik.errors.role === undefined && !formik.touched.role ? (
                                     <p className={classes.errorText}>{error}</p>
                                 ) : null}
                                 </span>
@@ -345,8 +393,20 @@ function RegistrationForm(){
                             </Grid> 
 
 
-                            <Grid container direction="column">
-                                
+                            <Grid container direction="column" style={{marginBelow:"50px"}}>
+                                <Grid item>
+                                     <span>
+                                    {(registrationReducer.isRequested==false && registrationReducer.requestSuccessful==false && registrationReducer.requestUnSuccessful==true) ? (
+                                        <p className={classes.errorTextMsg}>Registration Unsuccessfull Try Again</p>
+                                    ) : null}
+                                    {(registrationReducer.isRequested==false && registrationReducer.requestSuccessful==true && registrationReducer.requestUnSuccessful==false) ? (
+                                        <p className={classes.successText}>Registration Successfull</p>
+                                    ) : null}
+                                    {(registrationReducer.isRequested==true && registrationReducer.requestSuccessful==false && registrationReducer.requestUnSuccessful==false) ? (
+                                        <p className={classes.loadingText}>Registering..........</p>
+                                    ) : null}
+                                    </span>
+                                </Grid>
                                 <Grid item>
                                     <LoginButton
                                         variant="contained"

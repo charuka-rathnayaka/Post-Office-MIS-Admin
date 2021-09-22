@@ -18,6 +18,7 @@ import Statistics from "./views/Statistics/statistics";
 function Authorization() {
     const dispatch = useDispatch();
     const user = useContext(AuthContext);
+   // console.log("token -",user.currentUser.getIdToken(true))
     useEffect(()=>{
         if (user==null){
     
