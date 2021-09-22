@@ -31,7 +31,7 @@ function* getLiveLocations(data) {
         });
       } catch (error) {
       console.log("Error when locations retireved'")
-      return "Error"
+      return "Error";
   }
 }
 
@@ -58,7 +58,7 @@ function* getPostmanDetails(postOffice) {
         });
       } catch (error) {
       console.log("Error when taking postman details")
-      return "Error"
+      return "Error";
   }
 }
 
