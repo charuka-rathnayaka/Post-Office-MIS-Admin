@@ -3,7 +3,28 @@ import Nav from "../../components/SidePanel/sidePanel";
 import RegistrationForm from "../../components/Registration/registration";
 import TopBar from "../../components/TopBar/topBar";
 export default function Registration(){
-    
+    const employeeTypesPostmaster = [
+            {
+                label: "Postmaster",
+                value: "postmaster"
+            },
+            {
+                label: "Supervisor",
+                value: "supervisor"
+            },
+            {
+                label: "Receptionist",
+                value: "receptionist"
+            },
+            {
+                label: "Postman",
+                value: "postman"
+            },
+            {
+                label: "Delivery Log Keeper",
+                value: "deliveryLogKeeper"
+            }
+            ]
     
    
     return(
@@ -11,7 +32,7 @@ export default function Registration(){
             <Nav>
                 <TopBar page="Dashboard"/>
                 
-                <RegistrationForm></RegistrationForm>
+                <RegistrationForm employeeTypes={employeeTypesPostmaster}/>
             </Nav>
         </div>
     )
