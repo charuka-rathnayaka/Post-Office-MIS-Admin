@@ -12,7 +12,7 @@ function* getLiveLocations(data) {
   const channel = eventChannel((emit) => ref.onSnapshot(emit));
   try {
     const Data = yield take(channel);
-        return Data.docs.map((doc: any) => {
+        return Data.docs.map((doc) => {
             const data = doc.data();
             const documentID = doc.ref.parent.parent?.id || "";
             if (data.geoLocations.length > 0) {
@@ -41,7 +41,7 @@ function* getPostmanDetails(postOffice) {
   const channel = eventChannel((emit) => ref.onSnapshot(emit));
   try {  
     const Data = yield take(channel);
-        return Data.docs.map((doc: any) => {
+        return Data.docs.map((doc) => {
             const data = doc.data();
             const documentID = doc.id;
             if(data.postOffice.id===postOffice){

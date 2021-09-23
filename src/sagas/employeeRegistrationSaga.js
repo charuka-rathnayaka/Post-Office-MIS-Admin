@@ -27,7 +27,7 @@ export async function addEmployee(request){
       method: "post",
       url: "http://localhost:3050/create-user",
       params: {email:email,firstName:firstName,password:password,lastname:lastName,contactNumber:contactNumber,NIC:NIc,postOffice:postOffice,role:role,userID:userID},
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: {"Content-Type": "multipart/form-data" },
     })
       .then(function (response) {   
         console.log("sattus ",response.status)    
@@ -51,3 +51,6 @@ export function* addEmployeeSaga(request){
         yield put(addEmployeeError(e.toString()));
   }
 }
+
+
+
