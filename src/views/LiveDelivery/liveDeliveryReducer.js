@@ -3,9 +3,8 @@ import produce from "immer";
 
 const initialState = {
   error: "",
-  liveLocations: [],
+  locationData: [],
   locationsRetrieved:false,
-  postmen:[],
   postOffice:{},
   isLoading:false
 };
@@ -13,12 +12,11 @@ const initialState = {
 function LiveDeliveryReducer(state = initialState, action) {
   switch (action.type) {
     case liveLocationActionTypes.GET_LOCATIONS_REQUEST:
-      return { ...state, error: "", liveLocations: [],postmen:[],locationsRetrieved:false,isLoading:true};
+      return { ...state, error: "", locationsRetrieved:false,isLoading:true};
     case liveLocationActionTypes.GET_LOCATIONS_ERROR:
-      return { ...state, error: action.error, locationsRetrieved:false,postmen:[], liveLocations: [],isLoading:false };
+      return { ...state, error: action.error, locationsRetrieved:false,isLoading:false };
     case liveLocationActionTypes.GET_LOCATIONS_SUCCESS:
-      //Object.assign(state.liveLocations,action.data);
-      return {...state,liveLocations:[...action.locations],postmen:[...action.postmen],postOffice:{...action.postOfficeData.location}, locationsRetrieved:true, error: "",isLoading:false};
+      return {...state,locationData:[...action.locationData],postOffice:{...action.postOfficeData.location}, locationsRetrieved:true, error: "",isLoading:false};
     default:
       return state;
   }

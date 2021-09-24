@@ -34,8 +34,7 @@ export default function LiveDelivery(){
                         loadingElement={<div style={{ height: "100%" }} />}
                         containerElement={<div style={{ height: "90vh", width: "100%",backgroundColor:"#fcdcdc" }} />}
                         mapElement={<div style={{ height: "100%" }} />}
-                        liveLocations={liveLocations.liveLocations}
-                        postmen={liveLocations.postmen}
+                        liveLocations={liveLocations.locationData}
                         postOfficeLocation={liveLocations.postOffice}
                         defaultOptions={defaultMapOptions}
                         showLabels={[]}

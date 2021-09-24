@@ -10,7 +10,6 @@ const GoogleMapLive = withScriptjs(
   withGoogleMap(
     ({
       liveLocations,
-      postmen,
       defaultZoom,
       defaultCenter,
       postOfficeLocation
@@ -45,7 +44,6 @@ const GoogleMapLive = withScriptjs(
             />
 
           {liveLocations.map((postman,index)=>{
-            const postmanDetails=postmen.filter((e) => e.userDocumentID === postman.userDocumentID)[0];
               return(
     
                 <Marker
@@ -72,9 +70,9 @@ const GoogleMapLive = withScriptjs(
                       }}
                     >
                       <div >
-                        <p style={{fontWeight:"bold"}}>Name: {postmanDetails.firstName+" "+postmanDetails.lastName}</p>
-                        <p >Email: {postmanDetails.email}</p>
-                        <p >Contact Number: {postmanDetails.contactNumber}</p>
+                        <p style={{fontWeight:"bold"}}>Name: {postman.firstName+" "+postman.lastName}</p>
+                        <p >Email: {postman.email}</p>
+                        <p >Contact Number: {postman.contactNumber}</p>
                         <p >Last seen: {dateFormat(new Date(postman.timeStamp), "dd/mm/yyyy hh:MM TT")}</p>
                         
                       </div>

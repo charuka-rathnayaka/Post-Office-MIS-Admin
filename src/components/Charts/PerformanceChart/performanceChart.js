@@ -1,6 +1,6 @@
 import React from "react";
 import { AreaChart, linearGradient,XAxis, YAxis,CartesianGrid,Tooltip,Area  } from 'recharts';
-import { useDispatch,useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 
 function PerformanceChart(){
   const data = useSelector((state) => state.dashboardReducer.revenueData); 
