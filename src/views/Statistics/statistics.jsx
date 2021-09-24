@@ -1,18 +1,27 @@
-import React from "react";
+import React,{useEffect} from "react";
 import Nav from "./../../components/SidePanel/sidePanel";
 import TopBar from "./../../components/TopBar/topBar";
-import RevenueChart from "./../../components/Charts/RevenueChart/revenueChart";
+import RevenueChart from "../../components/Charts/PieCharts/revenueChart";
 import AcceptedServiceTypesLineChart from "../../components/Charts/AcceptedServiceTypeLineChart/acceptedServiceTypesLineChart";
 import { useStyles } from "./statisticsStyles";
 import {Grid} from "@material-ui/core";
-import { TextField } from "@material-ui/core";
 import DateFramePicker from "../../components/DatePicker/dateFramePicker";
+import { useDispatch,useSelector} from "react-redux";
+import { countDataRequest } from "./statisticsActions";
+import CountChart from "../../components/Charts/PieCharts/countChart";
+
+
 export default function Statistics(){
-   const classes=useStyles()
-   const [startDate,setStartDate]= React.useState(new Date());
+   const classes=useStyles();
+   var date=new Date();
+   const [startDate,setStartDate]= React.useState(new Date(date.setDate((new Date).getDate() - 20)));
    const [endDate,setEndDate]= React.useState(new Date())
-   // <RevenueChart/>  
-   console.log("dates - ",startDate,endDate)
+   const postOffice = useSelector((state) => state.homeReducer.postOffice); 
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(countDataRequest(startDate,endDate,postOffice))
+    },[dispatch,startDate,endDate,postOffice])
+   
     return(
         <div>
             <Nav>
@@ -32,12 +41,12 @@ export default function Statistics(){
                 </div>
                 <Grid container direction="row" spacing={0} alignItems={"center"} justify={"space-evenly"} className={classes.PieGrid}>
                     <Grid item className={classes.PieBox}>
-                        <div className={classes.PieTitle}>Mail Service Revenue - Past 30 days</div>
+                        <div className={classes.PieTitle}>Mail Service Revenue</div>
                         <RevenueChart/> 
                     </Grid>
                     <Grid item className={classes.PieBox}>   
-                        <div className={classes.PieTitle}>Mail Service Count - Past 30 days</div>        
-                        <RevenueChart/>               
+                        <div className={classes.PieTitle}>Mail Service Count</div>        
+                        <CountChart/>              
                     </Grid>
                 </Grid>
                 <div></div>

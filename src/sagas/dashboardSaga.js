@@ -4,10 +4,28 @@ import {performanceDataSuccess,performanceDataError} from "../views/Home/Dashboa
 import { eventChannel } from "redux-saga";
 import dateFormat from "dateformat";
 
-function* getPerformanceData(data){
+function* getPerformanceDataFromPending(data){
     //console.log("data - ",data.startDate,data.endDate,data.postOffice)
     const postOfficeRef= firestore.collection("PostOffice").doc(data.postOffice)
     const ref = firestore.collection("PendingMails").where("acceptedPostoffice","==",postOfficeRef).where('timestamp', '>',data.startDate).where("timestamp","<",data.endDate);
+    const channel = eventChannel((emit) => ref.onSnapshot(emit));
+    const Data = yield take(channel);
+    return Data.docs.map((doc) => {
+        const data = doc.data();
+        return{
+            cost:data.cost,
+            type:data.type,
+            date:dateFormat(data.timestamp.toDate(), "yyyy/mm/dd")
+        }
+        //console.log(data)
+        return data;
+    });
+}
+
+function* getPerformanceDataFromDelievered(data){
+    //console.log("data - ",data.startDate,data.endDate,data.postOffice)
+    const postOfficeRef= firestore.collection("PostOffice").doc(data.postOffice)
+    const ref = firestore.collection("DeliveredMails").where("acceptedPostoffice","==",postOfficeRef).where('timestamp', '>',data.startDate).where("timestamp","<",data.endDate);
     const channel = eventChannel((emit) => ref.onSnapshot(emit));
     const Data = yield take(channel);
     return Data.docs.map((doc) => {
@@ -52,9 +70,10 @@ function* getRevenueList(data,performanceData){
 
 export function* getPerformanceDataSaga(data){
     try {
-        const performanceData=yield call(getPerformanceData,data);
+        const performanceDataPending=yield call(getPerformanceDataFromPending,data);
+        const performanceDataDelivered=yield call(getPerformanceDataFromDelievered,data);
+        var performanceData=[...performanceDataPending,...performanceDataDelivered]
         const revenueList=yield call(getRevenueList,data,performanceData)
-        // console.log("performance data- ",performanceData)
         yield put(performanceDataSuccess(revenueList));
     } catch (error) {
         console.log("Errorr -",error);

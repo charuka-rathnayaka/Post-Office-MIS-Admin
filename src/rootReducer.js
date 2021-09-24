@@ -4,12 +4,13 @@ import homeReducer from "./views/Home/homeReducer.js";
 import LiveDeliveryReducer from "./views/LiveDelivery/liveDeliveryReducer";
 import registrationReducer from "./views/Registration/registrationReducer";
 import dashboardReducer from "./views/Home/Dashboard/dashboardReducer";
-
+import statisticsReducer from "./views/Statistics/statisticsReducer.js";
 
 export default combineReducers({
   loginReducer,
   homeReducer,
   LiveDeliveryReducer,
   registrationReducer,
-  dashboardReducer
+  dashboardReducer,
+  statisticsReducer
 });

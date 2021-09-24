@@ -1,8 +1,10 @@
 import {React} from "react";
 import { LineChart, CartesianGrid,XAxis,YAxis,Tooltip,Legend,Line  } from 'recharts';
+import { useSelector} from "react-redux";
 
 function AcceptedServiceTypesLineChart(){
-    const data = [
+  const data = useSelector((state) => state.statisticsReducer.countData);
+    /*const data = [
         {
           "Date": "Sep 1",
           "Normal Post": 4000,
@@ -88,7 +90,7 @@ function AcceptedServiceTypesLineChart(){
           "Package delievery":1500
         }
       ]
-      
+      */
     return (
         <LineChart width={1100} height={400} data={data}
             margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
@@ -97,10 +99,10 @@ function AcceptedServiceTypesLineChart(){
             <YAxis />
             <Tooltip />
             <Legend  />
-            <Line type="monotone" dataKey="Registered Post" stroke="#8884d8" />
-            <Line type="monotone" dataKey="Normal Post" stroke="#82ca9d" />
+            <Line type="monotone" dataKey="Registered Mail" stroke="#8884d8" />
+            <Line type="monotone" dataKey="Normal Mail" stroke="#82ca9d" />
             <Line type="monotone" dataKey="Money Order" stroke="#daa1e3" />
-            <Line type="monotone" dataKey="Package delievery" stroke="#dbd939" />
+            <Line type="monotone" dataKey="Package Delievery" stroke="#dbd939" />
         </LineChart>
     )
 }
