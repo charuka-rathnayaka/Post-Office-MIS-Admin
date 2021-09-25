@@ -80,7 +80,6 @@ async function getPostOffice(postOffice){
 function* getDataList(locations,postmen){
     const data= postmen.map((postman)=>{
         var location=locations.filter((e) => e.userDocumentID==postman.userDocumentID);
-        if (location.length==1){
             const loc=location[0];
             return {
                 userDocumentID: postman.documentID,
@@ -89,13 +88,12 @@ function* getDataList(locations,postmen){
                 contactNumber:postman.contactNumber,
                 email:postman.email,
                 postOffice:postman.postOffice,
-                timeStamp: loc.timeStamp,
+                timeStamp: loc?.timeStamp,
                 location: {
-                    lng: loc.location.lng || 0,
-                    lat: loc.location.lat || 0
+                    lng: loc?.location.lng || 0,
+                    lat: loc?.location.lat || 0
                 }
             }
-        }return null
     })
     return data;
 }
