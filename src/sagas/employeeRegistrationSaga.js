@@ -1,64 +1,56 @@
-import { put } from "redux-saga/effects";
+import { call,put } from "redux-saga/effects";
 import {
   ADD_EMPLOYEE_REQUEST
 } from "./../views/Registration/registrationActionTypes.js";
 //import {app} from "../auth/base.js";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import {auth} from "../auth/base.js";
-// import * as admin from 'firebase-admin/compat';
+import {
+  addEmployeeSuccess,
+  addEmployeeError
+} from "./../views/Registration/registrationAction.js";
+import axios from "axios";
 
-
-async function addUserAuth(email,password){
-    /*auth().createUserWithEmailAndPassword(email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log("user - ",user);
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log("error in adding user",error)
-    // ..
-  });*/
-  
-  return auth
-  .createUser({
-    uid: 'some-uid',
-    email: email,
-    password:password,
-  })
-  .then((userRecord) => {
-    // See the UserRecord reference doc for the contents of userRecord.
-    console.log('Successfully created new user:', userRecord.uid);
-    return userRecord.uid
-  })
-  .catch((error) => {
-    console.log('Error creating new user:', error);
-    return error
-  });
-    /*
-  try {
-    const res = await auth.createUserWithEmailAndPassword(email, password);
-    const user = res.user;
-    console.log("user - ",user);
-    await db.collection("users").add({
-      uid: user.uid,
-      name,
-      authProvider: "local",
-      email,
-    });
-  } catch (err) {
-    console.error(err);
-    console.log("error in adding user",err)
-    // alert(err.message);
-  }*/
-}
-export function* addEmployeeSaga(request){
+export async function addEmployee(request){
     const email=request.data.email;
-    const password=request.data.password;
-    const userRegister=addUserAuth(email,password)
-    console.log("ADD employee",request.data)
+    const password=request.data.password1;
+    const firstName=request.data.firstName;
+    const lastName=request.data.lastName;
+    const contactNumber=request.data.contactNumber;
+    const NIc=request.data.nic;
+    const postOffice=request.data.postOffice;
+    const role=request.data.role;
+    const userID=request.data.userID
+    // const userRegister=addUserAuth(email,password)
+    //console.log("ADD employee",email,password,request.data,postOffice)
+    const result =await axios({
+      method: "post",
+      url: "http://localhost:3050/create-user",
+      params: {email:email,firstName:firstName,password:password,lastname:lastName,contactNumber:contactNumber,NIC:NIc,postOffice:postOffice,role:role,userID:userID},
+      headers: {"Content-Type": "multipart/form-data" },
+    })
+      .then(function (response) {   
+        console.log("sattus ",response.status)    
+        return response.status;
+      })
+      return result;
 }
+
+export function* addEmployeeSaga(request){
+  try {
+        const data = yield (addEmployee(request));
+        if (data==201){ 
+            yield put(addEmployeeSuccess());
+        }
+        else{
+          yield put(addEmployeeError("Unexpected Error"));
+        }
+      
+        
+  } catch (e) {
+        yield put(addEmployeeError(e.toString()));
+  }
+}
+
+
 

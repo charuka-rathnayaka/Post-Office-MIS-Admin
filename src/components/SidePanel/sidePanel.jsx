@@ -186,7 +186,7 @@ function MainDrawer(props) {
 
 
         <NavLink
-          to="/settings"
+          to="/complains"
           style={{
             color: "#f7f3f2",
             textDecoration: "none",
@@ -215,7 +215,7 @@ function MainDrawer(props) {
               style={{ fontFamily: "Poppins !important" }}
               className={classes.DrawerLables}
             >
-              Feedback
+              Complains
             </label>
           </ListItem>
         </NavLink></div>):(

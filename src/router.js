@@ -1,7 +1,7 @@
 
 import React,{useContext} from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import PostmasterDashboard from "./views/Home/PostmasterDashboard/dashboard";
+import Dashboard from "./views/Home/Dashboard/dashboard";
 import Login from "./views/Login/login";
 import { useDispatch } from "react-redux";
 import { AuthContext } from "./auth/auth.js";
@@ -10,14 +10,15 @@ import { authorizationRequest } from "./views/Home/homeActions";
 import { useSelector } from 'react-redux';
 import AuthError from "./views/Error/authError";
 import { CircularProgress, Grid } from "@material-ui/core";
-import SupervisorDashboard from "./views/Home/SupervisorDashboard/dashboard";
 import LiveDelivery from "./views/LiveDelivery/liveDelivery";
 import Registration from "./views/Registration/registration";
 import Statistics from "./views/Statistics/statistics";
+import Complains from "./views/Complains/complains"
 
 function Authorization() {
     const dispatch = useDispatch();
     const user = useContext(AuthContext);
+   // console.log("token -",user.currentUser.getIdToken(true))
     useEffect(()=>{
         if (user==null){
     
@@ -36,8 +37,8 @@ function Authorization() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/dashboard" component={
                 userRole? 
-                (userRole=="postmaster"?(PostmasterDashboard):
-                (userRole=="supervisor"?(PostmasterDashboard):
+                (userRole=="postmaster"?(Dashboard):
+                (userRole=="supervisor"?(Dashboard):
                 (userRole=="receptionist"?null:null)))
                 :AuthError
             } />
@@ -57,6 +58,12 @@ function Authorization() {
             <Route exact path="/statistics" component={
                 userRole? 
                 (userRole=="postmaster"?(Statistics):
+                AuthError)
+                :AuthError
+            } />
+            <Route exact path="/complains" component={
+                userRole? 
+                (userRole=="postmaster"?(Complains):
                 AuthError)
                 :AuthError
             } />

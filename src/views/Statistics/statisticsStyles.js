@@ -7,9 +7,8 @@ export const useStyles = makeStyles(() => ({
         marginRight:"5px"
     },
     PieBox:{
-       
         textAlign: "center",
-       
+      
     },
     PieGrid:{
         marginTop:"30px"
@@ -17,7 +16,5 @@ export const useStyles = makeStyles(() => ({
     PieTitle:{
         fontFamily: "Rubik, sans-serif",
         fontSize: "16px",
-        
-        marginBottom:"20px"
     }
 }));

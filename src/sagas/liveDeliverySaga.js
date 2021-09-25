@@ -12,7 +12,7 @@ function* getLiveLocations(data) {
   const channel = eventChannel((emit) => ref.onSnapshot(emit));
   try {
     const Data = yield take(channel);
-        return Data.docs.map((doc: any) => {
+        return Data.docs.map((doc) => {
             const data = doc.data();
             const documentID = doc.ref.parent.parent?.id || "";
             if (data.geoLocations.length > 0) {
@@ -36,29 +36,27 @@ function* getLiveLocations(data) {
 }
 
 function* getPostmanDetails(postOffice) {
+  const postOfficeRef= firestore.collection("PostOffice").doc(postOffice)
   const role="postman"
-  const ref = firestore.collection("Users").where("role","==",role);
+  const ref = firestore.collection("Users").where("role","==",role).where("postOffice","==",postOfficeRef);
   const channel = eventChannel((emit) => ref.onSnapshot(emit));
   try {  
     const Data = yield take(channel);
-        return Data.docs.map((doc: any) => {
+        return Data.docs.map((doc) => {
             const data = doc.data();
             const documentID = doc.id;
-            if(data.postOffice.id===postOffice){
-                return {
-                    userDocumentID: documentID,
-                    firstName:data.firstName,
-                    lastName:data.lastName,
-                    contactNumber:data.contactNumber,
-                    email:data.email,
-                    postOffice:data.postOffice.id
-                };
-            }
-            return null;
+            return {
+                userDocumentID: documentID,
+                firstName:data.firstName,
+                lastName:data.lastName,
+                contactNumber:data.contactNumber,
+                email:data.email,
+                postOffice:data.postOffice.id
+            };
         });
       } catch (error) {
-      console.log("Error when taking postman details")
-      return "Error";
+        console.log("Error when taking postman details")
+        return "Error";
   }
 }
 
@@ -78,14 +76,36 @@ async function getPostOffice(postOffice){
 
 }
 
+
+function* getDataList(locations,postmen){
+    const data= postmen.map((postman)=>{
+        var location=locations.filter((e) => e.userDocumentID==postman.userDocumentID);
+            const loc=location[0];
+            return {
+                userDocumentID: postman.documentID,
+                firstName:postman.firstName,
+                lastName:postman.lastName,
+                contactNumber:postman.contactNumber,
+                email:postman.email,
+                postOffice:postman.postOffice,
+                timeStamp: loc?.timeStamp,
+                location: {
+                    lng: loc?.location.lng || 0,
+                    lat: loc?.location.lat || 0
+                }
+            }
+    })
+    return data;
+}
 export function* getLiveLocationsSaga(data){
     try {
         const postOffice=data.postOffice
         const locations=yield call(getLiveLocations);
         const postmen=yield call(getPostmanDetails,postOffice);
         const postOfficeData=yield call(getPostOffice,postOffice);
+        const locationData=yield call(getDataList,locations,postmen)
         if(locations!="Error"){
-            yield put(getLocationsSuccess(locations,postmen,postOfficeData));
+            yield put(getLocationsSuccess(locationData,postOfficeData));
         }
         else{
             yield put(getLocationsError("Unknown Error"))
