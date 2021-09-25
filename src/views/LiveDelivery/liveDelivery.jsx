@@ -21,8 +21,7 @@ export default function LiveDelivery(){
     useEffect(()=>{
       dispatch(getLocationsRequest(postOffice))
     },[dispatch])
-     const defaultMapOptions = {fullscreenControl: true,};
-
+    const defaultMapOptions = {fullscreenControl: true};
     return(
         <div>
             <Nav>
@@ -40,7 +39,6 @@ export default function LiveDelivery(){
                         showLabels={[]}
                         defaultZoom={14.0} 
                         defaultCenter={{lat: liveLocations.postOffice._lat, lng:liveLocations.postOffice._long}}
-                        
                     />
                 </div>
                 :((liveLocations.isLoading)?

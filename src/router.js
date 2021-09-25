@@ -13,6 +13,7 @@ import { CircularProgress, Grid } from "@material-ui/core";
 import LiveDelivery from "./views/LiveDelivery/liveDelivery";
 import Registration from "./views/Registration/registration";
 import Statistics from "./views/Statistics/statistics";
+import Complains from "./views/Complains/complains"
 
 function Authorization() {
     const dispatch = useDispatch();
@@ -57,6 +58,12 @@ function Authorization() {
             <Route exact path="/statistics" component={
                 userRole? 
                 (userRole=="postmaster"?(Statistics):
+                AuthError)
+                :AuthError
+            } />
+            <Route exact path="/complains" component={
+                userRole? 
+                (userRole=="postmaster"?(Complains):
                 AuthError)
                 :AuthError
             } />
