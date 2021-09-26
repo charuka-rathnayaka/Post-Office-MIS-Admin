@@ -1,6 +1,6 @@
 import React from 'react';
 import {useSelector,useDispatch} from "react-redux";
-import {addPostStart} from "../../views/RecepFunc/recepActions";
+import {addLogiPostStart} from "../../views/RecepFunc/recepActions";
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
@@ -30,12 +30,14 @@ const useStyles = makeStyles((theme) => ({
       },
   }));
 
-function NormalForm({postOffice}) {
+function LogiForm({postOffice}) {
     let today=new Date();
     let year=today.getFullYear();
     let month=today.getMonth()+1;
     let day=today.getDate();
     let tod=year.toString(10).slice(-2)+(("0"+month.toString(10)).slice(-2))+(("0"+day.toString(10)).slice(-2));
+    let num=''
+    var store=require('store');
     
     const dispatch = useDispatch();    
     
@@ -47,25 +49,47 @@ function NormalForm({postOffice}) {
     
     const initialState=useFormik({
         initialValues:{  
+            senderName:"",
+            senderAddressNo:"",
+            senderStreet1:"",
+            senderStreet2:"",
+            senderCity:"",
+            senderEmail:"",
             recipientName:"",
             recipientAddressNo:"",
             recipientStreet1:"",
             recipientStreet2:"",
             recipientCity:"",
+            recipientEmail:"",
             cost:"",
             pid:Pid,
             employee:userID,
             acceptedPostOffice:"",
             destinationPostOffice:"",
             long:longitude,
-            lat:latitude      
+            lat:latitude ,
+            weight:""     
         },
         onSubmit:(values,{resetForm})=>{
+            if ((store.get("pid")==null)||(store.get('pid').date!==tod)){
+                store.set("pid",{date:tod,number:'0001'});
+                num='0001';
+            }else{
+                num=('0000'+(parseInt(store.get('pid').number)+1).toString()).slice(-4);
+                store.set("pid",{date:tod,number:num});
+            }
+            initialState.touched.senderName=false;
+            initialState.touched.senderAddressNo=false;
+            initialState.touched.senderStreet1=false;
+            initialState.touched.senderStreet2=false;
+            initialState.touched.senderCity=false;
+            initialState.touched.senderEmail=false;
             initialState.touched.recipientName=false;
             initialState.touched.recipientAddressNo=false;
             initialState.touched.recipientStreet1=false;
             initialState.touched.recipientStreet2=false;
             initialState.touched.recipientCity=false;
+            initialState.touched.recipientEmail=false;
             initialState.touched.cost=false;
             initialState.touched.pid=false;
             initialState.touched.employee=false;
@@ -73,12 +97,13 @@ function NormalForm({postOffice}) {
             initialState.touched.destinationPostOffice=false;
             initialState.touched.long=false;
             initialState.touched.lat=false;
-            dispatch(addPostStart(initialState));
+            initialState.touched.weight=false;
+            dispatch(addLogiPostStart(initialState,num));
             resetForm({})
         }
     });
     
-    console.log(initialState);
+    //console.log(initialState);
     
     const classes = useStyles();
     
@@ -99,9 +124,147 @@ function NormalForm({postOffice}) {
         <>
             
                 
-                <Container maxWidth="sm">
-                    <h1>Normal Post</h1>
-                    <form  onSubmit={initialState.handleSubmit}>                            
+            <Container maxWidth="sm">
+                    <h1>Logi Post</h1>
+                    <form  onSubmit={initialState.handleSubmit}>  
+                    <div className="form-group">
+                            <TextField
+                                required
+                                id="filled-full-width"
+                                label="required"
+                                variant="filled"
+                                type="text"
+                                className="form-control"
+                                name="senderName"
+                                value={initialState.values.senderName}
+                                onChange={initialState.handleChange}
+                                style={{ margin: 8 }}
+                                placeholder="Sender's Name"
+                                fullWidth
+                                margin="normal"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                               
+                            />
+                            
+                        </div>
+                        <div className="form-group">
+                            <TextField
+                                required
+                                id="filled-full-width"
+                                label="required"
+                                variant="filled"
+                                type="text"
+                                className="form-control"
+                                name="senderAddressNo"
+                                value={initialState.values.senderAddressNo}
+                                onChange={initialState.handleChange}
+                                
+                                style={{ margin: 8 }}
+                                placeholder="Sender's Address No"
+                                fullWidth
+                                margin="normal"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                               
+                            />
+                            
+                        </div>
+                        <div className="form-group">
+                            <TextField
+                                required
+                                iid="filled-full-width"
+                                label="required"
+                                variant="filled"
+                                type="text"
+                                className="form-control"
+                                name="senderStreet1"
+                                value={initialState.values.senderStreet1}
+                                onChange={initialState.handleChange}
+                                
+                                style={{ margin: 8 }}
+                                placeholder="Sender's Street 1"
+                                fullWidth
+                                margin="normal"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                               
+                            />
+                            
+                        </div>
+                        <div className="form-group">
+                            <TextField
+                                
+                                
+                                
+                                variant="filled"
+                                type="text"
+                                className="form-control"
+                                name="senderStreet2"
+                                value={initialState.values.senderStreet2}
+                                
+                                onChange={initialState.handleChange}
+                                id="filled-full-width"
+                                style={{ margin: 8 }}
+                                placeholder="Sender's Street 2"
+                                fullWidth
+                                margin="normal"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                               
+                            />
+                            
+                        </div>
+                        <div className="form-group">
+                            <TextField
+                                required
+                                
+                                label="required"
+                                variant="filled"
+                                type="text"
+                                className="form-control"
+                                name="senderCity"
+                                value={initialState.values.senderCity}
+                                onChange={initialState.handleChange}
+                                id="filled-full-width"
+                                style={{ margin: 8 }}
+                                placeholder="Sender's City"
+                                fullWidth
+                                margin="normal"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                               
+                            />
+                            
+                        </div> 
+                        <div className="form-group">
+                            <TextField
+                                required
+                                
+                                label="required"
+                                variant="filled"
+                                type="email"
+                                className="form-control"
+                                name="senderEmail"
+                                value={initialState.values.senderEmail}
+                                onChange={initialState.handleChange}
+                                id="filled-full-width"
+                                style={{ margin: 8 }}
+                                placeholder="Sender's Email"
+                                fullWidth
+                                margin="normal"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                               
+                            />
+                            
+                        </div>                         
                         <div className="form-group">
                             <TextField
                                 required
@@ -220,10 +383,56 @@ function NormalForm({postOffice}) {
                         <div className="form-group">
                             <TextField
                                 required
+                                
+                                label="required"
+                                variant="filled"
+                                type="email"
+                                className="form-control"
+                                name="recipientEmail"
+                                value={initialState.values.recipientEmail}
+                                onChange={initialState.handleChange}
+                                id="filled-full-width"
+                                style={{ margin: 8 }}
+                                placeholder="Recipient's Email"
+                                fullWidth
+                                margin="normal"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                               
+                            />
+                            
+                        </div>
+                        <div className="form-group">
+                            <TextField
+                                required
+                                
+                                label="required"
+                                variant="filled"
+                                type="number"
+                                className="form-control"
+                                name="weight"
+                                value={initialState.values.weight}
+                                onChange={initialState.handleChange}
+                                id="filled-full-width"
+                                style={{ margin: 8 }}
+                                placeholder="Weight"
+                                fullWidth
+                                margin="normal"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                               
+                            />
+                            
+                        </div>
+                        <div className="form-group">
+                            <TextField
+                                required
                                
                                 label="required"
                                 variant="filled"
-                                type="float"
+                                type="number"
                                 className="form-control"
                                 name="cost"
                                 value={initialState.values.cost}
@@ -240,7 +449,7 @@ function NormalForm({postOffice}) {
                             />
                             
                         </div>
-                        <FormControl variant="filled" fullWidth className={classes.formControl}>
+                        <FormControl variant="filled" fullWidth required className={classes.formControl}>
                             <InputLabel id="demo-simple-select-filled-label">Accepted PostOffice</InputLabel>
                             
                             <Select
@@ -260,7 +469,7 @@ function NormalForm({postOffice}) {
                            
                         </FormControl><br/>
                         
-                        <FormControl variant="filled" fullWidth className={classes.formControl}>
+                        <FormControl variant="filled" fullWidth required className={classes.formControl}>
                             <InputLabel id="demo-simple-select-filled-label">Destination PostOffice</InputLabel>
                             
                             <Select
@@ -293,4 +502,4 @@ function NormalForm({postOffice}) {
     
 }
 
-export default NormalForm;
+export default LogiForm;

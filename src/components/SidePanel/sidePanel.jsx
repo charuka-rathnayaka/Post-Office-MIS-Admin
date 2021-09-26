@@ -485,7 +485,7 @@ userRole=="receptionist"?
     </NavLink>
 
     <NavLink
-      to="/LogiPform"
+      to="/logiPform"
       style={{
         color: "#f7f3f2",
         textDecoration: "none",
@@ -521,7 +521,7 @@ userRole=="receptionist"?
       </ListItem>
     </NavLink>
     <NavLink
-      to="/MoneyOform"
+      to="/moneyOform"
       style={{
         color: "#f7f3f2",
         textDecoration: "none",

@@ -6,7 +6,9 @@ const initialState = {
     post: {},
     dataRetrieved:false,
     isLoading:false,
-    isSubmitted:false
+    isSubmitted:false,
+    num:'',
+    moneyOrders:[]
     
 }
 
@@ -15,6 +17,8 @@ function postOfficeReducer (state=initialState,action){
     switch(action.type){
         
         case types.GET_POSTOFFICE_START:
+        case types.GET_MONEYORDERS_START:
+            console.log("GET_START");
             return{
                 ...state,
                 dataRetrieved:false,
@@ -33,7 +37,18 @@ function postOfficeReducer (state=initialState,action){
                 isLoading:false
             };
         
+            case types.GET_MONEYORDERS_SUCCESS:
+                console.log("types.GET_MONEYORDERS_SUCCESS")
+                return{
+                    
+                    ...state,
+                    moneyOrders:[...action.moneyOrders],
+                    dataRetrieved:true,
+                    isLoading:false
+                };
+        
         case types.GET_POSTOFFICE_FAIL:
+        case types.GET_MONEYORDERS_FAIL:
             return{
                 ...state,
                 error:action.error,
@@ -41,21 +56,30 @@ function postOfficeReducer (state=initialState,action){
                 isLoading:false
             };
         case types.ADD_POST_START:
+        case types.ADD_REG_POST_START:
+        case types.ADD_LOGI_POST_START:
+        case types.ADD_MONEYORDER_START:
             
             return{
                 ...state,
-                
+                num:action.num
                 
             };
         
             
         case types.ADD_POST_SUCCESS:
+        case types.ADD_REG_POST_SUCCESS:
+        case types.ADD_LOGI_POST_SUCCESS:
+        case types.ADD_MONEYORDER_SUCCESS:
             return{
                 ...state,
                 
             };
         
         case types.ADD_POST_FAIL:
+        case types.ADD_REG_POST_FAIL:
+        case types.ADD_LOGI_POST_FAIL:
+        case types.ADD_MONEYORDER_FAIL:
         
             return{
                 ...state,

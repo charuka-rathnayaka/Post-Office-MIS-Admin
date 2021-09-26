@@ -11,7 +11,7 @@ import { loginSaga,logoutSaga } from "./loginSaga.js";
 import { getUserDetailsSaga } from "./homeSaga.js";
 import { addEmployeeSaga } from "./employeeRegistrationSaga.js";
 import { getLiveLocationsSaga } from "./liveDeliverySaga.js";
-import {addPostDetailsSaga} from "./recepSaga.js";
+import {addPostDetailsSaga,addRegPostDetailsSaga,addLogiPostDetailsSaga,addMoneyOrderDetailsSaga, getMoneyOrdersSaga} from "./recepSaga.js";
 import {getPostOfficeSaga} from "./recepSaga.js";
 import { getPerformanceDataSaga } from "./dashboardSaga.js";
 import { getCountDataSaga } from "./statisticsSaga.js";
@@ -29,6 +29,10 @@ export default function* root() {
     takeEvery(dashboardActionTypes.PERFORMANCE_DATA_REQUEST,getPerformanceDataSaga),
     takeEvery(statisticsActionTypes.COUNT_DATA_REQUEST,getCountDataSaga),
     takeEvery(complainsActionTypes.COMPLAINS_DATA_REQUEST,getComplainDataSaga),
-    takeEvery(complainsActionTypes.MARK_SOLVED_REQUEST,setComplainSolvedSaga)
+    takeEvery(complainsActionTypes.MARK_SOLVED_REQUEST,setComplainSolvedSaga),
+    takeEvery(recepActionTypes.ADD_REG_POST_START,addRegPostDetailsSaga),
+    takeEvery(recepActionTypes.ADD_LOGI_POST_START,addLogiPostDetailsSaga),
+    takeEvery(recepActionTypes.ADD_MONEYORDER_START,addMoneyOrderDetailsSaga),
+    takeLatest(recepActionTypes.GET_MONEYORDERS_START,getMoneyOrdersSaga)
   ]);
 }

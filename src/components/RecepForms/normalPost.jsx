@@ -13,7 +13,6 @@ import { useFormik } from 'formik';
 
 
 
-
 const useStyles = makeStyles((theme) => ({
     
     textField: {
@@ -36,7 +35,9 @@ function NormalForm({postOffice}) {
     let month=today.getMonth()+1;
     let day=today.getDate();
     let tod=year.toString(10).slice(-2)+(("0"+month.toString(10)).slice(-2))+(("0"+day.toString(10)).slice(-2));
-    
+    let num='';
+    var store=require('store');
+
     const dispatch = useDispatch();    
     
     const longitude=postOffice[0].location._long;
@@ -61,6 +62,13 @@ function NormalForm({postOffice}) {
             lat:latitude      
         },
         onSubmit:(values,{resetForm})=>{
+            if ((store.get("pid")==null)||(store.get('pid').date!==tod)){
+                store.set("pid",{date:tod,number:'0001'});
+                num='0001';
+            }else{
+                num=('0000'+(parseInt(store.get('pid').number)+1).toString()).slice(-4);
+                store.set("pid",{date:tod,number:num});
+            }
             initialState.touched.recipientName=false;
             initialState.touched.recipientAddressNo=false;
             initialState.touched.recipientStreet1=false;
@@ -73,7 +81,7 @@ function NormalForm({postOffice}) {
             initialState.touched.destinationPostOffice=false;
             initialState.touched.long=false;
             initialState.touched.lat=false;
-            dispatch(addPostStart(initialState));
+            dispatch(addPostStart(initialState,num));
             resetForm({})
         }
     });
@@ -223,7 +231,7 @@ function NormalForm({postOffice}) {
                                
                                 label="required"
                                 variant="filled"
-                                type="float"
+                                type="number"
                                 className="form-control"
                                 name="cost"
                                 value={initialState.values.cost}
@@ -240,10 +248,11 @@ function NormalForm({postOffice}) {
                             />
                             
                         </div>
-                        <FormControl variant="filled" fullWidth className={classes.formControl}>
+                        <FormControl variant="filled" fullWidth required className={classes.formControl}>
                             <InputLabel id="demo-simple-select-filled-label">Accepted PostOffice</InputLabel>
                             
                             <Select
+                            
                             labelId="demo-simple-select-filled-label"
                             id="demo-simple-select-filled"
                             name="acceptedPostOffice"
@@ -260,10 +269,11 @@ function NormalForm({postOffice}) {
                            
                         </FormControl><br/>
                         
-                        <FormControl variant="filled" fullWidth className={classes.formControl}>
+                        <FormControl variant="filled" fullWidth required className={classes.formControl}>
                             <InputLabel id="demo-simple-select-filled-label">Destination PostOffice</InputLabel>
                             
                             <Select
+                            
                             labelId="demo-simple-select-filled-label"
                             id="demo-simple-select-filled"
                             name="destinationPostOffice"

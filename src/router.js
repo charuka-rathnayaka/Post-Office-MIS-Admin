@@ -2,6 +2,7 @@
 import React,{useContext} from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Dashboard from "./views/Home/Dashboard/dashboard";
+import RecepDashboard from "./views/Home/ReceptionistDashboard/dashboard";
 import Login from "./views/Login/login";
 import { useDispatch } from "react-redux";
 import { AuthContext } from "./auth/auth.js";
@@ -13,7 +14,12 @@ import { CircularProgress, Grid } from "@material-ui/core";
 import LiveDelivery from "./views/LiveDelivery/liveDelivery";
 import Registration from "./views/Registration/registration";
 import Statistics from "./views/Statistics/statistics";
-import Complains from "./views/Complains/complains"
+import Complains from "./views/Complains/complains";
+import NormalForm from "./views/RecepFunc/normPform";
+import RegisteredForm from "./views/RecepFunc/regPform";
+import LogiForm from "./views/RecepFunc/logiPform";
+import MoneyOrderForm from "./views/RecepFunc/moneyOform";
+import MoneyOrder from "./views/RecepFunc/moneyO";
 
 function Authorization() {
     const dispatch = useDispatch();
@@ -39,7 +45,7 @@ function Authorization() {
                 userRole? 
                 (userRole=="postmaster"?(Dashboard):
                 (userRole=="supervisor"?(Dashboard):
-                (userRole=="receptionist"?null:null)))
+                (userRole=="receptionist"?(RecepDashboard):null)))
                 :AuthError
             } />
             <Route exact path="/live-delivery" component={
@@ -67,9 +73,40 @@ function Authorization() {
                 AuthError)
                 :AuthError
             } />
+            <Route exact path="/normPForm" component={
+                userRole? 
+                (userRole==="receptionist"?(NormalForm):
+                AuthError)
+                :AuthError
+            } />
+            <Route exact path="/regPForm" component={
+                userRole? 
+                (userRole==="receptionist"?(RegisteredForm):
+                AuthError)
+                :AuthError
+            } />
+            <Route exact path="/logiPForm" component={
+                userRole? 
+                (userRole==="receptionist"?(LogiForm):
+                AuthError)
+                :AuthError
+            } />
+            <Route exact path="/moneyOForm" component={
+                userRole? 
+                (userRole==="receptionist"?(MoneyOrderForm):
+                AuthError)
+                :AuthError
+            } />
+            <Route exact path="/moneyO" component={
+                userRole? 
+                (userRole==="receptionist"?(MoneyOrder):
+                AuthError)
+                :AuthError
+            } />
             <Route exact path="/">
               <Redirect to="/dashboard" />
             </Route>
+
         </Router>
         :
         <Grid
