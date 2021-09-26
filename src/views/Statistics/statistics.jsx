@@ -9,7 +9,7 @@ import DateFramePicker from "../../components/DatePicker/dateFramePicker";
 import { useDispatch,useSelector} from "react-redux";
 import { countDataRequest } from "./statisticsActions";
 import CountChart from "../../components/Charts/PieCharts/countChart";
-
+import StatisticsReport from "../../components/Reports/statisticsReport";
 
 export default function Statistics(){
    const classes=useStyles();
@@ -27,14 +27,21 @@ export default function Statistics(){
             <Nav>
                 <TopBar page="Statistics"/>
                 <div>
-                    <DateFramePicker
-                        startDate={startDate}
-                        setStartDate={setStartDate}
-                        startLabel="Start Date"
-                        endDate={endDate}
-                        setEndDate={setEndDate}
-                        endLabel="End Date"
-                    />
+                    <Grid container direction="row" justifyContent="center" spacing={5}>
+                        <Grid item>
+                            <DateFramePicker
+                                startDate={startDate}
+                                setStartDate={setStartDate}
+                                startLabel="Start Date"
+                                endDate={endDate}
+                                setEndDate={setEndDate}
+                                endLabel="End Date"
+                            />
+                        </Grid>
+                        <Grid item style={{marginTop:"5px"}}>
+                            <StatisticsReport/>
+                        </Grid>
+                    </Grid>
                 </div>
                 <div style={{marginTop:"80px"}}>
                     <AcceptedServiceTypesLineChart/>

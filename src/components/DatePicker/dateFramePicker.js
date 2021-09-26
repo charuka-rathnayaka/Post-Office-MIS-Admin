@@ -11,7 +11,7 @@ function DateFramePicker(props){
     // console.log("chec- ",startDate<=endDate)
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Grid container direction="row" justifyContent="space-evenly" style={{marginTop:"10px"}}>
+        <Grid container direction="row" justifyContent="space-evenly"  spacing={3}>
             <Grid item>
             <Grid container direction="column">
                 <Grid item>
