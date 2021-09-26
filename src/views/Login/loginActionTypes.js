@@ -1,5 +1,5 @@
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-export const REQUEST_LOGIN_ERROR = "REQUEST_LOGIN_ERROR";
+export const LOGIN_ERROR = "LOGIN_ERROR";
 export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
 export const SAVE_ID_TOKEN = "SAVE_ID_TOKEN";

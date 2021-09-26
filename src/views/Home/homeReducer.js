@@ -21,7 +21,6 @@ function reducer(state = initialState, action) {
     case actionTypes.AUTHORIZATION_ERROR:
       return { ...state, error: action.error, isAuthorized: false };
     case actionTypes.AUTHORIZATION_SUCCESS:
-        console.log("success called")
       return { ...state, error: "", isAuthorized: true, firstName:action.data.firstName,lastName:action.data.lastName,contactNumber:action.data.contactNumber,NIC:action.data.NIC,role:action.data.role,postOffice:action.data.postOffice.id,currentUserID:action.currentUserID,currentUserEmail:action.currentUserEmail};
     default:
       return state;

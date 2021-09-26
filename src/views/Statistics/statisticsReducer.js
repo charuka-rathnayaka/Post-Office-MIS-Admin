@@ -16,7 +16,7 @@ function statisticsReducer(state = initialState, action) {
       return { ...state, error: action.error, countData:[],isRequested:false };
     case actionTypes.COUNT_DATA_SUCCESS:
         console.log("redu - ",action.data)
-      return { ...state, countData:[...action.countList],revenuePieData:[...action.revenuePieData],countPieData:[...action.countPieData],sRequested: false, error:"" };
+      return { ...state, countData:[...action.countList],revenuePieData:[...action.revenuePieData],countPieData:[...action.countPieData],isRequested: false, error:"" };
     default:
       return state;
   }

@@ -1,7 +1,7 @@
 import React,{ useEffect }  from "react";
 import Nav from "../../components/SidePanel/sidePanel";
 import TopBar from "../../components/TopBar/topBar";
-import FeedbackComponent from "../../components/Complain/complainComponent";
+import ComplainComponent from "../../components/Complain/complainComponent";
 import { complainsDataRequest } from "./complainsActions";
 import { useDispatch,useSelector} from "react-redux";
 import { CircularProgress, Grid } from "@material-ui/core";
@@ -21,7 +21,7 @@ export default function Complains(){
                     {(complainsReducer.isRequested===false && complainsReducer.dataRetrieved===true)?
                     (   complainsReducer.complainData.map((complain)=>
                             <div style={{marginTop:"30px"}}>
-                                <FeedbackComponent complain={complain}/>
+                                <ComplainComponent complain={complain}/>
                             </div>
                         )
                     ):

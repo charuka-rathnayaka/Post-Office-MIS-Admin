@@ -5,7 +5,7 @@ import { useDispatch,useSelector} from "react-redux";
 import { markSolvedRequest,complainsDataRequest } from "../../views/Complains/complainsActions";
     
 
-export default function FeedbackComponent(complain){
+export default function ComplainComponent(complain){
     const dispatch = useDispatch();
     const classes=useStyles();
     const complainData=complain.complain;
@@ -27,7 +27,7 @@ export default function FeedbackComponent(complain){
                                 </Grid>
 
                                 <Grid item>
-                                    <div className={classes.fieldValue}>{complainData.name}</div>
+                                    <div className={classes.fieldValue} data-testid="name-id">{complainData.name}</div>
                                 </Grid>
                             </Grid>
                         </Grid>
