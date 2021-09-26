@@ -8,6 +8,10 @@ export function loginSuccess() {
   return { type: actionTypes.LOGIN_SUCCESS };
 }
 
+export function loginError(error) {
+  return{ type:  actionTypes.LOGIN_ERROR, error: error};
+}
+
 export function logoutRequest() {
   return { type: actionTypes.LOGOUT_REQUEST };
 }

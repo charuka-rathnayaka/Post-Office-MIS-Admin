@@ -1,7 +1,7 @@
 import { put } from "redux-saga/effects";
 import {
   LOGIN_SUCCESS,
-  REQUEST_LOGIN_ERROR,
+  LOGIN_ERROR,
 } from "./../views/Login/loginActionTypes.js";
 import {app} from "../auth/base.js";
 
@@ -29,7 +29,7 @@ export function* loginSaga(request) {
         errorMessage = "Something went wrong! Please try again";
         break;
     }
-    yield put({ type: REQUEST_LOGIN_ERROR, error: errorMessage });
+    yield put({ type: LOGIN_ERROR, error: errorMessage });
     // console.log("Error occured",errorMessage,error.code);
   }
 }
