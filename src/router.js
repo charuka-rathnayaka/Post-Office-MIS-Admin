@@ -13,7 +13,10 @@ import { CircularProgress, Grid } from "@material-ui/core";
 import LiveDelivery from "./views/LiveDelivery/liveDelivery";
 import Registration from "./views/Registration/registration";
 import Statistics from "./views/Statistics/statistics";
-import Complains from "./views/Complains/complains"
+import Complains from "./views/Complains/complains";
+import MailAssignments from "./views/MailAssignments/mailAssignments";
+import MailTransfers from "./views/MailTransfers/mailTransfers";
+
 
 function Authorization() {
     const dispatch = useDispatch();
@@ -39,7 +42,7 @@ function Authorization() {
                 userRole? 
                 (userRole=="postmaster"?(Dashboard):
                 (userRole=="supervisor"?(Dashboard):
-                (userRole=="receptionist"?null:null)))
+                (userRole=="receptionist"?AuthError:AuthError)))
                 :AuthError
             } />
             <Route exact path="/live-delivery" component={
@@ -67,9 +70,27 @@ function Authorization() {
                 AuthError)
                 :AuthError
             } />
+
+            <Route exact path="/mail-assignments" component={
+                userRole? 
+                (userRole=="supervisor"?(MailAssignments):
+                AuthError)
+                :AuthError
+            } />
+
+            <Route exact path="/mail-transfer" component={
+                userRole? 
+                (userRole=="supervisor"?(MailTransfers):
+                AuthError)
+                :AuthError
+            } />
+
             <Route exact path="/">
               <Redirect to="/dashboard" />
             </Route>
+
+            <Route path='*' exact={true} component={AuthError} />
+            
         </Router>
         :
         <Grid

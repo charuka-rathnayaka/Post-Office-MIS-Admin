@@ -30,16 +30,16 @@ function Login(props) {
   
   const validate = (values) => {
     const errors = {};
-    if (!values.email) {
+    if (!values.emailVal) {
       errors.email = "Email field is required";
     } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.emailVal)
     ) {
       errors.email = "Invalid email address";
     }
-    if (!values.password) {
+    if (!values.passwordVal) {
       errors.password = "Password field is required";
-    } else if (values.password.length < 6) {
+    } else if (values.passwordVal.length < 6) {
       errors.password = "Password should contain atleast 6 characters";
     }
     return errors;
@@ -48,14 +48,15 @@ function Login(props) {
 
 
   const formik = useFormik({
+    
     initialValues: {
-      email: "",
-      password: "",
+      emailVal: "",
+      passwordVal: "",
     },
     validate,
     onSubmit: (values) => {
-      formik.touched.email = false;
-      formik.touched.password = false;
+      formik.touched.emailVal = false;
+      formik.touched.passwordVal = false;
       dispatch(loginRequest(values));
     },
   });
@@ -77,14 +78,15 @@ function Login(props) {
         />
     </div>
         <h2 className={classes.title}>Management System Login</h2>
-        <form onSubmit={formik.handleSubmit} autoComplete="off">
+        <form onSubmit={formik.handleSubmit} autoComplete="none">
           <TextField
             id="filled-basic"
             fullWidth
             label="Enter Email...."
             variant="filled"
             type="email"
-            name="email"
+            name="emailVal"
+            autoComplete="off"
             InputProps={{
               // disableUnderline,
               classes: {
@@ -112,7 +114,7 @@ function Login(props) {
             variant="filled"
             fullWidth
             label="Enter Password...."
-            name="password"
+            name="passwordVal"
             type={showPassword ? "text" : "password"}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}

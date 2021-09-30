@@ -40,7 +40,6 @@ export const styles = {
   },
   root: {
     marginBottom: "16px",
-    height: "48px",
     backgroundColor: "#FDFDFD !important",
     fontFamily: "Poppins",
     borderStyle: "solid",
@@ -65,7 +64,6 @@ export const styles = {
   },
   password: {
     marginBottom: "16px",
-    height: "48px",
     backgroundColor: "#FDFDFD !important",
     fontFamily: "Poppins",
     borderStyle: "solid",

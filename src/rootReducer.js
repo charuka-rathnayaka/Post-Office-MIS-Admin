@@ -6,7 +6,7 @@ import registrationReducer from "./views/Registration/registrationReducer";
 import dashboardReducer from "./views/Home/Dashboard/dashboardReducer";
 import statisticsReducer from "./views/Statistics/statisticsReducer.js";
 import complainsReducer from "./views/Complains/complainsReducer.js";
-
+import MailAssignmentsReducer from "./views/MailAssignments/mailAssignmentsReducer.js";
 
 export default combineReducers({
   loginReducer,
@@ -15,5 +15,6 @@ export default combineReducers({
   registrationReducer,
   dashboardReducer,
   statisticsReducer,
-  complainsReducer
+  complainsReducer,
+  MailAssignmentsReducer
 });

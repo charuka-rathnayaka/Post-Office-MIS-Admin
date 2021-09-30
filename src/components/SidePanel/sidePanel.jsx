@@ -64,12 +64,12 @@ function MainDrawer(props) {
            
           >
             <ListItemIcon>
-              <Badge color="secondary" variant="dot" invisible={true}>
-               <DashboardIcon style={{color:"white"}} activeStyle={{color:"red"}}/>
-              </Badge>
+             
+               <DashboardIcon />
+          
             </ListItemIcon>
             <label
-              style={{ fontFamily: "Poppins !important" }}
+              style={{ fontFamily: "Rubik, sans-serif"}}
               className={classes.DrawerLables}
             >
               Dashboard
@@ -240,15 +240,10 @@ function MainDrawer(props) {
                 <ListItem
                   button
                   className={classes.listItem}
-                  style={{
-                    backgroundColor: "inherit",
-                    fontFamily: "Poppins !important",
-                  }}
+                 
                 >
-                  <ListItemIcon>
-                    <Badge color="secondary" variant="dot" invisible={true}>
-                    <DashboardIcon style={{color:"white"}} activeStyle={{color:"red"}}/>
-                    </Badge>
+                  <ListItemIcon>      
+                    <DashboardIcon />
                   </ListItemIcon>
                   <label
                     style={{ fontFamily: "Poppins !important" }}
@@ -295,7 +290,7 @@ function MainDrawer(props) {
               </NavLink>
 
               <NavLink
-                to="/receipts"
+                to="/mail-assignments"
                 style={{
                   color: "#f7f3f2",
                   textDecoration: "none",
@@ -330,7 +325,7 @@ function MainDrawer(props) {
               </NavLink>
 
               <NavLink
-                to="/receipts"
+                to="/mail-transfer"
                 style={{
                   color: "#f7f3f2",
                   textDecoration: "none",

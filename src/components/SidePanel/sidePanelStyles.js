@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     "& :hover": {
       color: "white",
       fontWeight: "800",
-      fontSize:"18px",
+      fontSize:"16px",
       
     },
     "&.active": {
@@ -87,7 +87,6 @@ const useStyles = makeStyles((theme) => ({
   },
   DrawerLables: {
     fontFamily: "Rubik, sans-serif",
-    fontSize: "16px",
     display: "flex",
     [theme.breakpoints.up("sm") && theme.breakpoints.down("sm")]: {
       display: "none",
@@ -159,7 +158,7 @@ const useStyles = makeStyles((theme) => ({
     "& :hover": {
       color: "white",
       fontWeight: "800",
-      fontSize:"18px",
+    
       backgroundColor:"#de8071"
     },
   }

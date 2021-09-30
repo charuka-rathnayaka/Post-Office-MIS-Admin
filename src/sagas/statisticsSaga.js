@@ -24,7 +24,6 @@ function* getCountDataFromPending(data){
 
 
 function* getCountDataFromDelievered(data){
-    //console.log("data - ",data.startDate,data.endDate,data.postOffice)
     const postOfficeRef= firestore.collection("PostOffice").doc(data.postOffice)
     const ref = firestore.collection("DeliveredMails").where("acceptedPostoffice","==",postOfficeRef).where('timestamp', '>',data.startDate).where("timestamp","<",data.endDate);
     const channel = eventChannel((emit) => ref.onSnapshot(emit));
@@ -36,7 +35,6 @@ function* getCountDataFromDelievered(data){
             type:data.type,
             date:dateFormat(data.timestamp.toDate(), "yyyy/mm/dd")
         }
-        //console.log(data)
         return data;
     });
 }

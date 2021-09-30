@@ -40,6 +40,7 @@ function* getPostmanDetails(postOffice) {
   const role="postman"
   const ref = firestore.collection("Users").where("role","==",role).where("postOffice","==",postOfficeRef);
   const channel = eventChannel((emit) => ref.onSnapshot(emit));
+  console.log("getting postmen")
   try {  
     const Data = yield take(channel);
         return Data.docs.map((doc) => {

@@ -5,7 +5,8 @@ import * as addEmployeeActionTypes from "./../views/Registration/registrationAct
 import * as liveDeliveryActionTypes from "./../views/LiveDelivery/liveDeliveryActionTypes";
 import * as dashboardActionTypes from "../views/Home/Dashboard/dashboardActionTypes";
 import * as statisticsActionTypes from "./../views/Statistics/statisticActionTypes";
-import * as complainsActionTypes from "./../views/Complains/complainsActionTypes"
+import * as complainsActionTypes from "./../views/Complains/complainsActionTypes";
+import * as mailAssignmentsActionTypes from "./../views/MailAssignments/mailAssignmentsActionTypes";
 import { loginSaga,logoutSaga } from "./loginSaga.js";
 import { getUserDetailsSaga } from "./homeSaga.js";
 import { addEmployeeSaga } from "./employeeRegistrationSaga.js";
@@ -13,6 +14,8 @@ import { getLiveLocationsSaga } from "./liveDeliverySaga.js";
 import { getPerformanceDataSaga } from "./dashboardSaga.js";
 import { getCountDataSaga } from "./statisticsSaga.js";
 import { getComplainDataSaga,setComplainSolvedSaga } from "./complainsSaga.js";
+import { getMailsSaga,submitAssignmentsSaga } from "./mailAssignmentsSaga.js";
+
 
 export default function* root() {
   yield all([
@@ -24,6 +27,8 @@ export default function* root() {
     takeEvery(dashboardActionTypes.PERFORMANCE_DATA_REQUEST,getPerformanceDataSaga),
     takeEvery(statisticsActionTypes.COUNT_DATA_REQUEST,getCountDataSaga),
     takeEvery(complainsActionTypes.COMPLAINS_DATA_REQUEST,getComplainDataSaga),
-    takeEvery(complainsActionTypes.MARK_SOLVED_REQUEST,setComplainSolvedSaga)
+    takeEvery(complainsActionTypes.MARK_SOLVED_REQUEST,setComplainSolvedSaga),
+    takeEvery(mailAssignmentsActionTypes.GET_MAILS_REQUEST,getMailsSaga),
+    takeEvery(mailAssignmentsActionTypes.SUBMIT_ASSIGNMENTS_REQUEST,submitAssignmentsSaga)
   ]);
 }
