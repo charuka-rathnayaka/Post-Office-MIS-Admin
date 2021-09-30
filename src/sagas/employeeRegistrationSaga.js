@@ -30,7 +30,6 @@ export async function addEmployee(request){
       headers: {"Content-Type": "multipart/form-data" },
     })
       .then(function (response) {   
-        console.log("sattus ",response.status)    
         return response.status;
       })
       return result;

@@ -48,7 +48,7 @@ export default function Registration(){
     return(
         <div style={{backgroundColor: "#fab8b6"}}>
             <Nav>
-                <TopBar page="Dashboard"/>
+                <TopBar page="Registration"/>
                 {userType=="postmaster"?
                     <RegistrationForm employeeTypes={employeeTypesPostmaster}/>
                     :

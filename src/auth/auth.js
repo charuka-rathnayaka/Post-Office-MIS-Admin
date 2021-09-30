@@ -15,7 +15,11 @@ export const AuthProvider = ({ children }) => {
     app.auth().onAuthStateChanged((user) => {
       setCurrentUser(user);
       setPending(false);
-      // console.log("tenant id",user.tenantId);
+      /*console.log("User ",user.getIdTokenResult().claims);
+      user.getIdTokenResult()
+      .then((idTokenResult) => {
+        console.log("User ",idTokenResult.claims);
+      })*/
       if (user) {
           user.getIdToken(true).then((idToken) => {
             dispatch(saveIdToken(idToken));

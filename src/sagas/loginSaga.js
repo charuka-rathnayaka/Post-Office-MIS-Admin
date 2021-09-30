@@ -6,13 +6,11 @@ import {
 import {app} from "../auth/base.js";
 
 export function* loginSaga(request) {
-  const { email, password } = request.data;
+  const email =request.data.emailVal;
+  const password =request.data.passwordVal;
   let errorMessage = "";
-  console.log("In function* loginsaga");
   try {
-    app.auth().tenantId = null;
     yield app.auth().signInWithEmailAndPassword(email, password);
-    console.log("success")
     yield put({ type: LOGIN_SUCCESS });
   } catch (error) {
     switch (error.code) {

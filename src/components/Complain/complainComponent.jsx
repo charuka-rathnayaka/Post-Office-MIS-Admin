@@ -25,7 +25,6 @@ export default function ComplainComponent(complain){
                                 <Grid item>
                                     <div className={classes.fieldLabel}>Name: </div>
                                 </Grid>
-
                                 <Grid item>
                                     <div className={classes.fieldValue} data-testid="name-id">{complainData.name}</div>
                                 </Grid>
@@ -36,7 +35,6 @@ export default function ComplainComponent(complain){
                                 <Grid item>
                                     <div className={classes.fieldLabel}>PID: </div>
                                 </Grid>
-
                                 <Grid item>
                                     <div className={classes.fieldValue}>{complainData.pid} </div>
                                 </Grid>
@@ -47,8 +45,7 @@ export default function ComplainComponent(complain){
 
 
                 <Grid item style={{marginTop:"10px"}}>
-                    <Grid container direction="row" justifyContent="space-between" >
-
+                    <Grid container direction="row" justifyContent="space-between">
                         <Grid item>
                             <Grid container direction="row">
                                     <Grid item>
@@ -126,5 +123,6 @@ export default function ComplainComponent(complain){
 }
 
 /*<Grid item>
-                    <div data-testid="title-id" className={classes.title}>Title:-</div>
-                </Grid>*/
+    <div data-testid="title-id" className={classes.title}>Title:-</div>
+</Grid>*/
+
