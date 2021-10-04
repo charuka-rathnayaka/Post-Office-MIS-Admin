@@ -1,7 +1,7 @@
 import * as actionTypes from "./registrationActionTypes"
 
-export function addEmployee(data){
-    return {type:actionTypes.ADD_EMPLOYEE_REQUEST,data}
+export function addEmployee(data,idToken){
+    return {type:actionTypes.ADD_EMPLOYEE_REQUEST,data,idToken}
 }
 
 export function addEmployeeSuccess(){

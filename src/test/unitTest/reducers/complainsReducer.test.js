@@ -61,7 +61,6 @@ describe('Complains Reducer', () => {
         });
         const expectState= {isRequested:false,complainData:[],error:"",dataRetrieved:false,ismarkRequested:false,ismarkSuccess:false,markError:errorMessage};
         expect(newState).toEqual(expectState);
-
     });
 
     it('Should return state for Complain Solved Success', () => {

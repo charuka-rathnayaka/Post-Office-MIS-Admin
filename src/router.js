@@ -89,8 +89,7 @@ function Authorization() {
               <Redirect to="/dashboard" />
             </Route>
 
-            <Route path='*' exact={true} component={AuthError} />
-            
+      
         </Router>
         :
         <Grid
@@ -103,8 +102,8 @@ function Authorization() {
       >
         <Grid>
           <img
-            src={""}
-            style={{ width: 200 * 1.5, height: 80 * 1.5, opacity: 0.1 }}
+            src="/App_Icon.png"
+            style={{ width: 200 * 1.5, height: 80 * 1.5,  }}
             alt="Logo"
           />
         </Grid>

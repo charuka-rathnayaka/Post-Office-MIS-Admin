@@ -101,12 +101,12 @@ function Login(props) {
             }}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.email}
+            value={formik.values.emailVal}
           />
-          {formik.touched.email && formik.errors.email !== undefined ? (
+          {formik.touched.emailVal && formik.errors.email !== undefined ? (
             <p className={newClasses.errorText}>{formik.errors.email}</p>
           ) : null}
-          {formik.errors.email === undefined && !formik.touched.email ? (
+          {formik.errors.email === undefined && !formik.touched.emailVal ? (
             <p className={newClasses.errorText}>{error}</p>
           ) : null}
 
@@ -118,7 +118,7 @@ function Login(props) {
             type={showPassword ? "text" : "password"}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.password}
+            value={formik.values.passwordVal}
             InputLabelProps={{
               classes: {
                 root: classes.labelRoot,
@@ -150,9 +150,14 @@ function Login(props) {
           />
           <Grid container direction="column">
           <Grid item>
-          {formik.touched.password && formik.errors.password !== undefined ? (
+          {formik.touched.passwordVal && formik.errors.password !== undefined ? (
             <span><p className={newClasses.errorText}>{formik.errors.password}</p></span>
           ) : null}
+          </Grid>
+          <Grid item>
+            {data.error.length>0 && data.requireLogin==true ? (
+              <span><p className={newClasses.errorText}>{data.error}</p></span>
+            ) : null}
           </Grid>
           <Grid item>
           <LoginButton

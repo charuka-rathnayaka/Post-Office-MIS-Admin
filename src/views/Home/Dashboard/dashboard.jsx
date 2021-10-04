@@ -10,9 +10,11 @@ import { Grid } from "@material-ui/core";
 
 
 export default function Dashboard(){
-    var date = new Date();
-    const [startDate,setStartDate]= React.useState(new Date(date.setDate((new Date).getDate() -20)));
-    const [endDate,setEndDate]= React.useState(new Date());
+    const date = new Date();
+    const day20 = new Date(date - 1000 * 60 * 60 * 24 * 20);
+    const today=new Date();
+    const [endDate,setEndDate]= React.useState(today);
+    const [startDate,setStartDate]= React.useState(day20);
     const postOffice = useSelector((state) => state.homeReducer.postOffice);
     const dispatch = useDispatch();
     useEffect(()=>{
