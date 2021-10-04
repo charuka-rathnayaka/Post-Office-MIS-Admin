@@ -1,21 +1,41 @@
-import React from "react";
+import React,{useEffect} from "react";
 import DateFnsUtils from "@date-io/date-fns";
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import Grid from '@material-ui/core/Grid';
+//import {performanceDataRequest} from "../../views/Home/Dashboard/dashboardActions";
+import { useDispatch,useSelector} from "react-redux";
 
 function DateFramePicker(props){
     const { startDate, setStartDate, startLabel, endDate, setEndDate, endLabel } = props;
+    const postOffice = useSelector((state) => state.homeReducer.postOffice);
     const [startDateError, setStartDateError] = React.useState("");
     const [endDateError, setEndDateError] = React.useState("");
-    // console.log("eerror 1 -",startDateError)
-    // console.log("chec- ",startDate<=endDate)
+   /* console.log("fram - ",startDate,endDate);
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(performanceDataRequest(startDate,endDate,postOffice))
+    },[dispatch,startDate,endDate,postOffice]);
+    const handleStartDateChange = (date) => {
+        console.log("handle start",date,startDate,endDate)
+        if(date<endDate){
+            setStartDate(date);
+        }
+        else{
+            setStartDateError("Invalid Date")
+        }
+      };
+
+    const handleEndDateChange = (date) => {
+        console.log("handle end",date,startDate,endDate)
+        setEndDate(date);
+      };*/
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Grid container direction="row" justifyContent="space-evenly"  spacing={3}>
             <Grid item>
             <Grid container direction="column">
                 <Grid item>
-                    <KeyboardDatePicker
+                <KeyboardDatePicker
                     autoOk
                     disableFuture
                     disableToolbar
@@ -34,11 +54,9 @@ function DateFramePicker(props){
                         setStartDateError("Invalid Date");
                     
                         }else{
-                        if(event!==null && (event<=endDate)){
-                            
+                        if(event!==null){
                             setStartDateError("")
                             setStartDate(event)
-                           
                         }
                         else{
                             setStartDateError("Invalid Date");
@@ -50,7 +68,6 @@ function DateFramePicker(props){
                         // readOnly: true,
                     }}
                     />
-                
                 </Grid>
                 <Grid item >
                     <span style={{ color:"red",textAlign:"left"}}>{startDateError.length>0?"Invalid Start date":null}</span>
@@ -61,7 +78,7 @@ function DateFramePicker(props){
         <Grid item>
         <Grid container direction="column">
             <Grid item>
-                <KeyboardDatePicker
+            <KeyboardDatePicker
                 autoOk
                 disableFuture
                 disableToolbar
@@ -79,7 +96,7 @@ function DateFramePicker(props){
                     if(event=="Invalid Date"){ 
                     setEndDateError("Invalid Date")  
                     }else{
-                    if(event!==null && (event>=startDate)){
+                    if(event!==null){
                         setEndDateError("")
                         setEndDate(event)
                     }

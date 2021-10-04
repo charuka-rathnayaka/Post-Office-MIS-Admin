@@ -24,6 +24,7 @@ function RegistrationForm(data){
     const userID = useSelector((state) => state.homeReducer.currentUserID);
     const registrationReducer = useSelector((state) => state.registrationReducer);     
     const postOffice = useSelector((state) => state.homeReducer.postOffice); 
+    const idToken=useSelector((state) => state.loginReducer.idToken);
     const [showPassword1, setShowPassword1] = useState(false);
     const handleClickShowPassword1 = () => setShowPassword1(!showPassword1);
     const handleMouseDownPassword1 = () => setShowPassword1(!showPassword1);
@@ -94,7 +95,7 @@ function RegistrationForm(data){
           formik.touched.nic=false;
           formik.touched.password2=false;
           formik.touched.role=false;
-          dispatch(addEmployee(values));
+          dispatch(addEmployee(values,idToken));
         },
       });
 
