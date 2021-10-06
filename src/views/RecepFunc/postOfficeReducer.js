@@ -6,17 +6,22 @@ const initialState = {
     post: {},
     dataRetrieved:false,
     isLoading:false,
-    isSubmitted:false,
     num:'',
-    moneyOrders:[]
+    moneyOrders:[],
+    postOfficeID:''
     
 }
 
 function postOfficeReducer (state=initialState,action){
-    console.log("postOfficeReducer");
+    //console.log("postOfficeReducer");
     switch(action.type){
         
         case types.GET_POSTOFFICE_START:
+            return{
+                ...state,
+                dataRetrieved:false,
+                isLoading:true
+            };
         case types.GET_MONEYORDERS_START:
             console.log("GET_START");
             return{
@@ -28,7 +33,7 @@ function postOfficeReducer (state=initialState,action){
             
         
         case types.GET_POSTOFFICE_SUCCESS:
-            console.log("types.GET_POSTOFFICE_SUCCESS")
+            //console.log("types.GET_POSTOFFICE_SUCCESS")
             return{
                 
                 ...state,

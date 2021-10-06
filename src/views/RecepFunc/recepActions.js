@@ -56,7 +56,7 @@ export function addMoneyOrderFail (error){
 };
 
 export function getPostOfficeStart (){
-    console.log("putpost");
+    //console.log("putpost");
     return{type: types.GET_POSTOFFICE_START}
 };
 
@@ -68,9 +68,9 @@ export function getPostOfficeFail (error){
     return{type: types.GET_POSTOFFICE_FAIL,error}
 };
 
-export function getMoneyOrdersStart (){
+export function getMoneyOrdersStart (postOfficeID){
     //console.log("putpost");
-    return{type: types.GET_MONEYORDERS_START}
+    return{type: types.GET_MONEYORDERS_START,postOfficeID}
 };
 
 export function getMoneyOrdersSuccess (moneyOrders){

@@ -12,10 +12,11 @@ import { CircularProgress, Grid } from "@material-ui/core";
 function MoneyOrder() {
         
     const moneyOrders = useSelector((state) => state.postOfficeReducer);
+    const postOfficeID =useSelector((state)=>state.homeReducer.postOffice)
     
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getMoneyOrdersStart());
+        dispatch(getMoneyOrdersStart(postOfficeID));
         console.log("dcf");
     }, [dispatch])
     

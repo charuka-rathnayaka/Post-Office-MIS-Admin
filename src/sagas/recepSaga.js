@@ -42,7 +42,7 @@ async function addPostDetails(recipientName,recipientAddressNo,recipientStreet1,
         cost:cost,
         type: "NormalPost",
         timestamp:firebase.firestore.Timestamp.now(),
-        deliverAttempt:false
+        state:"Accepted"
     })
     .catch((e)=>{
         console.log("Error occured");
@@ -90,7 +90,7 @@ async function addRegPostDetails(senderName,senderAddressNo,senderStreet1,sender
         cost:cost,
         type: "RegisteredPost",
         timestamp:firebase.firestore.Timestamp.now(),
-        deliverAttempt:false,
+        state:"Accepted",
         signature:""
     })
     .catch((e)=>{
@@ -140,7 +140,7 @@ async function addLogiPostDetails(senderName,senderAddressNo,senderStreet1,sende
         cost:cost,
         type: "Package",
         timestamp:firebase.firestore.Timestamp.now(),
-        deliverAttempt:false,
+        state:"Accept",
         signature:"",
         weight:weight
     })
@@ -214,9 +214,10 @@ function* getPostOffice(){
   
 }
 
-function* getMoneyOrders(){
-    
-    const ref = firestore.collection("PendingMails").where("type",'==',"MoneyOrder");
+function* getMoneyOrders(postOfficeID){
+    console.log(postOfficeID);
+    const postOffice=firestore.collection("PostOffice").doc(postOfficeID)
+    const ref = firestore.collection("PendingMails").where("destinationPostoffice",'==',postOffice).orderBy("type").startAt("MoneyOrder").endAt("MoneyOrder");
     const channel = eventChannel((emit) => ref.onSnapshot(emit));
 
     const Data = yield take(channel);
@@ -224,7 +225,8 @@ function* getMoneyOrders(){
     return Data.docs.map((doc: any) => {
         const data = doc.data();
         //const documentID = doc.id;
-        console.log(data.recipientDetails.recipientID);
+        console.log(data.destinationPostoffice);
+        
         return {
             moneyAmount:data.moneyAmount,
             pid:data.pid,
@@ -362,9 +364,10 @@ export function* getPostOfficeSaga(){
     
 }
 
-export function* getMoneyOrdersSaga(){ 
+export function* getMoneyOrdersSaga(postOfficeID){ 
+    //console.log("postOfficeID",postOfficeID);
     
-    let moneyOrders = yield call(getMoneyOrders);
+    let moneyOrders = yield call(getMoneyOrders,postOfficeID.postOfficeID);
     
     //console.log("res ",postOffice);
     yield put(getMoneyOrdersSuccess(moneyOrders));
