@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles(() => ({
   errorText: {
-    fontSize: "12px",
+    fontSize: "14px",
     color: "#F7685B",
     marginTop: -14,
     float: "left",
@@ -40,7 +40,6 @@ export const styles = {
   },
   root: {
     marginBottom: "16px",
-    height: "48px",
     backgroundColor: "#FDFDFD !important",
     fontFamily: "Poppins",
     borderStyle: "solid",
@@ -65,7 +64,6 @@ export const styles = {
   },
   password: {
     marginBottom: "16px",
-    height: "48px",
     backgroundColor: "#FDFDFD !important",
     fontFamily: "Poppins",
     borderStyle: "solid",
@@ -109,6 +107,7 @@ export const styles = {
 
 export const LoginButton = withStyles(() => ({
   root: {
+    marginBotto:"20px",
     marginTop: "20px",
     backgroundColor: "#8c0e07",
     "&:hover": {

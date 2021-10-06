@@ -6,7 +6,8 @@ import * as liveDeliveryActionTypes from "./../views/LiveDelivery/liveDeliveryAc
 import * as recepActionTypes from "./../views/RecepFunc/recepActionTypes";
 import * as dashboardActionTypes from "../views/Home/Dashboard/dashboardActionTypes";
 import * as statisticsActionTypes from "./../views/Statistics/statisticActionTypes";
-import * as complainsActionTypes from "./../views/Complains/complainsActionTypes"
+import * as complainsActionTypes from "./../views/Complains/complainsActionTypes";
+import * as mailAssignmentsActionTypes from "./../views/MailAssignments/mailAssignmentsActionTypes";
 import { loginSaga,logoutSaga } from "./loginSaga.js";
 import { getUserDetailsSaga } from "./homeSaga.js";
 import { addEmployeeSaga } from "./employeeRegistrationSaga.js";
@@ -16,6 +17,8 @@ import {getPostOfficeSaga} from "./recepSaga.js";
 import { getPerformanceDataSaga } from "./dashboardSaga.js";
 import { getCountDataSaga } from "./statisticsSaga.js";
 import { getComplainDataSaga,setComplainSolvedSaga } from "./complainsSaga.js";
+import { getMailsSaga,submitAssignmentsSaga } from "./mailAssignmentsSaga.js";
+
 
 export default function* root() {
   yield all([
@@ -33,6 +36,8 @@ export default function* root() {
     takeEvery(recepActionTypes.ADD_REG_POST_START,addRegPostDetailsSaga),
     takeEvery(recepActionTypes.ADD_LOGI_POST_START,addLogiPostDetailsSaga),
     takeEvery(recepActionTypes.ADD_MONEYORDER_START,addMoneyOrderDetailsSaga),
-    takeLatest(recepActionTypes.GET_MONEYORDERS_START,getMoneyOrdersSaga)
+    takeLatest(recepActionTypes.GET_MONEYORDERS_START,getMoneyOrdersSaga),
+    takeEvery(mailAssignmentsActionTypes.GET_MAILS_REQUEST,getMailsSaga),
+    takeEvery(mailAssignmentsActionTypes.SUBMIT_ASSIGNMENTS_REQUEST,submitAssignmentsSaga)
   ]);
 }

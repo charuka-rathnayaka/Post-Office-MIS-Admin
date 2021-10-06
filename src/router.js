@@ -20,6 +20,9 @@ import RegisteredForm from "./views/RecepFunc/regPform";
 import LogiForm from "./views/RecepFunc/logiPform";
 import MoneyOrderForm from "./views/RecepFunc/moneyOform";
 import MoneyOrder from "./views/RecepFunc/moneyO";
+import MailAssignments from "./views/MailAssignments/mailAssignments";
+import MailTransfers from "./views/MailTransfers/mailTransfers";
+
 
 function Authorization() {
     const dispatch = useDispatch();
@@ -103,6 +106,21 @@ function Authorization() {
                 AuthError)
                 :AuthError
             } />
+
+            <Route exact path="/mail-assignments" component={
+                userRole? 
+                (userRole=="supervisor"?(MailAssignments):
+                AuthError)
+                :AuthError
+            } />
+
+            <Route exact path="/mail-transfer" component={
+                userRole? 
+                (userRole=="supervisor"?(MailTransfers):
+                AuthError)
+                :AuthError
+            } />
+
             <Route exact path="/">
               <Redirect to="/dashboard" />
             </Route>
@@ -119,8 +137,8 @@ function Authorization() {
       >
         <Grid>
           <img
-            src={""}
-            style={{ width: 200 * 1.5, height: 80 * 1.5, opacity: 0.1 }}
+            src="/App_Icon.png"
+            style={{ width: 200 * 1.5, height: 80 * 1.5,  }}
             alt="Logo"
           />
         </Grid>

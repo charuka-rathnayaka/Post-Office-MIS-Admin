@@ -21,16 +21,14 @@ export async function addEmployee(request){
     const postOffice=request.data.postOffice;
     const role=request.data.role;
     const userID=request.data.userID
-    // const userRegister=addUserAuth(email,password)
-    //console.log("ADD employee",email,password,request.data,postOffice)
+    const idToken=request.idToken;
     const result =await axios({
       method: "post",
       url: "http://localhost:3050/create-user",
-      params: {email:email,firstName:firstName,password:password,lastname:lastName,contactNumber:contactNumber,NIC:NIc,postOffice:postOffice,role:role,userID:userID},
+      params: {idToken:idToken,email:email,firstName:firstName,password:password,lastname:lastName,contactNumber:contactNumber,NIC:NIc,postOffice:postOffice,role:role,userID:userID},
       headers: {"Content-Type": "multipart/form-data" },
     })
       .then(function (response) {   
-        console.log("sattus ",response.status)    
         return response.status;
       })
       return result;

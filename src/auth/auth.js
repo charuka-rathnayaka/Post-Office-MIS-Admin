@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {app} from "./base.js";
 import { CircularProgress, Grid } from "@material-ui/core";
-import config from "../config/config.json";
 import { useDispatch } from "react-redux";
 import { saveIdToken } from "../views/Login/loginActions.js";
 export const AuthContext = React.createContext();
@@ -15,7 +14,11 @@ export const AuthProvider = ({ children }) => {
     app.auth().onAuthStateChanged((user) => {
       setCurrentUser(user);
       setPending(false);
-      // console.log("tenant id",user.tenantId);
+      /*console.log("User ",user.getIdTokenResult().claims);
+      user.getIdTokenResult()
+      .then((idTokenResult) => {
+        console.log("User ",idTokenResult.claims);
+      })*/
       if (user) {
           user.getIdToken(true).then((idToken) => {
             dispatch(saveIdToken(idToken));
@@ -37,9 +40,9 @@ export const AuthProvider = ({ children }) => {
       >
         <Grid>
           <img
-            src={config.LOGO}
-            style={{ width: 200 * 1.5, height: 80 * 1.5, opacity: 0.1 }}
-            alt="Logo"
+            src="/App_Icon.png"
+            style={{ width: 200 * 1.5, height: 80 * 1.5,  }}
+            alt="APP Logo"
           />
         </Grid>
         <Grid item>

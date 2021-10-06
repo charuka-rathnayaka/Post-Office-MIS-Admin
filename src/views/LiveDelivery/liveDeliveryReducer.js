@@ -23,36 +23,3 @@ function LiveDeliveryReducer(state = initialState, action) {
 }
 
 export default LiveDeliveryReducer;
-/*
-export default function LiveDeliveryReducer(
-    state = initialState,
-    action
-  ){
-    return produce(state, (draft) => {
-      switch (action.type) {
-        case liveLocationActionTypes.GET_LOCATIONS_REQUEST: {
-          draft.error = "";
-          draft.locationsRetrieved=false;
-          draft.liveLocations=[]
-          break;
-        }
-        case liveLocationActionTypes.GET_LOCATIONS_SUCCESS: {
-          draft.error = "";
-          console.log("data - ",action.data)
-          draft.liveLocations=action.data;
-          draft.locationsRetrieved=true;
-          console.log("draft  ",draft)
-          break;
-        }
-        case liveLocationActionTypes.GET_LOCATIONS_ERROR: {
-            draft.error = "";
-            draft.locationsRetrieved=false;
-            draft.liveLocations=[]
-            break;
-          break;
-        }
-        default:
-          break;
-      }
-    });
-  }*/
