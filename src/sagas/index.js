@@ -16,7 +16,7 @@ import { getPerformanceDataSaga } from "./dashboardSaga.js";
 import { getCountDataSaga } from "./statisticsSaga.js";
 import { getComplainDataSaga,setComplainSolvedSaga } from "./complainsSaga.js";
 import { getMailsSaga,submitAssignmentsSaga } from "./mailAssignmentsSaga.js";
-import { getTransfersSaga } from "./mailTransfersSaga.js";
+import { confirmTransfersSaga, getTransfersSaga } from "./mailTransfersSaga.js";
 
 export default function* root() {
   yield all([
@@ -32,5 +32,6 @@ export default function* root() {
     takeEvery(mailAssignmentsActionTypes.GET_MAILS_REQUEST,getMailsSaga),
     takeEvery(mailAssignmentsActionTypes.SUBMIT_ASSIGNMENTS_REQUEST,submitAssignmentsSaga),
     takeEvery(mailTransfersActionTypes.GET_TRANSFERS_REQUEST,getTransfersSaga),
+    takeEvery(mailTransfersActionTypes.CONFIRM_TRANSFER_REQUEST,confirmTransfersSaga),
   ]);
 }

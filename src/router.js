@@ -85,6 +85,8 @@ function Authorization() {
                 :AuthError
             } />
 
+           
+
             <Route exact path="/">
               <Redirect to="/dashboard" />
             </Route>
