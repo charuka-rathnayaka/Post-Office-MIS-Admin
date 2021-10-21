@@ -8,6 +8,7 @@ import * as dashboardActionTypes from "../views/Home/Dashboard/dashboardActionTy
 import * as statisticsActionTypes from "./../views/Statistics/statisticActionTypes";
 import * as complainsActionTypes from "./../views/Complains/complainsActionTypes";
 import * as mailAssignmentsActionTypes from "./../views/MailAssignments/mailAssignmentsActionTypes";
+import * as mailTransfersActionTypes from "./../views/MailTransfers/mailTransfersActionTypes";
 import { loginSaga,logoutSaga } from "./loginSaga.js";
 import { getUserDetailsSaga } from "./homeSaga.js";
 import { addEmployeeSaga } from "./employeeRegistrationSaga.js";
@@ -18,7 +19,7 @@ import { getPerformanceDataSaga } from "./dashboardSaga.js";
 import { getCountDataSaga } from "./statisticsSaga.js";
 import { getComplainDataSaga,setComplainSolvedSaga } from "./complainsSaga.js";
 import { getMailsSaga,submitAssignmentsSaga } from "./mailAssignmentsSaga.js";
-
+import { confirmTransfersSaga, getTransfersSaga } from "./mailTransfersSaga.js";
 
 export default function* root() {
   yield all([
@@ -38,6 +39,8 @@ export default function* root() {
     takeEvery(recepActionTypes.ADD_MONEYORDER_START,addMoneyOrderDetailsSaga),
     takeLatest(recepActionTypes.GET_MONEYORDERS_START,getMoneyOrdersSaga),
     takeEvery(mailAssignmentsActionTypes.GET_MAILS_REQUEST,getMailsSaga),
-    takeEvery(mailAssignmentsActionTypes.SUBMIT_ASSIGNMENTS_REQUEST,submitAssignmentsSaga)
+    takeEvery(mailAssignmentsActionTypes.SUBMIT_ASSIGNMENTS_REQUEST,submitAssignmentsSaga),
+    takeEvery(mailTransfersActionTypes.GET_TRANSFERS_REQUEST,getTransfersSaga),
+    takeEvery(mailTransfersActionTypes.CONFIRM_TRANSFER_REQUEST,confirmTransfersSaga),
   ]);
 }

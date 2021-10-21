@@ -21,7 +21,6 @@ describe('Complains Reducer', () => {
     });
 
     it('Should return state for Complains Error', () => {
-
         const errorMessage="Complains Error";
         const newState = complainsReducer(undefined, {
             type: actionTypes.COMPLAINS_DATA_ERROR,
@@ -29,7 +28,6 @@ describe('Complains Reducer', () => {
         });
         const expectState= {isRequested:false,complainData:[],error:errorMessage,dataRetrieved:false,ismarkRequested:false,ismarkSuccess:false,markError:""};
         expect(newState).toEqual(expectState);
-
     });
 
     it('Should return state for Complains Success', () => {
@@ -50,7 +48,6 @@ describe('Complains Reducer', () => {
         });
         const expectState= {isRequested:false,complainData:[],error:"",dataRetrieved:false,ismarkRequested:true,ismarkSuccess:false,markError:""};
         expect(newState).toEqual(expectState);
-
     });
 
     it('Should return state for Complain Solved Error', () => {
