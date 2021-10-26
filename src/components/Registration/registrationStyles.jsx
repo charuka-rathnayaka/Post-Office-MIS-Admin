@@ -20,12 +20,14 @@ export const useStyles = makeStyles(() => ({
         
     },
       Form:{
-        backgroundColor: "#ffe4e3",
+        backgroundColor: "#dddce6",
         marginTop:"30px",
         paddingTop:"50px",
         marginLeft:"30px",
         marginRight:"30px",
-        paddingBottom:"60px"
+        marginBottom:"50px",
+        paddingBottom:"60px",
+        borderRadius:10
       },
       password: {
         marginBottom: "16px",
@@ -81,14 +83,16 @@ export const useStyles = makeStyles(() => ({
 }))
 
 export const LoginButton = withStyles(() => ({
-    root: {
-      marginTop: "20px",
-      backgroundColor: "#8c0e07",
-      "&:hover": {
-        backgroundColor: "#8c0e07",
-        fontSize:"18px"
-      },
-      minWidth:"100px"
+  root: {
+    textDecoration:"none",
+    color:"white",
+    marginTop: "20px",
+    backgroundColor: "#01011a",
+    "&:hover": {
+        backgroundColor: "#000000",
+        fontSize:"14px"
+    },
+    minWidth:"100px"
     },
   }))(Button);
 

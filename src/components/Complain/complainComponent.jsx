@@ -5,11 +5,11 @@ import { useDispatch,useSelector} from "react-redux";
 import { markSolvedRequest,complainsDataRequest } from "../../views/Complains/complainsActions";
     
 
-export default function ComplainComponent(complain){
+export default function ComplainComponent(data){
     const dispatch = useDispatch();
     const classes=useStyles();
-    const complainData=complain.complain;
-    const postOffice = useSelector((state) => state.homeReducer.postOffice); 
+    const complainData=data.complain;
+    const postOffice = data.postOffice; 
     async function markAsSolved(){
         dispatch(markSolvedRequest(complainData.complainID));
         dispatch(complainsDataRequest(postOffice))

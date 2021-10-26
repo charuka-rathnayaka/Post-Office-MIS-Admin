@@ -17,7 +17,7 @@ export const useStyles = makeStyles(() => ({
 
 export const styles = {
   LoginPage:{
-    backgroundColor:"#e3b0ac",
+    backgroundColor:"#d4d4d4",
     minHeight:"100vh"
   },
 
@@ -47,21 +47,7 @@ export const styles = {
     borderColor: "#D9EAFD",
     borderRadius: 8,
   },
-  loginButton: {
-    marginTop: "22px",
-    height: "45px",
-    fontFamily: "Poppins",
-    fontStyle: "normal",
-    fontWeight: 700,
-    fontSize: "16px",
-    lineHeight: "24px",
-    borderRadius: 12,
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderColor: "#4f0804",
-    backgroundColor: "#ad271f",
-    color: "white",
-  },
+  
   password: {
     marginBottom: "16px",
     backgroundColor: "#FDFDFD !important",
@@ -72,7 +58,7 @@ export const styles = {
     borderRadius: 8,
   },
   boxMain: {
-    background: "#980404",
+    background: "#121226",
     borderRadius: "16px",
     padding: "53px",
     maxWidth: "436px",
@@ -81,6 +67,7 @@ export const styles = {
     textAlign: "center",
   },
   boxMainXs: {
+    background: "#121226",
     padding: "25px",
     maxWidth: "488px",
     maxHeight: "473px",
@@ -107,12 +94,15 @@ export const styles = {
 
 export const LoginButton = withStyles(() => ({
   root: {
-    marginBotto:"20px",
+    borderRadius: 8,
+    textDecoration:"none",
+    color:"white",
     marginTop: "20px",
-    backgroundColor: "#8c0e07",
+    backgroundColor: "#01011a",
     "&:hover": {
-      backgroundColor: "#8c0e07",
-      fontSize:"18px"
+        backgroundColor: "#000000",
+        fontSize:"15px"
     },
-  },
+    minWidth:"100px"
+    },
 }))(Button);

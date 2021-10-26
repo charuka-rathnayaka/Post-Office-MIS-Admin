@@ -3,15 +3,16 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 
 export const SubmitButton = withStyles(() => ({
-    root: {
+  root: {
+    textDecoration:"none",
     color:"white",
-      marginTop: "20px",
-      backgroundColor: "#8c0e07",
-      "&:hover": {
-        backgroundColor: "#8c0e07",
-        fontSize:"16px"
-      },
-      minWidth:"100px"
+    marginTop: "20px",
+    backgroundColor: "#01011a",
+    "&:hover": {
+        backgroundColor: "#000000",
+        fontSize:"14px"
+    },
+    minWidth:"100px"
     },
   }))(Button);
 

@@ -9,10 +9,10 @@ const useStyles = makeStyles((theme) => ({
       marginRight: theme.spacing(2),
     },
     title: {
-        color:"black",
+        color:"white",
         fontFamily:"Rubik, sans-serif",
         fontWeight:"bold",
-        fontSize:"24px",
+        fontSize:"20px",
       display: 'none',
       [theme.breakpoints.up('sm')]: {
         display: 'block',
@@ -33,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
       },
     },
     userName:{
-        color:"black",
-        fontSize:"20px",
+        color:"white",
+        fontSize:"15px",
         paddingLeft:"10px",
         fontFamily:"Rubik, sans-serif",
         fontWeight:"normal"

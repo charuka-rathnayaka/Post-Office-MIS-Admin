@@ -129,7 +129,7 @@ function Login(props) {
                 <InputAdornment position="end">
                   {formik.values.password !== "" ? (
                     <IconButton
-                      style={{ color: "red" }}
+                      style={{ color: "#1b1b2b" }}
                       id="iconButton"
                       aria-label="toggle password visibility"
                       onClick={handleClickShowPassword}
@@ -162,9 +162,8 @@ function Login(props) {
           <Grid item>
           <LoginButton
             variant="contained"
-            color="#63231c"
             className={classes.loginButton}
-            disableElevation
+            
             type="submit"
             
           >

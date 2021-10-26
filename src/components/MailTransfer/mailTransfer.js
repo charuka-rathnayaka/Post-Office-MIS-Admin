@@ -67,7 +67,7 @@ export default function MailTransfer(data) {
     <div className={classes.root}>
       <Accordion >
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon style={{color:"white"}}/>}
           aria-controls="panel1c-content"
           id="panel1c-header"
           className={classes.accorditionHeading}

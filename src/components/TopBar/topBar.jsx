@@ -58,7 +58,7 @@ export default function TopBar(props) {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" style={{ background: '#fcdcdc',paddingBottom:"10px" }}>
+      <AppBar position="static" style={{ background: '#070712',paddingBottom:"10px" }}>
         <Toolbar>
           
           <Typography className={classes.title} variant="h6" noWrap>
@@ -73,9 +73,9 @@ export default function TopBar(props) {
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
-              color="dark"
+              color="error"
             >
-              <AccountCircle style={{ fontSize: 40 }}/>
+              <AccountCircle  color="primary" style={{ fontSize: 40 }}/>
             </IconButton>
           </div>
           <div className={classes.userName}>{userFirstName} {userLastName}</div>

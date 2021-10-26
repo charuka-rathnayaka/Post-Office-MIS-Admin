@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     secondaryHeading: {
       fontSize: theme.typography.pxToRem(15),
-      color: theme.palette.text.secondary,
+      color: "#dfdfe8",
     },
     icon: {
       verticalAlign: 'bottom',
@@ -19,14 +19,15 @@ export const useStyles = makeStyles((theme) => ({
       width: 20,
     },
     accorditionHeading:{
-      backgroundColor:"#ed6464"
+      backgroundColor:"#0f0f2e",
+      color:"white"
     },
     details: {
       alignItems: 'center',
-      backgroundColor:"#f7c1c1"
+      backgroundColor:"#d7d7db"
     },
     accordionActions:{
-      backgroundColor:"#f2a7a7",
+      backgroundColor:"#d7d7db",
       paddingBottom:"10px"
     },
     column: {
@@ -48,12 +49,14 @@ export const useStyles = makeStyles((theme) => ({
 
   export const SubmitButton = withStyles(() => ({
     root: {
-    color:"white",
+      textDecoration:"none",
+      color:"white",
       marginTop: "20px",
-      backgroundColor: "#8c0e07",
+      backgroundColor: "#1b1b2e",
       "&:hover": {
-        backgroundColor: "#8c0e07",
+          backgroundColor: "#000000",
+          fontSize:"14px"
       },
       minWidth:"100px"
-    },
+      },
   }))(Button);
