@@ -6,10 +6,10 @@ function AcceptedServiceTypesLineChart(){
   const data = useSelector((state) => state.statisticsReducer.countData);
     return (
         <LineChart width={1050} height={400} data={data}
-            margin={{ top: 5, right: 5, left: 2, bottom: 5 }}>
+            margin={{ top: 5, right: 5, left: 10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="Date" />
-            <YAxis />
+            <YAxis label={{ value: 'Number of Items', angle: -90, position: 'insideLeft', textAnchor: 'middle' }} />
             <Tooltip />
             <Legend  />
             <Line type="monotone" dataKey="Registered Mail" stroke="#8884d8" />

@@ -95,10 +95,10 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
     },
   },
-  // necessary for content to be below app bar
+  // necessary for content to be below app bar #980404 #290202
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
-    backgroundColor: "#980404",
+    backgroundColor: "#070712",
     [theme.breakpoints.down("xs")]: {
       width: drawerWidthMobile,
     },
@@ -149,17 +149,19 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     height: "48px",
     width: "48px",
+    color:"white"
   },
   notifiIcon: {
     height: "30px",
     width: "30px",
+    color:"white"
   },
   NavButton:{
     "& :hover": {
       color: "white",
       fontWeight: "800",
     
-      backgroundColor:"#de8071"
+      backgroundColor:"#9c9dad"
     },
   }
 }));

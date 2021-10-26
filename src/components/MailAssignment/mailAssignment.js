@@ -16,7 +16,7 @@ import { changePostman } from "../../views/MailAssignments/mailAssignmentsAction
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: "#fab8b6",
+    backgroundColor: "#bcbbc7",
     color: "black",
     fontFamily:"bold",
     fontWeight:800,

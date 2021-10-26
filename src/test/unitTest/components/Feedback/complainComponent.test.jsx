@@ -1,11 +1,22 @@
 import React from "react";
-import {shallow} from "enzyme";
+import {configure,shallow} from "enzyme";
 import ComplainComponent from "../../../../components/Complain/complainComponent";
+import Adapter from "enzyme-adapter-react-16";
 
 
 describe("Complain Form",()=>{
     
-
+    const data={
+        complain:{
+            name:"John",
+            pid:"shbjshdbsjbsdjd",
+            email:"john.gmail.com",
+            contactNumber:"0745678894",
+            date:"2021/10/20",
+            message:"bjdsbjkdb kjdknks sdnkjdnkdn"
+        },
+        postOffice:1001
+    }
     it ("renders without crashing",()=>{
         expect(1).toBe(1);
     })

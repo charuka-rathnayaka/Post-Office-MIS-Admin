@@ -7,7 +7,7 @@ import dateFormat from "dateformat";
 function* getLiveLocations(data) {
   const date=new Date();
   const formattedDate=dateFormat(date, "yyyy/mm/dd");
-  const role="postman"
+  const role="postman";
   const ref = firestore.collectionGroup("locations").where("date", "==", formattedDate);
   const channel = eventChannel((emit) => ref.onSnapshot(emit));
   try {

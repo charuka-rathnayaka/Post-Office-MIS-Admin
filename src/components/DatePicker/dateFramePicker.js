@@ -7,9 +7,11 @@ import { useDispatch,useSelector} from "react-redux";
 
 function DateFramePicker(props){
     const { startDate, setStartDate, startLabel, endDate, setEndDate, endLabel } = props;
-    const postOffice = useSelector((state) => state.homeReducer.postOffice);
+    console.log("prps ",props)
+    //const postOffice = useSelector((state) => state.homeReducer.postOffice);
     const [startDateError, setStartDateError] = React.useState("");
     const [endDateError, setEndDateError] = React.useState("");
+    console.log("out - ",startDate)
    /* console.log("fram - ",startDate,endDate);
     const dispatch = useDispatch();
     useEffect(()=>{
@@ -36,23 +38,21 @@ function DateFramePicker(props){
             <Grid container direction="column">
                 <Grid item>
                 <KeyboardDatePicker
-                    autoOk
                     disableFuture
                     disableToolbar
                     inputVariant="filled"
                     variant="inline"
                     format="dd/MM/yyyy"
                     margin="normal"
-                    id="date-picker-inline"
+                    id="date1-picker-inline"
                     label={startLabel}
                     value={startDate}
                     error={false}
                     helperText={null}
                     onError={setStartDateError}
                     onChange = {(event, newValue, previousValue, name) => {
-                        if(event=="Invalid Date"){
-                        setStartDateError("Invalid Date");
-                    
+                        if(event=="Invalid Date"){ 
+                            setStartDateError("Invalid Date")  
                         }else{
                         if(event!==null){
                             setStartDateError("")
@@ -63,9 +63,11 @@ function DateFramePicker(props){
                         }
                         } 
                         }}
+                    KeyboardButtonProps={{
+                        "aria-label": "change date"
+                    }}
                     InputProps={{
-                        disableUnderline: true,
-                        // readOnly: true,
+                        disableUnderline: true
                     }}
                     />
                 </Grid>
@@ -79,7 +81,6 @@ function DateFramePicker(props){
         <Grid container direction="column">
             <Grid item>
             <KeyboardDatePicker
-                autoOk
                 disableFuture
                 disableToolbar
                 inputVariant="filled"
@@ -94,7 +95,7 @@ function DateFramePicker(props){
                 onError={setEndDateError}
                 onChange = {(event, newValue, previousValue, name) => {
                     if(event=="Invalid Date"){ 
-                    setEndDateError("Invalid Date")  
+                        setEndDateError("Invalid Date")  
                     }else{
                     if(event!==null){
                         setEndDateError("")

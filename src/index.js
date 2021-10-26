@@ -9,6 +9,8 @@ import createSagaMiddleware from "redux-saga";
 import rootSaga from "./sagas";
 import combinedReducers from "./rootReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
+import {registerObserver} from 'react-perf-devtool';
+registerObserver()
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(

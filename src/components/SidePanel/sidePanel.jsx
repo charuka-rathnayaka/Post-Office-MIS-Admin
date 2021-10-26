@@ -51,8 +51,8 @@ function MainDrawer(props) {
             fontStyle: "normal",
           }}
           activeStyle={{
-            color: "#63231c",
-            backgroundColor: "#de8071",
+            color: "#030114",
+            backgroundColor: "#e6e3fa",
             fontWeight: "bold",
             
           }}
@@ -65,7 +65,7 @@ function MainDrawer(props) {
           >
             <ListItemIcon>
              
-               <DashboardIcon />
+               <DashboardIcon color='primary' style={{ color:"#727287"}}/>
           
             </ListItemIcon>
             <label
@@ -87,8 +87,8 @@ function MainDrawer(props) {
             fontStyle: "normal",
           }}
           activeStyle={{
-            color: "#63231c",
-            backgroundColor: "#de8071",
+            color: "#030114",
+            backgroundColor: "#e6e3fa",
             fontWeight: "bold",
             
           }}
@@ -99,7 +99,7 @@ function MainDrawer(props) {
             className={classes.listItem}      
           >
             <ListItemIcon>
-              <DirectionsBikeIcon/>
+              <DirectionsBikeIcon color='primary' style={{ color:"#727287"}}/>
             </ListItemIcon>
             <label
               style={{ fontFamily: "Rubik, sans-serif" }}
@@ -121,8 +121,8 @@ function MainDrawer(props) {
             fontStyle: "normal",
           }}
           activeStyle={{
-            color: "#63231c",
-            backgroundColor: "#de8071",
+            color: "#030114",
+            backgroundColor: "#e6e3fa",
             fontWeight: "bold",
             
           }}
@@ -134,7 +134,7 @@ function MainDrawer(props) {
             
           >
             <ListItemIcon style={{ position: "relative" }}>
-              <EqualizerIcon/>
+              <EqualizerIcon color='primary' style={{ color:"#727287"}}/>
             </ListItemIcon>
             <label
               style={{ fontFamily: "Poppins !important" }}
@@ -156,8 +156,8 @@ function MainDrawer(props) {
             fontStyle: "normal",
           }}
           activeStyle={{
-            color: "#63231c",
-            backgroundColor: "#de8071",
+            color: "#030114",
+            backgroundColor: "#e6e3fa",
             fontWeight: "bold",
             
           }}
@@ -169,7 +169,7 @@ function MainDrawer(props) {
             
           >
             <ListItemIcon style={{ position: "relative" }}>
-              <PersonAddIcon/>
+              <PersonAddIcon color='primary' style={{ color:"#727287"}}/>
             </ListItemIcon>
             <label
               style={{ fontFamily: "Poppins !important" }}
@@ -194,8 +194,8 @@ function MainDrawer(props) {
             fontStyle: "normal",
           }}
           activeStyle={{
-            color: "#63231c",
-            backgroundColor: "#de8071",
+            color: "#030114",
+            backgroundColor: "#e6e3fa",
             fontWeight: "bold",
             
           }}
@@ -207,7 +207,7 @@ function MainDrawer(props) {
           
           >
             <ListItemIcon style={{ position: "relative" }}>
-              <FeedbackIcon/>
+              <FeedbackIcon color='primary' style={{ color:"#727287"}}/>
             </ListItemIcon>
             <label
               style={{ fontFamily: "Poppins !important" }}
@@ -230,8 +230,8 @@ function MainDrawer(props) {
                   fontStyle: "normal",
                 }}
                 activeStyle={{
-                  color: "#63231c",
-                  backgroundColor: "#de8071",
+                  color: "#030114",
+                  backgroundColor: "#e6e3fa",
                   fontWeight: "bold",
                   
                 }}
@@ -243,7 +243,7 @@ function MainDrawer(props) {
                  
                 >
                   <ListItemIcon>      
-                    <DashboardIcon />
+                    <DashboardIcon color='primary' style={{ color:"#727287"}}/>
                   </ListItemIcon>
                   <label
                     style={{ fontFamily: "Poppins !important" }}
@@ -265,8 +265,8 @@ function MainDrawer(props) {
                   fontStyle: "normal",
                 }}
                 activeStyle={{
-                  color: "#63231c",
-                  backgroundColor: "#de8071",
+                  color: "#030114",
+                  backgroundColor: "#e6e3fa",
                   fontWeight: "bold",
                   
                 }}
@@ -278,7 +278,7 @@ function MainDrawer(props) {
                   
                 >
                   <ListItemIcon style={{ position: "relative" }}>
-                    <PersonAddIcon/>
+                    <PersonAddIcon color='primary' style={{ color:"#727287"}}/>
                   </ListItemIcon>
                   <label
                     style={{ fontFamily: "Poppins !important" }}
@@ -300,8 +300,8 @@ function MainDrawer(props) {
                   fontStyle: "normal",
                 }}
                 activeStyle={{
-                  color: "#63231c",
-                  backgroundColor: "#de8071",
+                  color: "#030114",
+                  backgroundColor: "#e6e3fa",
                   fontWeight: "bold",
                   
                 }}
@@ -313,7 +313,7 @@ function MainDrawer(props) {
                   
                 >
                   <ListItemIcon style={{ position: "relative" }}>
-                    <AssignmentIcon/>
+                    <AssignmentIcon color='primary' style={{ color:"#727287"}}/>
                   </ListItemIcon>
                   <label
                     style={{ fontFamily: "Poppins !important" }}
@@ -335,8 +335,8 @@ function MainDrawer(props) {
                   fontStyle: "normal",
                 }}
                 activeStyle={{
-                  color: "#63231c",
-                  backgroundColor: "#de8071",
+                  color: "#030114",
+                  backgroundColor: "#e6e3fa",
                   fontWeight: "bold",
                   
                 }}
@@ -347,8 +347,8 @@ function MainDrawer(props) {
                   className={classes.listItem}
                   
                 >
-                  <ListItemIcon style={{ position: "relative" }}>
-                    <LocalShippingIcon/>
+                  <ListItemIcon style={{ position: "relative",color:"white"}}>
+                    <LocalShippingIcon color='primary' style={{ color:"#727287"}}/>
                   </ListItemIcon>
                   <label
                     style={{ fontFamily: "Poppins !important" }}

@@ -5,14 +5,15 @@ import { withStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles(() => ({
     form:{
-        backgroundColor:"#fab8b6",
+        backgroundColor:"#dddce6",
         justifyContent:"center",
         maxWidth:"850px",
         display:"flex",
         marginLeft:"10%",
         marginRight:"10%",
         marginBottom:"30px",
-        border:"8px black"
+        border:"8px black",
+        borderRadius:10
     },
     button:{
         alignContent:"left",
@@ -40,13 +41,15 @@ export const useStyles = makeStyles(() => ({
 
   export const SubmitButton = withStyles(() => ({
     root: {
-    color:"white",
+      textDecoration:"none",
+      color:"white",
       marginTop: "20px",
-      backgroundColor: "#8c0e07",
+      backgroundColor: "#1b1b2e",
       "&:hover": {
-        backgroundColor: "#8c0e07",
-        fontSize:"16px"
+          backgroundColor: "#000000",
+          fontSize:"14px"
       },
       minWidth:"100px"
-    },
+      }
+    
   }))(Button);

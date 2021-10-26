@@ -10,17 +10,18 @@ import { useDispatch,useSelector} from "react-redux";
 import { countDataRequest } from "./statisticsActions";
 import CountChart from "../../components/Charts/PieCharts/countChart";
 import StatisticsReport from "../../components/Reports/statisticsReport";
+import { DateRangePick} from "../../components/DatePicker/dateRangePicker";
 
 export default function Statistics(){
    const classes=useStyles();
-   var date=new Date();
-   const [startDate,setStartDate]= React.useState(new Date(date.setDate((new Date).getDate() - 20)));
-   const [endDate,setEndDate]= React.useState(new Date())
+   const today=new Date();
+   const day20 = new Date(today - 1000 * 60 * 60 * 24 * 20);
+   const [dateRange, setDateRange] = React.useState([day20, today]);
    const postOffice = useSelector((state) => state.homeReducer.postOffice); 
     const dispatch = useDispatch();
     useEffect(()=>{
-        dispatch(countDataRequest(startDate,endDate,postOffice))
-    },[dispatch,startDate,endDate,postOffice])
+        dispatch(countDataRequest(dateRange[0],dateRange[1],postOffice))
+    },[dispatch,dateRange,postOffice])
    
     return(
         <div>
@@ -29,13 +30,9 @@ export default function Statistics(){
                 <div>
                     <Grid container direction="row" justifyContent="center" spacing={5}>
                         <Grid item>
-                            <DateFramePicker
-                                startDate={startDate}
-                                setStartDate={setStartDate}
-                                startLabel="Start Date"
-                                endDate={endDate}
-                                setEndDate={setEndDate}
-                                endLabel="End Date"
+                            <DateRangePick
+                                dateRange={dateRange}
+                                setDateRange={setDateRange}
                             />
                         </Grid>
                         <Grid item style={{marginTop:"5px"}}>

@@ -8,9 +8,9 @@ export const ExportButton = withStyles(() => ({
         textDecoration:"none",
         color:"white",
         marginTop: "20px",
-        backgroundColor: "#8c0e07",
+        backgroundColor: "#01011a",
         "&:hover": {
-            backgroundColor: "#8c0e07",
+            backgroundColor: "#000000",
             fontSize:"14px"
         },
         minWidth:"100px"
