@@ -9,9 +9,24 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { useFormik } from 'formik';
+import { Formik, useFormik } from 'formik';
+// import combinedReducers from "../../rootReducer";
+// import { composeWithDevTools } from "redux-devtools-extension";
+// import { applyMiddleware, createStore } from "redux";
+// import createSagaMiddleware from "redux-saga";
+// import { Provider } from "react-redux";
 
+// const sagaMiddleware = createSagaMiddleware();
 
+// const NormalFormWrapper = () => {
+//     const store = createStore(combinedReducers,composeWithDevTools(applyMiddleware(sagaMiddleware)));
+  
+//     return (
+//       <Provider store={store}> 
+//         <NormalForm /> 
+//       </Provider>
+//     )
+// }
 
 const useStyles = makeStyles((theme) => ({
     
@@ -30,21 +45,21 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function NormalForm({postOffice}) {
-    let today=new Date();
-    let year=today.getFullYear();
-    let month=today.getMonth()+1;
-    let day=today.getDate();
-    let tod=year.toString(10).slice(-2)+(("0"+month.toString(10)).slice(-2))+(("0"+day.toString(10)).slice(-2));
-    let num='';
-    var store=require('store');
+    //console.log("postOffice",postOffice);
+    //let today=new Date();
+    //let year=today.getFullYear();
+    //let month=today.getMonth()+1;
+    //let day=today.getDate();
+    //let tod=year.toString(10).slice(-2)+(("0"+month.toString(10)).slice(-2))+(("0"+day.toString(10)).slice(-2));
+    //let num='';
+    //var store=require('store');
 
-    const dispatch = useDispatch();    
-    
-    const longitude=postOffice[0].location._long;
-    const latitude=postOffice[0].location._lat;
-    const POcode=postOffice.map((option)=>(option.code));
+    const dispatch = useDispatch();  
+    // const longitude=postOffice[0].location._long;
+    // const latitude=postOffice[0].location._lat;
+    //const POcode=postOffice.map((option)=>(option.code));
     const userID = useSelector((state)=>state.homeReducer.currentUserID);   
-    const Pid=tod+POcode[0]+POcode[1];
+    //const Pid=tod+POcode[0]+POcode[1];
     
     const initialState=useFormik({
         initialValues:{  
@@ -54,21 +69,19 @@ function NormalForm({postOffice}) {
             recipientStreet2:"",
             recipientCity:"",
             cost:"",
-            pid:Pid,
             employee:userID,
             acceptedPostOffice:"",
             destinationPostOffice:"",
-            long:longitude,
-            lat:latitude      
+                
         },
         onSubmit:(values,{resetForm})=>{
-            if ((store.get("pid")==null)||(store.get('pid').date!==tod)){
-                store.set("pid",{date:tod,number:'0001'});
-                num='0001';
-            }else{
-                num=('0000'+(parseInt(store.get('pid').number)+1).toString()).slice(-4);
-                store.set("pid",{date:tod,number:num});
-            }
+            // if ((store.get("pid")==null)||(store.get('pid').date!==tod)){
+            //     store.set("pid",{date:tod,number:'0001'});
+            //     num='0001';
+            // }else{
+            //     num=('0000'+(parseInt(store.get('pid').number)+1).toString()).slice(-4);
+            //     store.set("pid",{date:tod,number:num});
+            // }    
             initialState.touched.recipientName=false;
             initialState.touched.recipientAddressNo=false;
             initialState.touched.recipientStreet1=false;
@@ -81,39 +94,29 @@ function NormalForm({postOffice}) {
             initialState.touched.destinationPostOffice=false;
             initialState.touched.long=false;
             initialState.touched.lat=false;
-            dispatch(addPostStart(initialState,num));
+            dispatch(addPostStart(initialState));
             resetForm({})
         }
     });
     
-    console.log(initialState);
+    //console.log(initialState);
     
     const classes = useStyles();
     
-    
-
-    // const handleInputChange = (e)=>{
-    //     let{name,value}=e.target;
-    //     setState({
-    //         ...initialState,
-    //         [name]:value,
-    //     });
-    //     console.log("initial",initialState);
-    // };
-    
+     
                         
     
     return ( 
         <>
-            
+            <Formik>
                 
-                <Container maxWidth="sm">
+                <Container role="combobox" maxWidth="sm">
                     <h1>Normal Post</h1>
-                    <form  onSubmit={initialState.handleSubmit}>                            
-                        <div className="form-group">
+                    <form  data-testid="normal-form" className="form" onSubmit={initialState.handleSubmit}>                            
+                        <div className="form-group-recipientName">
                             <TextField
                                 required
-                                id="filled-full-width"
+                                data-testid="recipientName"
                                 label="required"
                                 variant="filled"
                                 type="text"
@@ -132,10 +135,10 @@ function NormalForm({postOffice}) {
                             />
                             
                         </div>
-                        <div className="form-group">
+                        <div className="form-group-recipientAddressNo">
                             <TextField
                                 required
-                                id="filled-full-width"
+                                data-testid="recipientAddressNo"
                                 label="required"
                                 variant="filled"
                                 type="text"
@@ -155,10 +158,10 @@ function NormalForm({postOffice}) {
                             />
                             
                         </div>
-                        <div className="form-group">
+                        <div className="form-group-recipientStreet1">
                             <TextField
                                 required
-                                iid="filled-full-width"
+                                data-testid="recipientStreet1"
                                 label="required"
                                 variant="filled"
                                 type="text"
@@ -178,7 +181,7 @@ function NormalForm({postOffice}) {
                             />
                             
                         </div>
-                        <div className="form-group">
+                        <div className="form-group-recipientStreet2">
                             <TextField
                                 
                                 
@@ -190,7 +193,7 @@ function NormalForm({postOffice}) {
                                 value={initialState.values.recipientStreet2}
                                 
                                 onChange={initialState.handleChange}
-                                id="filled-full-width"
+                                data-testid="recipientStreet2"
                                 style={{ margin: 8 }}
                                 placeholder="Recipient's Street 2"
                                 fullWidth
@@ -202,7 +205,7 @@ function NormalForm({postOffice}) {
                             />
                             
                         </div>
-                        <div className="form-group">
+                        <div className="form-group-recipientCity">
                             <TextField
                                 required
                                 
@@ -213,7 +216,7 @@ function NormalForm({postOffice}) {
                                 name="recipientCity"
                                 value={initialState.values.recipientCity}
                                 onChange={initialState.handleChange}
-                                id="filled-full-width"
+                                data-testid="recipientCity"
                                 style={{ margin: 8 }}
                                 placeholder="Recipient's City"
                                 fullWidth
@@ -225,7 +228,7 @@ function NormalForm({postOffice}) {
                             />
                             
                         </div>
-                        <div className="form-group">
+                        <div className="form-group-cost">
                             <TextField
                                 required
                                
@@ -236,7 +239,7 @@ function NormalForm({postOffice}) {
                                 name="cost"
                                 value={initialState.values.cost}
                                 onChange={initialState.handleChange}
-                                id="filled-full-width"
+                                data-testid="cost"
                                 style={{ margin: 8 }}
                                 placeholder="Cost"
                                 fullWidth
@@ -248,21 +251,23 @@ function NormalForm({postOffice}) {
                             />
                             
                         </div>
-                        <FormControl variant="filled" fullWidth required className={classes.formControl}>
-                            <InputLabel id="demo-simple-select-filled-label">Accepted PostOffice</InputLabel>
+                        
+                        <FormControl variant="filled" fullWidth required className={classes.formControl}placeholder="acceptedPostOffice">
+                            <InputLabel id="acceptedPostOffice">Accepted PostOffice</InputLabel>
                             
                             <Select
-                            
-                            labelId="demo-simple-select-filled-label"
-                            id="demo-simple-select-filled"
+                            key={initialState.values.acceptedPostOffice.city}
+                            label="acceptedPostOffices"
+                            data-testid={initialState.values.acceptedPostOffice.city}
                             name="acceptedPostOffice"
                             value={initialState.values.acceptedPostOffice}
                             onChange={initialState.handleChange}
+                            placeholder="Accepted PostOffice"
                             
                             >
                             
                             {postOffice.map((option)=> (
-                                <MenuItem value={option.code}>{option.city}</MenuItem>
+                                <MenuItem value={option} key={option.code}>{option.city}</MenuItem>
                             ))}
                             
                             </Select>
@@ -270,32 +275,32 @@ function NormalForm({postOffice}) {
                         </FormControl><br/>
                         
                         <FormControl variant="filled" fullWidth required className={classes.formControl}>
-                            <InputLabel id="demo-simple-select-filled-label">Destination PostOffice</InputLabel>
+                            <InputLabel id="destinationPostOffice">Destination PostOffice</InputLabel>
                             
                             <Select
-                            
-                            labelId="demo-simple-select-filled-label"
-                            id="demo-simple-select-filled"
+                            key={initialState.values.destinationPostOffice}
+                            labelId="destinationPostOffice"
+                            data-testid={initialState.values.destinationPostOffice}
                             name="destinationPostOffice"
                             value={initialState.values.destinationPostOffice}
                             onChange={initialState.handleChange}
-                            fullWidth 
+                            placeholder="Destination PostOffice"
                             >
                             
                             {postOffice.map((option)=> (
-                                <MenuItem value={option.code}>{option.city}</MenuItem>
+                                <MenuItem value={option.code} label={option.city}>{option.city}</MenuItem>
                             ))}
                             
                             </Select>
                            
                         </FormControl><br/>
                             
-                        <Button type="submit"  variant="contained"color="secondary" >Submit</Button>
+                        <Button type="submit"  variant="contained"color="secondary" value="add">Submit</Button>
                         <br/><br/>
                     </form>
 
                 </Container>
-        
+            </Formik>
         </>
      );
      

@@ -6,7 +6,6 @@ const initialState = {
     post: {},
     dataRetrieved:false,
     isLoading:false,
-    num:'',
     moneyOrders:[],
     postOfficeID:''
     
@@ -23,7 +22,7 @@ function postOfficeReducer (state=initialState,action){
                 isLoading:true
             };
         case types.GET_MONEYORDERS_START:
-            console.log("GET_START");
+            //console.log("GET_START");
             return{
                 ...state,
                 dataRetrieved:false,
@@ -43,7 +42,7 @@ function postOfficeReducer (state=initialState,action){
             };
         
             case types.GET_MONEYORDERS_SUCCESS:
-                console.log("types.GET_MONEYORDERS_SUCCESS")
+                //console.log("types.GET_MONEYORDERS_SUCCESS")
                 return{
                     
                     ...state,
@@ -67,7 +66,7 @@ function postOfficeReducer (state=initialState,action){
             
             return{
                 ...state,
-                num:action.num
+                //num:action.num
                 
             };
         

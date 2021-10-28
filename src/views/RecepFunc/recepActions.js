@@ -1,8 +1,8 @@
 import * as types from "./recepActionTypes";
 
-export function addPostStart (data,num){ 
+export function addPostStart (data){ 
     //console.log(data);
-    return{type: types.ADD_POST_START,data,num}
+    return{type: types.ADD_POST_START,data}
 };
 
 export function addPostSuccess (){
@@ -13,9 +13,9 @@ export function addPostSuccess (){
 export function addPostFail (error){
     return{type: types.ADD_POST_FAIL,error}
 };
-export function addRegPostStart (data,num){ 
+export function addRegPostStart (data){ 
     //console.log(data);
-    return{type: types.ADD_REG_POST_START,data,num}
+    return{type: types.ADD_REG_POST_START,data}
 };
 
 export function addRegPostSuccess (){
@@ -27,9 +27,9 @@ export function addRegPostFail (error){
     return{type: types.ADD_REG_POST_FAIL,error}
 };
 
-export function addLogiPostStart (data,num){ 
+export function addLogiPostStart (data){ 
     //console.log(data,num);
-    return{type: types.ADD_LOGI_POST_START,data,num}
+    return{type: types.ADD_LOGI_POST_START,data}
 };
 
 export function addLogiPostSuccess (){
@@ -41,9 +41,9 @@ export function addLogiPostFail (error){
     return{type: types.ADD_LOGI_POST_FAIL,error}
 };
 
-export function addMoneyOrderStart (data,num){ 
+export function addMoneyOrderStart (data){ 
     //console.log(data);
-    return{type: types.ADD_MONEYORDER_START,data,num}
+    return{type: types.ADD_MONEYORDER_START,data}
 };
 
 export function addMoneyOrderSuccess (){

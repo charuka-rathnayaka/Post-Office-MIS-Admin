@@ -11,7 +11,6 @@ describe('Post Office Reducer', () => {
             post: {},
             dataRetrieved:false,
             isLoading:false,
-            num:'',
             moneyOrders:[],
             postOfficeID:''
           };
@@ -29,7 +28,6 @@ describe('Post Office Reducer', () => {
             post: {},
             dataRetrieved:false,
             isLoading:true,
-            num:'',
             moneyOrders:[],
             postOfficeID:''
             
@@ -52,7 +50,6 @@ describe('Post Office Reducer', () => {
             post: {},
             dataRetrieved:true,
             isLoading:false,
-            num:'',
             moneyOrders:[],
             postOfficeID:''
         };
@@ -73,7 +70,6 @@ describe('Post Office Reducer', () => {
             post: {},
             dataRetrieved:false,
             isLoading:false,
-            num:'',
             moneyOrders:[],
             postOfficeID:''
         };
@@ -92,7 +88,6 @@ describe('Post Office Reducer', () => {
             post: {},
             dataRetrieved:false,
             isLoading:true,
-            num:'',
             moneyOrders:[],
             postOfficeID:''
             
@@ -115,7 +110,6 @@ describe('Post Office Reducer', () => {
             post: {},
             dataRetrieved:true,
             isLoading:false,
-            num:'',
             moneyOrders:data,
             postOfficeID:''
         };
@@ -136,7 +130,6 @@ describe('Post Office Reducer', () => {
             post: {},
             dataRetrieved:false,
             isLoading:false,
-            num:'',
             moneyOrders:[],
             postOfficeID:''
         };
@@ -147,8 +140,7 @@ describe('Post Office Reducer', () => {
      it('Should return state for add normal post start', () => {
 
         const newState = postOfficeReducer(undefined, {
-            type: actionTypes.ADD_POST_START,
-            num:"134"
+            type: actionTypes.ADD_POST_START
         });
         const expectState={
             error:null,   
@@ -156,7 +148,6 @@ describe('Post Office Reducer', () => {
             post: {},
             dataRetrieved:false,
             isLoading:false,
-            num:"134",
             moneyOrders:[],
             postOfficeID:''
             
@@ -178,7 +169,6 @@ describe('Post Office Reducer', () => {
             post: {},
             dataRetrieved:false,
             isLoading:false,
-            num:'',
             moneyOrders:[],
             postOfficeID:''
         };
@@ -199,7 +189,6 @@ describe('Post Office Reducer', () => {
             post: {},
             dataRetrieved:false,
             isLoading:false,
-            num:'',
             moneyOrders:[],
             postOfficeID:''
         };
@@ -218,7 +207,6 @@ describe('Post Office Reducer', () => {
             post: {},
             dataRetrieved:false,
             isLoading:false,
-            num:"134",
             moneyOrders:[],
             postOfficeID:''
             
@@ -240,7 +228,6 @@ describe('Post Office Reducer', () => {
             post: {},
             dataRetrieved:false,
             isLoading:false,
-            num:'',
             moneyOrders:[],
             postOfficeID:''
         };
@@ -261,7 +248,6 @@ describe('Post Office Reducer', () => {
             post: {},
             dataRetrieved:false,
             isLoading:false,
-            num:'',
             moneyOrders:[],
             postOfficeID:''
         };
@@ -271,8 +257,7 @@ describe('Post Office Reducer', () => {
      it('Should return state for add logi post start', () => {
 
         const newState = postOfficeReducer(undefined, {
-            type: actionTypes.ADD_LOGI_POST_START,
-            num:"134"
+            type: actionTypes.ADD_LOGI_POST_START
         });
         const expectState={
             error:null,   
@@ -280,7 +265,6 @@ describe('Post Office Reducer', () => {
             post: {},
             dataRetrieved:false,
             isLoading:false,
-            num:"134",
             moneyOrders:[],
             postOfficeID:''
             
@@ -302,7 +286,6 @@ describe('Post Office Reducer', () => {
             post: {},
             dataRetrieved:false,
             isLoading:false,
-            num:'',
             moneyOrders:[],
             postOfficeID:''
         };
@@ -323,7 +306,6 @@ describe('Post Office Reducer', () => {
             post: {},
             dataRetrieved:false,
             isLoading:false,
-            num:'',
             moneyOrders:[],
             postOfficeID:''
         };
@@ -334,8 +316,7 @@ describe('Post Office Reducer', () => {
      it('Should return state for add money order start', () => {
 
         const newState = postOfficeReducer(undefined, {
-            type: actionTypes.ADD_MONEYORDER_START,
-            num:"134"
+            type: actionTypes.ADD_MONEYORDER_START
         });
         const expectState={
             error:null,   
@@ -343,7 +324,6 @@ describe('Post Office Reducer', () => {
             post: {},
             dataRetrieved:false,
             isLoading:false,
-            num:"134",
             moneyOrders:[],
             postOfficeID:''
             
@@ -365,7 +345,6 @@ describe('Post Office Reducer', () => {
             post: {},
             dataRetrieved:false,
             isLoading:false,
-            num:'',
             moneyOrders:[],
             postOfficeID:''
         };
@@ -386,7 +365,6 @@ describe('Post Office Reducer', () => {
             post: {},
             dataRetrieved:false,
             isLoading:false,
-            num:'',
             moneyOrders:[],
             postOfficeID:''
         };

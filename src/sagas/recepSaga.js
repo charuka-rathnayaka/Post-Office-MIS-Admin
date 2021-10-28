@@ -11,7 +11,7 @@ import {getPostOfficeSuccess,getMoneyOrdersSuccess} from "../views/RecepFunc/rec
 
 
 
-async function addPostDetails(recipientName,recipientAddressNo,recipientStreet1,recipientStreet2,recipientCity,cost,pid,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice){
+async function addPostDetails(recipientName,recipientAddressNo,recipientStreet1,recipientStreet2,recipientCity,cost,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice){
      
       
     return firestore
@@ -29,7 +29,7 @@ async function addPostDetails(recipientName,recipientAddressNo,recipientStreet1,
             timestamp:firebase.firestore.Timestamp.now()
         }],
 
-        pid:pid,
+        //pid:pid,
         
         recipientDetails:{
             recipientName:recipientName,
@@ -51,7 +51,7 @@ async function addPostDetails(recipientName,recipientAddressNo,recipientStreet1,
     
 }
 
-async function addRegPostDetails(senderName,senderAddressNo,senderStreet1,senderStreet2,senderCity,senderEmail,recipientName,recipientAddressNo,recipientStreet1,recipientStreet2,recipientCity,cost,pid,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice){
+async function addRegPostDetails(senderName,senderAddressNo,senderStreet1,senderStreet2,senderCity,senderEmail,recipientName,recipientAddressNo,recipientStreet1,recipientStreet2,recipientCity,cost,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice){
      
       
     return firestore
@@ -69,7 +69,7 @@ async function addRegPostDetails(senderName,senderAddressNo,senderStreet1,sender
             timestamp:firebase.firestore.Timestamp.now()
         }],
 
-        pid:pid,
+        //pid:pid,
         
         recipientDetails:{
             recipientName:recipientName,
@@ -100,7 +100,7 @@ async function addRegPostDetails(senderName,senderAddressNo,senderStreet1,sender
     
 }
 
-async function addLogiPostDetails(senderName,senderAddressNo,senderStreet1,senderStreet2,senderCity,senderEmail,recipientName,recipientAddressNo,recipientStreet1,recipientStreet2,recipientCity,recipientEmail,cost,pid,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice,weight){
+async function addLogiPostDetails(senderName,senderAddressNo,senderStreet1,senderStreet2,senderCity,senderEmail,recipientName,recipientAddressNo,recipientStreet1,recipientStreet2,recipientCity,recipientEmail,cost,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice,weight){
      
       
     return firestore
@@ -118,7 +118,7 @@ async function addLogiPostDetails(senderName,senderAddressNo,senderStreet1,sende
             timestamp:firebase.firestore.Timestamp.now()
         }],
 
-        pid:pid,
+        //pid:pid,
         
         recipientDetails:{
             recipientName:recipientName,
@@ -151,7 +151,7 @@ async function addLogiPostDetails(senderName,senderAddressNo,senderStreet1,sende
     
 }
 
-async function addMoneyOrderDetails(recipientName,recipientID,senderName,senderID,cost,pid,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice,moneyAmount,securityCode){
+async function addMoneyOrderDetails(recipientName,recipientID,senderName,senderID,cost,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice,moneyAmount,securityCode){
      
       
     return firestore
@@ -165,7 +165,7 @@ async function addMoneyOrderDetails(recipientName,recipientID,senderName,senderI
             employee:firestore.doc('Users/'+employee)
         }],
         
-        pid:pid,
+    //pid:pid,
         
         recipientDetails:{
             recipientName:recipientName,
@@ -254,15 +254,15 @@ export function* addPostDetailsSaga(data){
     const recipientStreet2=data.data.values.recipientStreet2
     const recipientCity =data.data.values.recipientCity
     const cost=data.data.values.cost
-    const pid=data.data.values.pid+data.num
-    const loc_long=data.data.values.long
-    const loc_lat=data.data.values.lat
+    //const pid=data.data.values.pid+data.num
+    const loc_long=data.data.values.acceptedPostOffice.location._long
+    const loc_lat=data.data.values.acceptedPostOffice.location._lat
     const employee=data.data.values.employee
-    const acceptedPostoffice=data.data.values.acceptedPostOffice
+    const acceptedPostoffice=data.data.values.acceptedPostOffice.code
     const destinationPostoffice=data.data.values.destinationPostOffice
     
-    console.log(employee);
-    let result = yield call(addPostDetails,recipientName,recipientAddressNo,recipientStreet1,recipientStreet2,recipientCity,cost,pid,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice);
+    console.log("po details",loc_long,loc_lat,acceptedPostoffice);
+    let result = yield call(addPostDetails,recipientName,recipientAddressNo,recipientStreet1,recipientStreet2,recipientCity,cost,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice);
     console.log("res add",result)
     
     yield put(addPostSuccess(result));
@@ -284,7 +284,7 @@ export function* addRegPostDetailsSaga(data){
     const recipientStreet2=data.data.values.recipientStreet2
     const recipientCity =data.data.values.recipientCity
     const cost=data.data.values.cost
-    const pid=data.data.values.pid+data.num
+    //const pid=data.data.values.pid+data.num
     const loc_long=data.data.values.long
     const loc_lat=data.data.values.lat
     const employee=data.data.values.employee
@@ -292,7 +292,7 @@ export function* addRegPostDetailsSaga(data){
     const destinationPostoffice=data.data.values.destinationPostOffice
     
     console.log(senderStreet1);
-    let result = yield call(addRegPostDetails,senderName,senderAddressNo,senderStreet1,senderStreet2,senderCity,senderEmail,recipientName,recipientAddressNo,recipientStreet1,recipientStreet2,recipientCity,cost,pid,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice);
+    let result = yield call(addRegPostDetails,senderName,senderAddressNo,senderStreet1,senderStreet2,senderCity,senderEmail,recipientName,recipientAddressNo,recipientStreet1,recipientStreet2,recipientCity,cost,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice);
     console.log("res add",result)
     
     yield put(addPostSuccess(result));
@@ -315,7 +315,7 @@ export function* addLogiPostDetailsSaga(data){
     const recipientCity =data.data.values.recipientCity
     const recipientEmail=data.data.values.recipientEmail 
     const cost=data.data.values.cost
-    const pid=data.data.values.pid+data.num
+    //const pid=data.data.values.pid+data.num
     const loc_long=data.data.values.long
     const loc_lat=data.data.values.lat
     const employee=data.data.values.employee
@@ -324,7 +324,7 @@ export function* addLogiPostDetailsSaga(data){
     const weight=data.data.values.weight
     
     
-    let result = yield call(addLogiPostDetails,senderName,senderAddressNo,senderStreet1,senderStreet2,senderCity,senderEmail,recipientName,recipientAddressNo,recipientStreet1,recipientStreet2,recipientCity,recipientEmail,cost,pid,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice,weight);
+    let result = yield call(addLogiPostDetails,senderName,senderAddressNo,senderStreet1,senderStreet2,senderCity,senderEmail,recipientName,recipientAddressNo,recipientStreet1,recipientStreet2,recipientCity,recipientEmail,cost,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice,weight);
     console.log("res add",result)
     
     yield put(addPostSuccess(result));
@@ -339,7 +339,7 @@ export function* addMoneyOrderDetailsSaga(data){
     const senderName=data.data.values.senderName
     const senderID=data.data.values.senderID
     const cost=data.data.values.cost
-    const pid=data.data.values.pid+data.num
+    //const pid=data.data.values.pid+data.num
     const loc_long=data.data.values.long
     const loc_lat=data.data.values.lat
     const employee=data.data.values.employee
@@ -349,7 +349,7 @@ export function* addMoneyOrderDetailsSaga(data){
     const securityCode=data.data.values.securityCode
     
     //console.log(employee);
-    let result = yield call(addMoneyOrderDetails,recipientName,recipientID,senderName,senderID,cost,pid,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice,moneyAmount,securityCode);
+    let result = yield call(addMoneyOrderDetails,recipientName,recipientID,senderName,senderID,cost,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice,moneyAmount,securityCode);
     //console.log("res add",result)
     
     yield put(addPostSuccess(result));
