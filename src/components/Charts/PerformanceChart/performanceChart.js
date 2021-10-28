@@ -1,12 +1,12 @@
 import React from "react";
-import { AreaChart, linearGradient,XAxis, YAxis,CartesianGrid,Tooltip,Area  } from 'recharts';
+import { AreaChart, linearGradient,XAxis, YAxis,CartesianGrid,Tooltip,Area,Label  } from 'recharts';
 import { useSelector} from "react-redux";
 
 function PerformanceChart(){
   const data = useSelector((state) => state.dashboardReducer.revenueData); 
     return(
         <AreaChart width={1100} height={450} data={data}
-            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+            margin={{ top: 10, right: 30, left: 10, bottom: 10}}>
             <defs>
                 <linearGradient id="colorNormalMail" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
@@ -25,8 +25,10 @@ function PerformanceChart(){
                 <stop offset="95%" stopColor="#2ec720" stopOpacity={0}/>
                 </linearGradient>
             </defs>
-            <XAxis dataKey="date" />
-            <YAxis />
+            <XAxis dataKey="date">
+                <Label value="Date" offset={-5} position="insideBottom" />
+            </XAxis>
+            <YAxis label={{ value: 'Revenue', angle: -90, position: 'insideLeft', textAnchor: 'middle' }} />
             <CartesianGrid strokeDasharray="3 3" />
             <Tooltip />
             <Area type="monotone" dataKey="Normal Mail" stroke="#8884d8" fillOpacity={1} fill="url(#colorNormalMail)" />

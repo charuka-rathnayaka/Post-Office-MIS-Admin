@@ -21,7 +21,7 @@ export default function Complains(){
                     {(complainsReducer.isRequested===false && complainsReducer.dataRetrieved===true)?
                     (   complainsReducer.complainData.map((complain)=>
                             <div style={{marginTop:"30px"}}>
-                                <ComplainComponent complain={complain}/>
+                                <ComplainComponent complain={complain} postOffice={postOffice}/>
                             </div>
                         )
                     ):
@@ -33,7 +33,7 @@ export default function Complains(){
                             style={{ marginTop: "25%",marginLeft:"45%" }}
                         >
                             <Grid item>
-                            <CircularProgress size={60} color="secondary" />
+                            <CircularProgress size={60} color="secondary" style={{color:"#03031c"}}/>
                             </Grid>
                         </Grid>
                     ):

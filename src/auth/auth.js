@@ -30,6 +30,8 @@ export const AuthProvider = ({ children }) => {
 
   if (pending) {
     return (
+      <div style={{backgroundColor:"#d4d4d4",
+      minHeight:"100vh"}}>
       <Grid
         container
         direction="column"
@@ -46,9 +48,10 @@ export const AuthProvider = ({ children }) => {
           />
         </Grid>
         <Grid item>
-          <CircularProgress size={80} color="secondary" />
+          <CircularProgress size={80} color="secondary" style={{color:"#03031c"}}/>
         </Grid>
       </Grid>
+      </div>
     );
   }
 

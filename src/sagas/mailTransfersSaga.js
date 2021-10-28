@@ -4,7 +4,6 @@ import { eventChannel } from "redux-saga";
 import { confirmTransferError, confirmTransferSuccess, getTransfersError, getTransfersSuccess } from "../views/MailTransfers/mailTransfersActions";
 import dateFormat from "dateformat";
 
-
 function* getPostOffices(){
     const ref = firestore.collection("PostOffice"); 
     const channel = eventChannel((emit) => ref.onSnapshot(emit));
@@ -16,8 +15,9 @@ function* getPostOffices(){
             PostOffice:data.city
         }
     });
-    
 }
+
+
 function* getTransfers(postOffice,postOffices){
     const postOfficeRef= firestore.collection("PostOffice").doc(postOffice)
     const ref = firestore.collection("PendingMails").where("state","==","Accepted").where("acceptedPostoffice","==",postOfficeRef);
@@ -50,17 +50,14 @@ function* groupTransfers(transferData,postOffices){
                 itemCount:mails.length,
                 mails:mails
             })
-        }
-        
+        }   
     })
-    return transfers;
-   
+    return transfers; 
 }
 
 
 async function markTransfer(date,transfer,acceptedPostoffice) {
     var docID;
-    
     const destinationPostoffice=transfer.postOfficeCode;
     const mails=transfer.mails
     const mailList = mails.map((mail)=>{
@@ -68,13 +65,12 @@ async function markTransfer(date,transfer,acceptedPostoffice) {
             firestore.collection("PendingMails").doc(mail.pid)
         )
     })
-  
     const relevantDocumentRef = await firestore
       .collection("Transfers")
       .where("date", "==", date)
       .where("destinationPostoffice","==",destinationPostoffice)
       .get();
-  
+
     if (relevantDocumentRef.empty) {
         var doc =firestore
         .collection("Transfers")
@@ -115,15 +111,14 @@ async function markTransfer(date,transfer,acceptedPostoffice) {
           postOffice:transfer.postOffice,
           itemCount:transfer.itemCount,
           mails:mails
-        }
-  }
+    }
+}
 
 function* markTransfers(transferAssignments,postOffice){
     const date=new Date();
     const formattedDate=dateFormat(date, "yyyy/mm/dd");
     const transferList= yield all(transferAssignments.map((transfer)=> 
          call (markTransfer,formattedDate,transfer,postOffice)
-
     ))
     return transferList;
 }
@@ -138,15 +133,9 @@ export function* getTransfersSaga(data){
         yield put(getTransfersSuccess(transferMarking));
     } catch (error) {
         console.log("Error -",error);
-        yield put(getTransfersError(error));
-        
+        yield put(getTransfersError(error)); 
     }
-  
 }
-
-
-
-
 
 function* confirmTransfers(transfers){
   return transfers.forEach((transfer)=>{
@@ -154,9 +143,7 @@ function* confirmTransfers(transfers){
           transferRef.update({
               "state": "Confirmed"
           })
-      
-  })
-  
+  })  
 }
 
 function* confirmMails(transfers){
@@ -168,22 +155,17 @@ function* confirmMails(transfers){
           "state": "Transfered"
       })
     })
-
-})
-
+  })
 }
 
 export function* confirmTransfersSaga(data){
   try {
       const transfers=data.transfers;
       const transferConfirm=yield call(confirmTransfers,transfers);
-      const mailsConfirm=yield call(confirmMails,transfers);
-     
+      const mailsConfirm=yield call(confirmMails,transfers);     
       yield put(confirmTransferSuccess());
   } catch (error) {
       console.log("Error -",error);
-      yield put(confirmTransferError(error));
-      
+      yield put(confirmTransferError(error));   
   }
-
 }

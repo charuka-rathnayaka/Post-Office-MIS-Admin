@@ -48,7 +48,7 @@ export default function LiveDelivery(){
                     style={{ marginTop: "25%",marginLeft:"45%" }}
                 >
                     <Grid item>
-                    <CircularProgress size={60} color="secondary" />
+                    <CircularProgress size={60} color="secondary" style={{color:"#03031c"}}/>
                     </Grid>
                 </Grid>):(
                 <p style={{color:"red",textAlign:"center",marginTop: "25%",marginLeft:"45%"}}>Error Occured: Please try again later</p>))}

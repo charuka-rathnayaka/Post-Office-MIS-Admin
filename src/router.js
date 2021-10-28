@@ -27,7 +27,7 @@ import MailTransfers from "./views/MailTransfers/mailTransfers";
 function Authorization() {
     const dispatch = useDispatch();
     const user = useContext(AuthContext);
-   // console.log("token -",user.currentUser.getIdToken(true))
+   //console.log("token -",user.currentUser.getIdToken(true))
     useEffect(()=>{
         if (user==null){
     
@@ -56,7 +56,7 @@ function Authorization() {
                 (userRole=="postmaster"?(LiveDelivery):
                 AuthError)
                 :AuthError
-            } />
+            }/>
             <Route exact path="/registration" component={
                 userRole? 
                 (userRole=="postmaster"?(Registration):
@@ -129,6 +129,8 @@ function Authorization() {
 
         </Router>
         :
+        <div style={{backgroundColor:"#d4d4d4",
+        minHeight:"100vh"}}>
         <Grid
         container
         direction="column"
@@ -145,9 +147,10 @@ function Authorization() {
           />
         </Grid>
         <Grid item>
-          <CircularProgress size={80} color="secondary" />
+          <CircularProgress size={80} color="secondary" style={{color:"#03031c"}}/>
         </Grid>
-      </Grid>}  
+      </Grid>
+      </div>}  
       </div>
   );
 }

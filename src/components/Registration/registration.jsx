@@ -320,7 +320,7 @@ function RegistrationForm(data){
                                             <InputAdornment position="end">
                                             {formik.values.password1 !== "" ? (
                                                 <IconButton
-                                                style={{ color: "red" }}
+                                                style={{ color: "#090726" }}
                                                 id="iconButton"
                                                 aria-label="toggle password visibility"
                                                 onClick={handleClickShowPassword1}
@@ -367,7 +367,7 @@ function RegistrationForm(data){
                                             <InputAdornment position="end">
                                             {formik.values.password2 !== "" ? (
                                                 <IconButton
-                                                style={{ color: "red" }}
+                                                style={{ color: "#090726" }}
                                                 id="iconButton"
                                                 aria-label="toggle password visibility"
                                                 onClick={handleClickShowPassword2}
