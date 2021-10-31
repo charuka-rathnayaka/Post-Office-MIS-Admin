@@ -24,7 +24,7 @@ export async function addEmployee(request){
     const idToken=request.idToken;
     const result =await axios({
       method: "post",
-      url: "http://localhost:3050/create-user",
+      url: "http://localhost:5001/post-office-mis-325210/us-central1/app/create-user",
       params: {idToken:idToken,email:email,firstName:firstName,password:password,lastname:lastName,contactNumber:contactNumber,NIC:NIc,postOffice:postOffice,role:role,userID:userID},
       headers: {"Content-Type": "multipart/form-data" },
     })
