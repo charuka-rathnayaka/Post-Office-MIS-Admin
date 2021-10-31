@@ -11,6 +11,7 @@ import useStyles from './topBarStyles';
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
 import { logoutRequest } from "../../views/Login/loginActions.js";
+import ProfileModal from '../Profile/profileModal';
 
 export default function TopBar(props) {
   const classes = useStyles();
@@ -18,9 +19,11 @@ export default function TopBar(props) {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const userFirstName= useSelector((state)=>state.homeReducer.firstName);
   const userLastName=useSelector((state)=>state.homeReducer.lastName);
+  const userDetails=useSelector((state)=>state.homeReducer);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const dispatch = useDispatch();
+  const [open, setOpen] = React.useState(false);
  // console.log("page-",page)
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -32,6 +35,7 @@ export default function TopBar(props) {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+    setOpen(true);
     handleMobileMenuClose();
   };
   const logout = (e) => {
@@ -50,8 +54,6 @@ export default function TopBar(props) {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <hr/>
       <MenuItem onClick={logout}>Logout</MenuItem>
     </Menu>
   );
@@ -82,8 +84,9 @@ export default function TopBar(props) {
           
         </Toolbar>
       </AppBar>
-      
+      <ProfileModal open={open} setOpen={setOpen} userDetails={userDetails}/>
       {renderMenu}
+
     </div>
   );
 }

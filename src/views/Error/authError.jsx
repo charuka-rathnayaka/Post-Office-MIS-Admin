@@ -5,9 +5,10 @@ import { useStyles } from "./errorStyles";
 
 
 export default function AuthError(data){
-    
+    console.log("data - ",data)
     const classes=useStyles()
-    
+    const errorCode=data.errorCode;
+    const errorMessage=data.errorMessage;
     return(
         <Container>
             <Grid container direction="column" justifyContent="center">
@@ -21,11 +22,11 @@ export default function AuthError(data){
                     </div>
                 </Grid>
                 <Grid item>
-                    <div className={classes.errorCode}>Error: 401</div>
+                    <div className={classes.errorCode}>Error: {errorCode}</div>
                 </Grid>
                     
                 <Grid item>
-                    <div className={classes.errorMessage}>UnAuthorized Access.....</div>
+                    <div className={classes.errorMessage}>{errorMessage}</div>
                 </Grid>
 
                 
