@@ -10,29 +10,32 @@ function* getLiveLocations(data) {
   const role="postman";
   const ref = firestore.collectionGroup("locations").where("date", "==", formattedDate);
   const channel = eventChannel((emit) => ref.onSnapshot(emit));
-  try {
-    const Data = yield take(channel);
-        return Data.docs.map((doc) => {
-            const data = doc.data();
-            const documentID = doc.ref.parent.parent?.id || "";
-            if (data.geoLocations.length > 0) {
-            const history = data.geoLocations.sort((a, b) => b.timestamp.seconds - a.timestamp.seconds);
-            const latestElement = history[0];
-            return {
-                userDocumentID: documentID,
-                timeStamp: latestElement.timestamp.seconds * 1000,
-                location: {
-                lng: latestElement.location?.longitude || 0,
-                lat: latestElement.location?.latitude || 0
+  while(true){
+    try {
+        console.log("trying")
+        const Data = yield take(channel);
+            return Data.docs.map((doc) => {
+                const data = doc.data();
+                const documentID = doc.ref.parent.parent?.id || "";
+                if (data.geoLocations.length > 0) {
+                const history = data.geoLocations.sort((a, b) => b.timestamp.seconds - a.timestamp.seconds);
+                const latestElement = history[0];
+                return {
+                    userDocumentID: documentID,
+                    timeStamp: latestElement.timestamp.seconds * 1000,
+                    location: {
+                    lng: latestElement.location?.longitude || 0,
+                    lat: latestElement.location?.latitude || 0
+                    }
+                };
                 }
-            };
-            }
-            return null;
-        });
-      } catch (error) {
-      console.log("Error when locations retireved'")
-      return "Error";
-  }
+                return null;
+            });
+        } catch (error) {
+        console.log("Error when locations retireved'")
+        return "Error";
+        }
+    }
 }
 
 function* getPostmanDetails(postOffice) {

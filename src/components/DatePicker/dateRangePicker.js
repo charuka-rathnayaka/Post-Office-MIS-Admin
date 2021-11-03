@@ -7,7 +7,7 @@ import 'rsuite/dist/rsuite-rtl.min.css';
 // import './dateRangePickerStyles.css'
 
 export function DateRangePick(props){
-    
+    const {afterToday} =DateRangePicker;
     const dateRange = props.dateRange;
     const setDateRange= props.setDateRange;
     console.log("Date range - ",dateRange)
@@ -15,7 +15,7 @@ export function DateRangePick(props){
         <div>
             <Grid container>
                 <Grid item style={{marginTop:"25px"}}>
-                   <DateRangePicker   value={dateRange} onChange={setDateRange} placeholder="Select Date Range" style={{ width: 230 }}/>
+                   <DateRangePicker disabledDate={afterToday()} block value={dateRange} onChange={setDateRange} placeholder="Select Date Range" style={{ width: 230 }}/>
                 </Grid>
                
             </Grid>
