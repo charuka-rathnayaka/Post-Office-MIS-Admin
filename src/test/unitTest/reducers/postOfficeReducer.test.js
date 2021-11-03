@@ -198,8 +198,8 @@ describe('Post Office Reducer', () => {
      it('Should return state for add registered post start', () => {
 
         const newState = postOfficeReducer(undefined, {
-            type: actionTypes.ADD_REG_POST_START,
-            num:"134"
+            type: actionTypes.ADD_REG_POST_START
+    
         });
         const expectState={
             error:null,   
@@ -357,6 +357,67 @@ describe('Post Office Reducer', () => {
         const errorMsg="Error at adding money order"
         const newState = postOfficeReducer(undefined, {
             type: actionTypes.ADD_MONEYORDER_FAIL,
+            error:errorMsg
+        });
+        const expectState= {
+            error: errorMsg,
+            postOffice:[],
+            post: {},
+            dataRetrieved:false,
+            isLoading:false,
+            moneyOrders:[],
+            postOfficeID:''
+        };
+        expect(newState).toEqual(expectState);
+
+     });
+     it('Should return state for remove money order state', () => {
+        const id='jAds353748ngk7'
+        const newState = postOfficeReducer(undefined, {
+            type: actionTypes.REMOVE_MONEY_ORDER_START,
+            id:id
+        });
+        const expectState={
+            error:null,   
+            postOffice:[],
+            post: {},
+            dataRetrieved:false,
+            isLoading:false,
+            moneyOrders:[],
+            postOfficeID:'',
+            id:id
+            
+        };
+        expect(newState).toEqual(expectState);
+
+    });
+
+    it('Should return state for remove money order success', () => {
+
+        
+        const newState = postOfficeReducer(undefined, {
+            type: actionTypes.REMOVE_MONEY_ORDER_SUCCESS,
+            
+        });
+        const expectState= {
+            error:null,   
+            postOffice:[],
+            post: {},
+            dataRetrieved:false,
+            isLoading:false,
+            moneyOrders:[],
+            postOfficeID:'',
+            
+        };
+        expect(newState).toEqual(expectState);
+
+    });
+
+    it('Should return state for remove money order error', () => {
+
+        const errorMsg="Error at removing money order"
+        const newState = postOfficeReducer(undefined, {
+            type: actionTypes.REMOVE_MONEY_ORDER_FAIL,
             error:errorMsg
         });
         const expectState= {

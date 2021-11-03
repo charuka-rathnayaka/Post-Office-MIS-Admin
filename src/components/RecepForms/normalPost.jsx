@@ -10,6 +10,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { Formik, useFormik } from 'formik';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
+import Barcode from 'react-barcode';
+import html2canvas from 'html2canvas';
 // import combinedReducers from "../../rootReducer";
 // import { composeWithDevTools } from "redux-devtools-extension";
 // import { applyMiddleware, createStore } from "redux";
@@ -44,6 +52,10 @@ const useStyles = makeStyles((theme) => ({
       },
   }));
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
 function NormalForm({postOffice}) {
     //console.log("postOffice",postOffice);
     //let today=new Date();
@@ -53,12 +65,23 @@ function NormalForm({postOffice}) {
     //let tod=year.toString(10).slice(-2)+(("0"+month.toString(10)).slice(-2))+(("0"+day.toString(10)).slice(-2));
     //let num='';
     //var store=require('store');
+    const [open, setOpen] = React.useState(false);
+    const wrapper_ref = React.useRef();
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     const dispatch = useDispatch();  
     // const longitude=postOffice[0].location._long;
     // const latitude=postOffice[0].location._lat;
     //const POcode=postOffice.map((option)=>(option.code));
-    const userID = useSelector((state)=>state.homeReducer.currentUserID);   
+    const userID = useSelector((state)=>state.homeReducer.currentUserID); 
+    const pid = useSelector((state)=>state.postOfficeReducer.pid);
+    
     //const Pid=tod+POcode[0]+POcode[1];
     
     const initialState=useFormik({
@@ -95,12 +118,46 @@ function NormalForm({postOffice}) {
             initialState.touched.long=false;
             initialState.touched.lat=false;
             dispatch(addPostStart(initialState));
+            handleClickOpen();
             resetForm({})
         }
     });
     
     //console.log(initialState);
-    
+    const onClick=(e)=>{
+        const opt = {
+           scale: 4
+       }
+       const elem = wrapper_ref.current;
+       html2canvas(elem, opt).then(canvas => {
+           const iframe = document.createElement('iframe')
+           iframe.name = 'printf'
+           iframe.id = 'printf'
+           iframe.height = 0;
+           iframe.width = 0;
+           document.body.appendChild(iframe)
+   
+           const imgUrl = canvas.toDataURL({
+               format: 'jpeg',
+               quality: '1.0'
+           })
+   
+           const style=`
+               height:100vh;
+               width:100vw;
+               position:absolute;
+               left:0:
+               top:0;
+           `;
+   
+           const url = `<img style="${style}" src="${imgUrl}"/>`;
+           var newWin = window.frames["printf"];
+           newWin.document.write(`<body onload="window.print()">${url}</body>`);
+           newWin.document.close();
+   
+       });
+       handleClose();
+    }
     const classes = useStyles();
     
      
@@ -295,12 +352,37 @@ function NormalForm({postOffice}) {
                            
                         </FormControl><br/>
                             
-                        <Button type="submit"  variant="contained"color="secondary" value="add">Submit</Button>
+                        <Button type="submit"  variant="contained"color="primary"  value="add">Submit</Button>
                         <br/><br/>
                     </form>
 
                 </Container>
             </Formik>
+            <Dialog
+                open={open}
+                TransitionComponent={Transition}
+                keepMounted
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-slide-title"
+                aria-describedby="alert-dialog-slide-description"
+            >
+                <DialogTitle id="alert-dialog-slide-title">{"Barcode for the Post"}</DialogTitle>
+                <DialogContent>
+                <DialogContentText id="alert-dialog-slide-description">
+                    <div ref={wrapper_ref}>
+                        <Barcode value={pid} />
+                    </div>
+                </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={onClick} color="primary">
+                    Print
+                </Button>
+                <Button onClick={handleClose} color="primary">
+                    Close
+                </Button>
+                </DialogActions>
+            </Dialog>
         </>
      );
      

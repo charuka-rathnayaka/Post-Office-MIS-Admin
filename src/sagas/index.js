@@ -13,7 +13,7 @@ import { loginSaga,logoutSaga } from "./loginSaga.js";
 import { getUserDetailsSaga } from "./homeSaga.js";
 import { addEmployeeSaga } from "./employeeRegistrationSaga.js";
 import { getLiveLocationsSaga } from "./liveDeliverySaga.js";
-import {addPostDetailsSaga,addRegPostDetailsSaga,addLogiPostDetailsSaga,addMoneyOrderDetailsSaga, getMoneyOrdersSaga} from "./recepSaga.js";
+import {addPostDetailsSaga,addRegPostDetailsSaga,addLogiPostDetailsSaga,addMoneyOrderDetailsSaga, getMoneyOrdersSaga,removeMoneyOrderSaga} from "./recepSaga.js";
 import {getPostOfficeSaga} from "./recepSaga.js";
 import { getPerformanceDataSaga } from "./dashboardSaga.js";
 import { getCountDataSaga } from "./statisticsSaga.js";
@@ -42,5 +42,6 @@ export default function* root() {
     takeEvery(mailAssignmentsActionTypes.SUBMIT_ASSIGNMENTS_REQUEST,submitAssignmentsSaga),
     takeEvery(mailTransfersActionTypes.GET_TRANSFERS_REQUEST,getTransfersSaga),
     takeEvery(mailTransfersActionTypes.CONFIRM_TRANSFER_REQUEST,confirmTransfersSaga),
+    takeEvery(recepActionTypes.REMOVE_MONEY_ORDER_START,removeMoneyOrderSaga),
   ]);
 }

@@ -3,7 +3,7 @@ import { call,put,take} from "redux-saga/effects";
 import {firestore} from "../firebase/firestore";
 
 import firebase from 'firebase/compat/app';
-import { addPostSuccess } from "../views/RecepFunc/recepActions";
+import { addPostSuccess, removeMoneyOrderSuccess } from "../views/RecepFunc/recepActions";
 import { eventChannel } from "redux-saga";
 import {getPostOfficeSuccess,getMoneyOrdersSuccess} from "../views/RecepFunc/recepActions";
 
@@ -48,6 +48,7 @@ async function addPostDetails(recipientName,recipientAddressNo,recipientStreet1,
         console.log("Error occured");
         return null;
     })
+
     
 }
 
@@ -188,6 +189,37 @@ async function addMoneyOrderDetails(recipientName,recipientID,senderName,senderI
     })
     
 }
+async function deliverMoneyOrder(data){
+     
+    //console.log(data.acceptedPostoffice,data.destinationPostoffice,data.recipientDetails.recipientName,data.recipientDetails.recipientID,data.senderDetails.senderName,data.senderDetails.senderID);  
+    return firestore
+    .collection("DeliveredMails")
+    .add({
+        
+        pid:data.id,
+        acceptedPostoffice:data.acceptedPostoffice,
+        destinationPostoffice:data.destinationPostoffice,
+        recipientDetails:{
+            recipientName:data.recipientDetails.recipientName,
+            recipientID:data.recipientDetails.recipientID,
+        },
+        histories:data.histories,
+        senderDetails:{
+            senderName:data.senderDetails.senderName,
+            senderID:data.senderDetails.senderID,
+        },
+        type: "MoneyOrder",
+        timestamp:firebase.firestore.Timestamp.now(),
+        moneyAmount:data.moneyAmount,
+        securityCode:data.securityCode,
+    
+    })
+    .catch((e)=>{
+        console.log("Error occured");
+        return null;
+    })
+    
+}
 
 function* getPostOffice(){
     
@@ -224,12 +256,12 @@ function* getMoneyOrders(postOfficeID){
     //console.log("Charitha");
     return Data.docs.map((doc: any) => {
         const data = doc.data();
-        //const documentID = doc.id;
-        console.log(data.destinationPostoffice);
+        const documentID = doc.id;
+        console.log(documentID);
         
         return {
             moneyAmount:data.moneyAmount,
-            pid:data.pid,
+            pid:documentID,
             recipientID:data.recipientDetails.recipientID,
             recipientName:data.recipientDetails.recipientName,
             securityCode:data.securityCode,
@@ -243,6 +275,38 @@ function* getMoneyOrders(postOfficeID){
     });
       
   
+}
+function* removeMoneyOrder(id){
+    console.log(id)
+    const ref = firestore.collection("PendingMails").doc(id.id);
+    const channel = eventChannel((emit) => ref.onSnapshot(emit));
+
+    const doc = yield take(channel);
+    const data=doc.data()
+    //console.log("doc",data.acceptedPostoffice);
+    doc.ref.delete();
+    data.histories.push({action:"Delivered",employee:firestore.doc('Users/'+id.userID)})
+    console.log("history",data.histories)
+    return {
+        id:doc.id,
+        acceptedPostoffice:data.acceptedPostoffice,
+        destinationPostoffice:data.destinationPostoffice,
+        histories:data.histories,
+        recipientDetails:{
+            recipientName:data.recipientDetails.recipientName,
+            recipientID:data.recipientDetails.recipientID,
+        },
+        senderDetails:{
+            senderName:data.senderDetails.senderName,
+            senderID:data.senderDetails.senderID,
+        },
+        type: "MoneyOrder",
+        moneyAmount:data.moneyAmount,
+        securityCode:data.securityCode,
+        timestamp:firebase.firestore.Timestamp.now()
+    }
+
+    
 }
     
 export function* addPostDetailsSaga(data){
@@ -261,11 +325,11 @@ export function* addPostDetailsSaga(data){
     const acceptedPostoffice=data.data.values.acceptedPostOffice.code
     const destinationPostoffice=data.data.values.destinationPostOffice
     
-    console.log("po details",loc_long,loc_lat,acceptedPostoffice);
+    //console.log("po details",loc_long,loc_lat,acceptedPostoffice);
     let result = yield call(addPostDetails,recipientName,recipientAddressNo,recipientStreet1,recipientStreet2,recipientCity,cost,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice);
-    console.log("res add",result)
+    console.log("res add",result.id)
     
-    yield put(addPostSuccess(result));
+    yield put(addPostSuccess(result.id));
     
 }
 
@@ -291,11 +355,11 @@ export function* addRegPostDetailsSaga(data){
     const acceptedPostoffice=data.data.values.acceptedPostOffice
     const destinationPostoffice=data.data.values.destinationPostOffice
     
-    console.log(senderStreet1);
+    //console.log(senderStreet1);
     let result = yield call(addRegPostDetails,senderName,senderAddressNo,senderStreet1,senderStreet2,senderCity,senderEmail,recipientName,recipientAddressNo,recipientStreet1,recipientStreet2,recipientCity,cost,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice);
-    console.log("res add",result)
+    //console.log("res add",result.id)
     
-    yield put(addPostSuccess(result));
+    yield put(addPostSuccess(result.id));
     
 }
 
@@ -325,9 +389,9 @@ export function* addLogiPostDetailsSaga(data){
     
     
     let result = yield call(addLogiPostDetails,senderName,senderAddressNo,senderStreet1,senderStreet2,senderCity,senderEmail,recipientName,recipientAddressNo,recipientStreet1,recipientStreet2,recipientCity,recipientEmail,cost,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice,weight);
-    console.log("res add",result)
+    //console.log("res add",result)
     
-    yield put(addPostSuccess(result));
+    yield put(addPostSuccess(result.id));
     
 }
 
@@ -352,7 +416,7 @@ export function* addMoneyOrderDetailsSaga(data){
     let result = yield call(addMoneyOrderDetails,recipientName,recipientID,senderName,senderID,cost,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice,moneyAmount,securityCode);
     //console.log("res add",result)
     
-    yield put(addPostSuccess(result));
+    yield put(addPostSuccess(result.id));
     
 }
 export function* getPostOfficeSaga(){ 
@@ -369,10 +433,17 @@ export function* getMoneyOrdersSaga(postOfficeID){
     
     let moneyOrders = yield call(getMoneyOrders,postOfficeID.postOfficeID);
     
-    //console.log("res ",postOffice);
+    //console.log("res ",moneyOrders);
     yield put(getMoneyOrdersSuccess(moneyOrders));
     
 }
-
+export function* removeMoneyOrderSaga(id){
+    //console.log("saga");
+    let removedMoneyOrder=yield call(removeMoneyOrder,id);
+    //console.log("removedMO",removedMoneyOrder);
+    let addMoneyOrder=yield call(deliverMoneyOrder,removedMoneyOrder);
+    //console.log("deliverMO",addMoneyOrder);
+    yield put(removeMoneyOrderSuccess(addMoneyOrder));
+}
 
 

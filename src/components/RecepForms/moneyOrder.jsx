@@ -11,9 +11,18 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { useFormik } from 'formik';
 //import GenerateRandomCode from 'GenerateRandomCode';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
+import html2canvas from 'html2canvas';
 
 
-
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 const useStyles = makeStyles((theme) => ({
     
     textField: {
@@ -39,6 +48,17 @@ function MoneyOrderForm({postOffice}) {
     let num='';
     var store=require('store');
 
+    const [open, setOpen] = React.useState(false);
+    const wrapper_ref = React.useRef();
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+
     const dispatch = useDispatch();    
     
     const longitude=postOffice[0].location._long;
@@ -46,13 +66,15 @@ function MoneyOrderForm({postOffice}) {
     const POcode=postOffice.map((option)=>(option.code));
     const userID = useSelector((state)=>state.homeReducer.currentUserID);   
     const Pid=tod+POcode[0]+POcode[1];
-    const secCode=Math.random().toString().slice(2,11);
-    console.log("seccode",secCode);
+    
+    //console.log("seccode",secCode);
+    const pid = useSelector((state)=>state.postOfficeReducer.pid);
+    
     
     const initialState=useFormik({
         initialValues:{ 
             senderName:"",
-            senderID:"", 
+            senderID:"",  
             recipientName:"",
             recipientID:"", 
             cost:"",
@@ -63,7 +85,7 @@ function MoneyOrderForm({postOffice}) {
             long:longitude,
             lat:latitude,
             moneyAmount:"",
-            securityCode:secCode     
+            securityCode:Math.random().toString().slice(2,11) 
         },
         onSubmit:(values,{resetForm})=>{
             if ((store.get("pid")==null)||(store.get('pid').date!==tod)){
@@ -87,12 +109,46 @@ function MoneyOrderForm({postOffice}) {
             initialState.touched.moneyAmount=false;
             initialState.touched.securityCode=false;
             dispatch(addMoneyOrderStart(initialState,num));
+            handleClickOpen();
             resetForm({})
         }
     });
     
     //console.log(initialState);
-    
+    const onClick=(e)=>{
+        const opt = {
+           scale: 4
+       }
+       const elem = wrapper_ref.current;
+       html2canvas(elem, opt).then(canvas => {
+           const iframe = document.createElement('iframe')
+           iframe.name = 'printf'
+           iframe.id = 'printf'
+           iframe.height = 0;
+           iframe.width = 0;
+           document.body.appendChild(iframe)
+   
+           const imgUrl = canvas.toDataURL({
+               format: 'jpeg',
+               quality: '1.0'
+           })
+   
+           const style=`
+               height:100vh;
+               width:100vw;
+               position:absolute;
+               left:0:
+               top:0;
+           `;
+   
+           const url = `<img style="${style}" src="${imgUrl}"/>`;
+           var newWin = window.frames["printf"];
+           newWin.document.write(`<body onload="window.print()">${url}</body>`);
+           newWin.document.close();
+   
+       });
+       handleClose();
+    }
     const classes = useStyles();
     
     
@@ -291,11 +347,38 @@ function MoneyOrderForm({postOffice}) {
                            
                         </FormControl><br/>
                             
-                        <Button type="submit"  variant="contained"color="secondary" >Submit</Button>
+                        <Button type="submit"  variant="contained"color="primary"  >Submit</Button>
                         <br/><br/>
                     </form>
 
                 </Container>
+                <Dialog
+                open={open}
+                TransitionComponent={Transition}
+                keepMounted
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-slide-title"
+                aria-describedby="alert-dialog-slide-description"
+            >
+                <DialogTitle id="alert-dialog-slide-title">{"Barcode for the Post"}</DialogTitle>
+                <DialogContent>
+                <DialogContentText id="alert-dialog-slide-description">
+                    <div ref={wrapper_ref}>
+                        <p>PID No: {pid}<br/>
+                        Security Code: {initialState.values.securityCode}</p>
+                    
+                    </div>
+                </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={onClick} color="primary">
+                    Print
+                </Button>
+                <Button onClick={handleClose} color="primary">
+                    Close
+                </Button>
+                </DialogActions>
+            </Dialog>
         
         </>
      );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import {useSelector,useDispatch} from "react-redux";
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,6 +10,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import { Button, TableFooter, Typography } from '@material-ui/core';
+import {removeMoneyOrderStart} from "../../views/RecepFunc/recepActions";
+
 
 
 const columns = [
@@ -62,24 +65,29 @@ const columns = [
 
 const useStyles = makeStyles({
   root: {
-    width: '95%',
+    width: '97%',
+    height: '95%'
   },
   container: {
-    maxHeight: 440,
+    maxHeight: 650,
     borderRadius: 15,
     margin: '10px 10px'
   },
   tableHeader:{
       fontWeight:"bold",
-      backgroundColor: '#cc0000',
+      backgroundColor: '#4d4dff',
+      color:'black'
     
   }
+  
 });
 
 export default function MOTable({moneyOrders}) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const userID = useSelector((state)=>state.homeReducer.currentUserID);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(15);
   let MoneyOrders=[]
   for (let i=0;i<moneyOrders.length;i++){
       MoneyOrders[i]={
@@ -100,8 +108,15 @@ export default function MOTable({moneyOrders}) {
   };
 
   const handleChangeRowsPerPage = (event) => {
+    //console.log("Ch")
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+  const handleSubmit=(id,userID)=> (event)=>{
+    event.preventDefault();
+    //console.log("handle",id)
+    dispatch(removeMoneyOrderStart(id,userID))
+
   };
 
   return (
@@ -141,17 +156,18 @@ export default function MOTable({moneyOrders}) {
                         <Typography className={classes.moneyAmount}>{row.moneyAmount}</Typography>    
                     </TableCell>
                     <TableCell>
-                        <Typography className={classes.paid} >
-                        <Button type="submit" variant="filled" style={{backgroundColor:'#ff0000'}}>Pay</Button>  
-                        </Typography>  
+                      
+                        <Button type="submit" variant="filled" style={{backgroundColor:'#000033',color:'white'}} onClick={handleSubmit(row.pid,userID)}>Pay</Button>  
+                      
                     </TableCell>
                 </TableRow>
             ))}
             
                   
           </TableBody>
-        </Table>  
-      <TableFooter>
+        </Table> 
+        </TableContainer> 
+      
       <TablePagination
         rowsPerPageOptions={[5, 10, 15]}
         component="div"
@@ -161,9 +177,9 @@ export default function MOTable({moneyOrders}) {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-      </TableFooter>
       
-    </TableContainer> 
+      
+     
     </Paper>
   );
 }

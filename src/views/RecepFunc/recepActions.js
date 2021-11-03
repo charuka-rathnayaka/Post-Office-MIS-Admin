@@ -5,9 +5,9 @@ export function addPostStart (data){
     return{type: types.ADD_POST_START,data}
 };
 
-export function addPostSuccess (){
-    //console.log(addPostSuccess);
-    return{type: types.ADD_POST_SUCCESS}
+export function addPostSuccess (pid){
+    console.log("at addpostsuccess",pid);
+    return{type: types.ADD_POST_SUCCESS,pid}
 };
 
 export function addPostFail (error){
@@ -18,9 +18,9 @@ export function addRegPostStart (data){
     return{type: types.ADD_REG_POST_START,data}
 };
 
-export function addRegPostSuccess (){
+export function addRegPostSuccess (pid){
     //console.log(addPostSuccess);
-    return{type: types.ADD_REG_POST_SUCCESS}
+    return{type: types.ADD_REG_POST_SUCCESS,pid}
 };
 
 export function addRegPostFail (error){
@@ -32,9 +32,9 @@ export function addLogiPostStart (data){
     return{type: types.ADD_LOGI_POST_START,data}
 };
 
-export function addLogiPostSuccess (){
+export function addLogiPostSuccess (pid){
     //console.log(addPostSuccess);
-    return{type: types.ADD_LOGI_POST_SUCCESS}
+    return{type: types.ADD_LOGI_POST_SUCCESS,pid}
 };
 
 export function addLogiPostFail (error){
@@ -46,9 +46,9 @@ export function addMoneyOrderStart (data){
     return{type: types.ADD_MONEYORDER_START,data}
 };
 
-export function addMoneyOrderSuccess (){
+export function addMoneyOrderSuccess (pid){
     //console.log(addPostSuccess);
-    return{type: types.ADD_MONEYORDER_SUCCESS}
+    return{type: types.ADD_MONEYORDER_SUCCESS,pid}
 };
 
 export function addMoneyOrderFail (error){
@@ -79,4 +79,17 @@ export function getMoneyOrdersSuccess (moneyOrders){
 
 export function getMoneyOrdersFail (error){
     return{type: types.GET_MONEYORDERS_FAIL,error}
+};
+export function removeMoneyOrderStart (id,userID){ 
+    //console.log(id);
+    return{type: types.REMOVE_MONEY_ORDER_START,id,userID}
+};
+
+export function removeMoneyOrderSuccess (){
+    //console.log("at addpostsuccess");
+    return{type: types.REMOVE_MONEY_ORDER_SUCCESS}
+};
+
+export function removeMoneyOrderFail (error){
+    return{type: types.REMOVE_MONEY_ORDER_FAIL,error}
 };

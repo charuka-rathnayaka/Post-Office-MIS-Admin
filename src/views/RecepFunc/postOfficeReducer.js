@@ -7,9 +7,10 @@ const initialState = {
     dataRetrieved:false,
     isLoading:false,
     moneyOrders:[],
-    postOfficeID:''
+    postOfficeID:'',
     
-}
+    
+} 
 
 function postOfficeReducer (state=initialState,action){
     //console.log("postOfficeReducer");
@@ -77,7 +78,7 @@ function postOfficeReducer (state=initialState,action){
         case types.ADD_MONEYORDER_SUCCESS:
             return{
                 ...state,
-                
+                pid:action.pid
             };
         
         case types.ADD_POST_FAIL:
@@ -90,7 +91,22 @@ function postOfficeReducer (state=initialState,action){
                 error:action.error,
 
             };
-            
+        case types.REMOVE_MONEY_ORDER_START:
+            //console.log("remove start");
+            return{
+                ...state,
+                id:action.id
+    
+            }
+        case types.REMOVE_MONEY_ORDER_SUCCESS:
+            return{
+                ...state
+            }
+        case types.REMOVE_MONEY_ORDER_FAIL:
+            return{
+                ...state,
+                error:action.error
+            }
         default:
             return state;
     }
