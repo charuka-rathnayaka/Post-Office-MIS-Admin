@@ -2,6 +2,7 @@
 import React,{useContext} from "react";
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 import Dashboard from "./views/Home/Dashboard/dashboard";
+import RecepDashboard from "./views/Home/ReceptionistDashboard/dashboard";
 import Login from "./views/Login/login";
 import { useDispatch } from "react-redux";
 import { AuthContext } from "./auth/auth.js";
@@ -14,6 +15,11 @@ import LiveDelivery from "./views/LiveDelivery/liveDelivery";
 import Registration from "./views/Registration/registration";
 import Statistics from "./views/Statistics/statistics";
 import Complains from "./views/Complains/complains";
+import NormalForm from "./views/RecepFunc/normPform";
+import RegisteredForm from "./views/RecepFunc/regPform";
+import LogiForm from "./views/RecepFunc/logiPform";
+import MoneyOrderForm from "./views/RecepFunc/moneyOform";
+import MoneyOrder from "./views/RecepFunc/moneyO";
 import MailAssignments from "./views/MailAssignments/mailAssignments";
 import MailTransfers from "./views/MailTransfers/mailTransfers";
 
@@ -35,53 +41,83 @@ function Authorization() {
       const isAuthorized= useSelector((state)=>state.homeReducer.isAuthorized);  
   return (
       <div className="App">
-      {isAuthorized==true?
+      {isAuthorized===true?
         <Router>
           <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/dashboard" children={
                 userRole? 
-                (userRole=="postmaster"?(<Dashboard />):
-                (userRole=="supervisor"?(<Dashboard />):
-                (userRole=="receptionist"?<AuthError errorCode={"403"} errorMessage={"Access Denied. Authorization Error Occured"}/>:<AuthError errorCode={"403"} errorMessage={"Access Denied. Authorization Error Occured"}/>)))
+                (userRole==="postmaster"?(<Dashboard />):
+                (userRole==="supervisor"?(<Dashboard />):
+                (userRole==="receptionist"?(<RecepDashboard/>):<AuthError errorCode={"403"} errorMessage={"Access Denied. Authorization Error Occured"}/>)))
                 :<AuthError errorCode={"403"} errorMessage={"Access Denied. Authorization Error Occured"}/>
             } />
             <Route exact path="/live-delivery" children={
                 userRole? 
-                (userRole=="postmaster"?(<LiveDelivery />):
+                (userRole==="postmaster"?(<LiveDelivery />):
                 <AuthError errorCode={"403"} errorMessage={"Access Denied. Authorization Error Occured"}/>)
                 :<AuthError errorCode={"403"} errorMessage={"Access Denied. Authorization Error Occured"}/>
             }/>
             <Route exact path="/registration" children={
                 userRole? 
-                (userRole=="postmaster"?(<Registration />):
-                (userRole=="supervisor"?(<Registration />):
+                (userRole==="postmaster"?(<Registration />):
+                (userRole==="supervisor"?(<Registration />):
                 <AuthError errorCode={"403"} errorMessage={"Access Denied. Authorization Error Occured"}/>))
                 :<AuthError errorCode={"403"} errorMessage={"Access Denied. Authorization Error Occured"}/>
             } />
             <Route exact path="/statistics" children={
                 userRole? 
-                (userRole=="postmaster"?(<Statistics />):
+                (userRole==="postmaster"?(<Statistics />):
                 <AuthError errorCode={"403"} errorMessage={"Access Denied. Authorization Error Occured"}/>)
                 :<AuthError errorCode={"403"} errorMessage={"Access Denied. Authorization Error Occured"}/>
             } />
             <Route exact path="/complains" children={
                 userRole? 
-                (userRole=="postmaster"?(<Complains />):
+                (userRole==="postmaster"?(<Complains />):
                 <AuthError errorCode={"403"} errorMessage={"Access Denied. Authorization Error Occured"}/>)
                 :<AuthError errorCode={"403"} errorMessage={"Access Denied. Authorization Error Occured"}/>
+            } />
+            <Route exact path="/normPForm" component={
+                userRole? 
+                (userRole==="receptionist"?(NormalForm):
+                AuthError)
+                :AuthError
+            } />
+            <Route exact path="/regPForm" component={
+                userRole? 
+                (userRole==="receptionist"?(RegisteredForm):
+                AuthError)
+                :AuthError
+            } />
+            <Route exact path="/logiPForm" component={
+                userRole? 
+                (userRole==="receptionist"?(LogiForm):
+                AuthError)
+                :AuthError
+            } />
+            <Route exact path="/moneyOForm" component={
+                userRole? 
+                (userRole==="receptionist"?(MoneyOrderForm):
+                AuthError)
+                :AuthError
+            } />
+            <Route exact path="/moneyO" component={
+                userRole? 
+                (userRole==="receptionist"?(MoneyOrder):
+                AuthError)
+                :AuthError
             } />
 
             <Route exact path="/mail-assignments" children={
                 userRole? 
-                (userRole=="supervisor"?(<MailAssignments />):
+                (userRole==="supervisor"?(<MailAssignments />):
                 <AuthError errorCode={"403"} errorMessage={"Access Denied. Authorization Error Occured"}/>)
                 :<AuthError errorCode={"403"} errorMessage={"Access Denied. Authorization Error Occured"}/>
             } />
 
             <Route exact path="/mail-transfer" children={
                 userRole? 
-                (userRole=="supervisor"?(<MailTransfers/>):
+                (userRole==="supervisor"?(<MailTransfers/>):
                 <AuthError errorCode={"403"} errorMessage={"Access Denied. Authorization Error Occured"}/>)
                 :<AuthError errorCode={"403"} errorMessage={"Access Denied. Authorization Error Occured"}/>
             } />

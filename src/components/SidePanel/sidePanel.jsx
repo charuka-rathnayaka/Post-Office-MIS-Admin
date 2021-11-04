@@ -18,6 +18,8 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import PaymentIcon from '@material-ui/icons/Payment';
 
 function MainDrawer(props) {
   const classes = useStyles();
@@ -360,6 +362,233 @@ function MainDrawer(props) {
               </NavLink>
             </div>):null
         )}
+        {
+
+userRole=="receptionist"?
+  (<div>
+    <NavLink
+      to="/dashboard"
+      style={{
+        color: "#f7f3f2",
+        textDecoration: "none",
+        fontFamily: "Mulish",
+        fontWeight: "bold",
+        fontSize: "16px",
+        fontStyle: "normal",
+      }}
+      activeStyle={{
+        color: "#63231c",
+        backgroundColor: "#de8071",
+        fontWeight: "bold",
+        
+      }}
+    >
+      <ListItem
+        button
+        className={classes.listItem}
+        style={{
+          backgroundColor: "inherit",
+          fontFamily: "Poppins !important",
+        }}
+      >
+        <ListItemIcon>
+          <Badge color="secondary" variant="dot" invisible={true}>
+          <DashboardIcon style={{color:"white"}} activeStyle={{color:"red"}}/>
+          </Badge>
+        </ListItemIcon>
+        <label
+          style={{ fontFamily: "Poppins !important" }}
+          className={classes.DrawerLables}
+        >
+          Dashboard
+        </label>
+      </ListItem>
+    </NavLink>
+
+    <NavLink
+      to="/normPform"
+      style={{
+        color: "#f7f3f2",
+        textDecoration: "none",
+        fontFamily: "Mulish",
+        fontWeight: "bold",
+        fontSize: "16px",
+        fontStyle: "normal",
+      }}
+      activeStyle={{
+        color: "#63231c",
+        backgroundColor: "#de8071",
+        fontWeight: "bold",
+        
+      }}
+    >
+      <ListItem
+        button
+        className={classes.listItem}
+        style={{
+          backgroundColor: "inherit",
+          fontFamily: "Poppins !important",
+        }}
+      >
+        <ListItemIcon style={{ position: "relative" }}>
+          <AddBoxIcon/>
+        </ListItemIcon>
+        <label
+          style={{ fontFamily: "Poppins !important" }}
+          className={classes.DrawerLables}
+        >
+          Normal Post
+        </label>
+      </ListItem>
+    </NavLink>
+
+    <NavLink
+      to="/regPform"
+      style={{
+        color: "#f7f3f2",
+        textDecoration: "none",
+        fontFamily: "Mulish",
+        fontWeight: "bold",
+        fontSize: "16px",
+        fontStyle: "normal",
+      }}
+      activeStyle={{
+        color: "#63231c",
+        backgroundColor: "#de8071",
+        fontWeight: "bold",
+        
+      }}
+    >
+      <ListItem
+        button
+        className={classes.listItem}
+        style={{
+          backgroundColor: "inherit",
+          fontFamily: "Poppins !important",
+        }}
+      >
+        <ListItemIcon style={{ position: "relative" }}>
+          <AddBoxIcon/>
+        </ListItemIcon>
+        <label
+          style={{ fontFamily: "Poppins !important" }}
+          className={classes.DrawerLables}
+        >
+          Registered Post
+        </label>
+      </ListItem>
+    </NavLink>
+
+    <NavLink
+      to="/logiPform"
+      style={{
+        color: "#f7f3f2",
+        textDecoration: "none",
+        fontFamily: "Mulish",
+        fontWeight: "bold",
+        fontSize: "16px",
+        fontStyle: "normal",
+      }}
+      activeStyle={{
+        color: "#63231c",
+        backgroundColor: "#de8071",
+        fontWeight: "bold",
+        
+      }}
+    >
+      <ListItem
+        button
+        className={classes.listItem}
+        style={{
+          backgroundColor: "inherit",
+          fontFamily: "Poppins !important",
+        }}
+      >
+        <ListItemIcon style={{ position: "relative" }}>
+          <AddBoxIcon/>
+        </ListItemIcon>
+        <label
+          style={{ fontFamily: "Poppins !important" }}
+          className={classes.DrawerLables}
+        >
+          Logi Post
+        </label>
+      </ListItem>
+    </NavLink>
+    <NavLink
+      to="/moneyOform"
+      style={{
+        color: "#f7f3f2",
+        textDecoration: "none",
+        fontFamily: "Mulish",
+        fontWeight: "bold",
+        fontSize: "16px",
+        fontStyle: "normal",
+      }}
+      activeStyle={{
+        color: "#63231c",
+        backgroundColor: "#de8071",
+        fontWeight: "bold",
+        
+      }}
+    >
+      <ListItem
+        button
+        className={classes.listItem}
+        style={{
+          backgroundColor: "inherit",
+          fontFamily: "Poppins !important",
+        }}
+      >
+        <ListItemIcon style={{ position: "relative" }}>
+          <AddBoxIcon/>
+        </ListItemIcon>
+        <label
+          style={{ fontFamily: "Poppins !important" }}
+          className={classes.DrawerLables}
+        >
+          Money Order
+        </label>
+      </ListItem>
+    </NavLink>
+    <NavLink
+      to="/moneyO"
+      style={{
+        color: "#f7f3f2",
+        textDecoration: "none",
+        fontFamily: "Mulish",
+        fontWeight: "bold",
+        fontSize: "16px",
+        fontStyle: "normal",
+      }}
+      activeStyle={{
+        color: "#63231c",
+        backgroundColor: "#de8071",
+        fontWeight: "bold",
+        
+      }}
+    >
+    <ListItem
+      button
+      className={classes.listItem}
+      style={{
+        backgroundColor: "inherit",
+        fontFamily: "Poppins !important",
+      }}
+    >
+    <ListItemIcon style={{ position: "relative" }}>
+      <PaymentIcon/>
+    </ListItemIcon>
+    <label
+      style={{ fontFamily: "Poppins !important" }}
+      className={classes.DrawerLables}
+    >
+      Pay Money Order
+    </label>
+    </ListItem>
+    </NavLink>
+  </div>):null
+  };
 
       </List>
 
