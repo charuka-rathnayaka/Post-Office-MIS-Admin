@@ -12,7 +12,11 @@ async function getUserDetails(uID,email){
         .get()
         .then((doc)=>{
             var userData=doc.data();
-            //console.log("post office ",userData.postOffice.id)
+            console.log("post office ",userData.role)
+            if(userData.role=="postman" || userData.role=="deliveryLogKeeper"){
+                console.log("lofg - ",userData.role)
+                app.auth().signOut();
+            }
             return userData;
         })
         .catch((e)=>{

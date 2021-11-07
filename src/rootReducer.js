@@ -9,6 +9,7 @@ import statisticsReducer from "./views/Statistics/statisticsReducer.js";
 import complainsReducer from "./views/Complains/complainsReducer.js";
 import MailAssignmentsReducer from "./views/MailAssignments/mailAssignmentsReducer.js";
 import MailTransfersReducer from "./views/MailTransfers/mailTransfersReducer.js";
+import postmenRoutesReducer from "./views/PostmenRoutes/postmenRoutesReducer.js";
 
 export default combineReducers({
   loginReducer,
@@ -20,5 +21,6 @@ export default combineReducers({
   statisticsReducer,
   complainsReducer,
   MailAssignmentsReducer,
-  MailTransfersReducer
+  MailTransfersReducer,
+  postmenRoutesReducer
 });
