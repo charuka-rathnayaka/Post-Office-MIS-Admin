@@ -85,6 +85,7 @@ function* submitAssignments(assignments){
         if(assignment.postmanID!="-"){
             var Mailref = firestore.collection('PendingMails').doc(assignment.pid);
             Mailref.update({
+                "pid":assignment.pid,
                 "state": "Assigned",
                 "histories": arrayUnion({action:"Assigned",employee:firestore.doc('Users/' +assignment.postmanID)})
             })

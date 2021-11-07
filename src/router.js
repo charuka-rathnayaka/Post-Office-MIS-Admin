@@ -22,7 +22,7 @@ import MoneyOrderForm from "./views/RecepFunc/moneyOform";
 import MoneyOrder from "./views/RecepFunc/moneyO";
 import MailAssignments from "./views/MailAssignments/mailAssignments";
 import MailTransfers from "./views/MailTransfers/mailTransfers";
-
+import PostmenRoutes from "./views/PostmenRoutes/postmenRoutes";
 
 function Authorization() {
     const dispatch = useDispatch();
@@ -122,7 +122,12 @@ function Authorization() {
                 :<AuthError errorCode={"403"} errorMessage={"Access Denied. Authorization Error Occured"}/>
             } />
 
-           
+            <Route exact path="/postmen-routes" children={
+                userRole? 
+                (userRole==="supervisor"?(<PostmenRoutes/>):
+                <AuthError errorCode={"403"} errorMessage={"Access Denied. Authorization Error Occured"}/>)
+                :<AuthError errorCode={"403"} errorMessage={"Access Denied. Authorization Error Occured"}/>
+            } />      
 
             <Route exact path="/">
               <Redirect to="/dashboard" />
