@@ -175,7 +175,7 @@ function MoneyOrderForm({postOffice}) {
                             <TextField
                                 required
                                 id="filled-full-width"
-                                label="required"
+                                label="Sender Name"
                                 variant="filled"
                                 type="text"
                                 className="form-control"
@@ -197,7 +197,7 @@ function MoneyOrderForm({postOffice}) {
                             <TextField
                                 required
                                 id="filled-full-width"
-                                label="required"
+                                label="Sender ID"
                                 variant="filled"
                                 type="text"
                                 className="form-control"
@@ -220,7 +220,7 @@ function MoneyOrderForm({postOffice}) {
                             <TextField
                                 required
                                 id="filled-full-width"
-                                label="required"
+                                label="Recipient Name"
                                 variant="filled"
                                 type="text"
                                 className="form-control"
@@ -242,7 +242,7 @@ function MoneyOrderForm({postOffice}) {
                             <TextField
                                 required
                                 id="filled-full-width"
-                                label="required"
+                                label="Recipient ID"
                                 variant="filled"
                                 type="text"
                                 className="form-control"
@@ -265,7 +265,7 @@ function MoneyOrderForm({postOffice}) {
                             <TextField
                                 required
                                
-                                label="required"
+                                label="Cost"
                                 variant="filled"
                                 type="float"
                                 className="form-control"
@@ -274,7 +274,7 @@ function MoneyOrderForm({postOffice}) {
                                 onChange={initialState.handleChange}
                                 id="filled-full-width"
                                 style={{ margin: 8 }}
-                                placeholder="Cost"
+                                placeholder="Cost(Rs)"
                                 fullWidth
                                 margin="normal"
                                 InputLabelProps={{
@@ -288,7 +288,7 @@ function MoneyOrderForm({postOffice}) {
                             <TextField
                                 required
                                
-                                label="required"
+                                label="Money Amount"
                                 variant="filled"
                                 type="float"
                                 className="form-control"
@@ -297,7 +297,7 @@ function MoneyOrderForm({postOffice}) {
                                 onChange={initialState.handleChange}
                                 id="filled-full-width"
                                 style={{ margin: 8 }}
-                                placeholder="Amount of Money"
+                                placeholder="Amount of Money(Rs)"
                                 fullWidth
                                 margin="normal"
                                 InputLabelProps={{
@@ -360,7 +360,7 @@ function MoneyOrderForm({postOffice}) {
                 aria-labelledby="alert-dialog-slide-title"
                 aria-describedby="alert-dialog-slide-description"
             >
-                <DialogTitle id="alert-dialog-slide-title">{"Barcode for the Post"}</DialogTitle>
+                <DialogTitle id="alert-dialog-slide-title">{"Security Code & PID"}</DialogTitle>
                 <DialogContent>
                 <DialogContentText id="alert-dialog-slide-description">
                     <div ref={wrapper_ref}>

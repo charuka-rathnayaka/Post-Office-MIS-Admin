@@ -371,14 +371,14 @@ userRole=="receptionist"?
       style={{
         color: "#f7f3f2",
         textDecoration: "none",
-        fontFamily: "Mulish",
+        fontFamily: "Rubik, sans-serif",
         fontWeight: "bold",
         fontSize: "16px",
         fontStyle: "normal",
       }}
       activeStyle={{
-        color: "#63231c",
-        backgroundColor: "#de8071",
+        color: "#030114",
+        backgroundColor: "#e6e3fa",
         fontWeight: "bold",
         
       }}
@@ -393,7 +393,7 @@ userRole=="receptionist"?
       >
         <ListItemIcon>
           <Badge color="secondary" variant="dot" invisible={true}>
-          <DashboardIcon style={{color:"white"}} activeStyle={{color:"red"}}/>
+          <DashboardIcon color='primary' style={{ color:"#727287"}}/>
           </Badge>
         </ListItemIcon>
         <label
@@ -410,14 +410,14 @@ userRole=="receptionist"?
       style={{
         color: "#f7f3f2",
         textDecoration: "none",
-        fontFamily: "Mulish",
+        fontFamily: "Rubik, sans-serif",
         fontWeight: "bold",
         fontSize: "16px",
         fontStyle: "normal",
       }}
       activeStyle={{
-        color: "#63231c",
-        backgroundColor: "#de8071",
+        color: "#030114",
+        backgroundColor: "#e6e3fa",
         fontWeight: "bold",
         
       }}
@@ -431,7 +431,7 @@ userRole=="receptionist"?
         }}
       >
         <ListItemIcon style={{ position: "relative" }}>
-          <AddBoxIcon/>
+          <AddBoxIcon color='primary' style={{ color:"#727287"}}/>
         </ListItemIcon>
         <label
           style={{ fontFamily: "Poppins !important" }}
@@ -447,14 +447,14 @@ userRole=="receptionist"?
       style={{
         color: "#f7f3f2",
         textDecoration: "none",
-        fontFamily: "Mulish",
+        fontFamily: "Rubik, sans-serif",
         fontWeight: "bold",
         fontSize: "16px",
         fontStyle: "normal",
       }}
       activeStyle={{
-        color: "#63231c",
-        backgroundColor: "#de8071",
+        color: "#030114",
+        backgroundColor: "#e6e3fa",
         fontWeight: "bold",
         
       }}
@@ -468,7 +468,7 @@ userRole=="receptionist"?
         }}
       >
         <ListItemIcon style={{ position: "relative" }}>
-          <AddBoxIcon/>
+          <AddBoxIcon color='primary' style={{ color:"#727287"}}/>
         </ListItemIcon>
         <label
           style={{ fontFamily: "Poppins !important" }}
@@ -484,14 +484,14 @@ userRole=="receptionist"?
       style={{
         color: "#f7f3f2",
         textDecoration: "none",
-        fontFamily: "Mulish",
+        fontFamily: "Rubik, sans-serif",
         fontWeight: "bold",
         fontSize: "16px",
         fontStyle: "normal",
       }}
       activeStyle={{
-        color: "#63231c",
-        backgroundColor: "#de8071",
+        color: "#030114",
+        backgroundColor: "#e6e3fa",
         fontWeight: "bold",
         
       }}
@@ -505,7 +505,7 @@ userRole=="receptionist"?
         }}
       >
         <ListItemIcon style={{ position: "relative" }}>
-          <AddBoxIcon/>
+          <AddBoxIcon color='primary' style={{ color:"#727287"}}/>
         </ListItemIcon>
         <label
           style={{ fontFamily: "Poppins !important" }}
@@ -520,14 +520,14 @@ userRole=="receptionist"?
       style={{
         color: "#f7f3f2",
         textDecoration: "none",
-        fontFamily: "Mulish",
+        fontFamily: "Rubik, sans-serif",
         fontWeight: "bold",
         fontSize: "16px",
         fontStyle: "normal",
       }}
       activeStyle={{
-        color: "#63231c",
-        backgroundColor: "#de8071",
+        color: "#030114",
+        backgroundColor: "#e6e3fa",
         fontWeight: "bold",
         
       }}
@@ -541,7 +541,7 @@ userRole=="receptionist"?
         }}
       >
         <ListItemIcon style={{ position: "relative" }}>
-          <AddBoxIcon/>
+          <AddBoxIcon color='primary' style={{ color:"#727287"}}/>
         </ListItemIcon>
         <label
           style={{ fontFamily: "Poppins !important" }}
@@ -556,14 +556,14 @@ userRole=="receptionist"?
       style={{
         color: "#f7f3f2",
         textDecoration: "none",
-        fontFamily: "Mulish",
+        fontFamily: "Rubik, sans-serif",
         fontWeight: "bold",
         fontSize: "16px",
         fontStyle: "normal",
       }}
       activeStyle={{
-        color: "#63231c",
-        backgroundColor: "#de8071",
+        color: "#030114",
+        backgroundColor: "#e6e3fa",
         fontWeight: "bold",
         
       }}
@@ -577,7 +577,7 @@ userRole=="receptionist"?
       }}
     >
     <ListItemIcon style={{ position: "relative" }}>
-      <PaymentIcon/>
+      <PaymentIcon color='primary' style={{ color:"#727287"}}/>
     </ListItemIcon>
     <label
       style={{ fontFamily: "Poppins !important" }}
