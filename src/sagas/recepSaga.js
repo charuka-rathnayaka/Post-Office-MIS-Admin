@@ -141,7 +141,7 @@ async function addLogiPostDetails(senderName,senderAddressNo,senderStreet1,sende
         cost:cost,
         type: "Package",
         timestamp:firebase.firestore.Timestamp.now(),
-        state:"Accept",
+        state:"Accepted",
         signature:"",
         weight:weight
     })
@@ -228,7 +228,7 @@ function* getPostOffice(){
 
     const Data = yield take(channel);
     //console.log("Charitha");
-    return Data.docs.map((doc: any) => {
+    return Data.docs.map((doc) => {
         const data = doc.data();
         const documentID = doc.id;
         //console.log(data.city);
@@ -254,7 +254,7 @@ function* getMoneyOrders(postOfficeID){
 
     const Data = yield take(channel);
     //console.log("Charitha");
-    return Data.docs.map((doc: any) => {
+    return Data.docs.map((doc) => {
         const data = doc.data();
         const documentID = doc.id;
         console.log(documentID);
@@ -314,8 +314,8 @@ export function* addPostDetailsSaga(data){
     //console.log("addpostsaga",data.data.values)   
     const recipientName = data.data.values.recipientName
     const recipientAddressNo= data.data.values.recipientAddressNo
-    const recipientStreet1=data.data.values.recipientStreet1
-    const recipientStreet2=data.data.values.recipientStreet2
+    const recipientStreet1=data.data.values.recipientStreet1.toLowerCase()
+    const recipientStreet2=data.data.values.recipientStreet2.toLowerCase()
     const recipientCity =data.data.values.recipientCity
     const cost=data.data.values.cost
     //const pid=data.data.values.pid+data.num
@@ -338,14 +338,14 @@ export function* addRegPostDetailsSaga(data){
     //console.log("addpostsaga",data.data.values) 
     const senderName=data.data.values.senderName
     const senderAddressNo=data.data.values.senderAddressNo
-    const senderStreet1=data.data.values.senderStreet1
-    const senderStreet2=data.data.values.senderStreet2
+    const senderStreet1=data.data.values.senderStreet1.toLowerCase()
+    const senderStreet2=data.data.values.senderStreet2.toLowerCase()
     const senderCity=data.data.values.senderCity
     const senderEmail=data.data.values.senderEmail  
     const recipientName = data.data.values.recipientName
     const recipientAddressNo= data.data.values.recipientAddressNo
-    const recipientStreet1=data.data.values.recipientStreet1
-    const recipientStreet2=data.data.values.recipientStreet2
+    const recipientStreet1=data.data.values.recipientStreet1.toLowerCase()
+    const recipientStreet2=data.data.values.recipientStreet2.toLowerCase()
     const recipientCity =data.data.values.recipientCity
     const cost=data.data.values.cost
     //const pid=data.data.values.pid+data.num
@@ -364,18 +364,18 @@ export function* addRegPostDetailsSaga(data){
 }
 
 export function* addLogiPostDetailsSaga(data){
-    //console.log("num",data.num);
+    console.log("num",data.num);
     //console.log("addpostsaga",data.data.values)  
     const senderName=data.data.values.senderName
     const senderAddressNo=data.data.values.senderAddressNo
-    const senderStreet1=data.data.values.senderStreet1
-    const senderStreet2=data.data.values.senderStreet2
+    const senderStreet1=data.data.values.senderStreet1.toLowerCase()
+    const senderStreet2=data.data.values.senderStreet2.toLowerCase()
     const senderCity=data.data.values.senderCity
     const senderEmail=data.data.values.senderEmail  
     const recipientName = data.data.values.recipientName
     const recipientAddressNo= data.data.values.recipientAddressNo
-    const recipientStreet1=data.data.values.recipientStreet1
-    const recipientStreet2=data.data.values.recipientStreet2
+    const recipientStreet1=data.data.values.recipientStreet1.toLowerCase()
+    const recipientStreet2=data.data.values.recipientStreet2.toLowerCase()
     const recipientCity =data.data.values.recipientCity
     const recipientEmail=data.data.values.recipientEmail 
     const cost=data.data.values.cost
@@ -387,9 +387,9 @@ export function* addLogiPostDetailsSaga(data){
     const destinationPostoffice=data.data.values.destinationPostOffice
     const weight=data.data.values.weight
     
-    
+    console.log("street",senderStreet1,senderStreet2)
     let result = yield call(addLogiPostDetails,senderName,senderAddressNo,senderStreet1,senderStreet2,senderCity,senderEmail,recipientName,recipientAddressNo,recipientStreet1,recipientStreet2,recipientCity,recipientEmail,cost,loc_lat,loc_long,employee,acceptedPostoffice,destinationPostoffice,weight);
-    //console.log("res add",result)
+    console.log("res add",result)
     
     yield put(addPostSuccess(result.id));
     

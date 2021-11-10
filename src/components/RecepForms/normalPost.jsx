@@ -174,7 +174,7 @@ function NormalForm({postOffice}) {
                             <TextField
                                 required
                                 data-testid="recipientName"
-                                label="required"
+                                label="Recipient Name"
                                 variant="filled"
                                 type="text"
                                 className="form-control"
@@ -196,7 +196,7 @@ function NormalForm({postOffice}) {
                             <TextField
                                 required
                                 data-testid="recipientAddressNo"
-                                label="required"
+                                label="Recipient Address"
                                 variant="filled"
                                 type="text"
                                 className="form-control"
@@ -219,7 +219,7 @@ function NormalForm({postOffice}) {
                             <TextField
                                 required
                                 data-testid="recipientStreet1"
-                                label="required"
+                                label="Recipient Street1"
                                 variant="filled"
                                 type="text"
                                 className="form-control"
@@ -248,7 +248,7 @@ function NormalForm({postOffice}) {
                                 className="form-control"
                                 name="recipientStreet2"
                                 value={initialState.values.recipientStreet2}
-                                
+                                label="Recipient Street2"
                                 onChange={initialState.handleChange}
                                 data-testid="recipientStreet2"
                                 style={{ margin: 8 }}
@@ -266,7 +266,7 @@ function NormalForm({postOffice}) {
                             <TextField
                                 required
                                 
-                                label="required"
+                                label="Recipient City"
                                 variant="filled"
                                 type="text"
                                 className="form-control"
@@ -289,7 +289,7 @@ function NormalForm({postOffice}) {
                             <TextField
                                 required
                                
-                                label="required"
+                                label="Cost"
                                 variant="filled"
                                 type="number"
                                 className="form-control"
@@ -298,7 +298,7 @@ function NormalForm({postOffice}) {
                                 onChange={initialState.handleChange}
                                 data-testid="cost"
                                 style={{ margin: 8 }}
-                                placeholder="Cost"
+                                placeholder="Cost(Rs)"
                                 fullWidth
                                 margin="normal"
                                 InputLabelProps={{

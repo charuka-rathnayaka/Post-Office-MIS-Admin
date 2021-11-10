@@ -170,7 +170,7 @@ function RegisteredForm({postOffice}) {
                             <TextField
                                 required
                                 id="filled-full-width"
-                                label="required"
+                                label="Sender Name"
                                 variant="filled"
                                 type="text"
                                 className="form-control"
@@ -192,7 +192,7 @@ function RegisteredForm({postOffice}) {
                             <TextField
                                 required
                                 id="filled-full-width"
-                                label="required"
+                                label="Sender Address"
                                 variant="filled"
                                 type="text"
                                 className="form-control"
@@ -215,7 +215,7 @@ function RegisteredForm({postOffice}) {
                             <TextField
                                 required
                                 iid="filled-full-width"
-                                label="required"
+                                label="Sender Street1"
                                 variant="filled"
                                 type="text"
                                 className="form-control"
@@ -244,7 +244,7 @@ function RegisteredForm({postOffice}) {
                                 className="form-control"
                                 name="senderStreet2"
                                 value={initialState.values.senderStreet2}
-                                
+                                label="Sender Street2"
                                 onChange={initialState.handleChange}
                                 id="filled-full-width"
                                 style={{ margin: 8 }}
@@ -262,7 +262,7 @@ function RegisteredForm({postOffice}) {
                             <TextField
                                 required
                                 
-                                label="required"
+                                label="senderCity"
                                 variant="filled"
                                 type="text"
                                 className="form-control"
@@ -285,7 +285,7 @@ function RegisteredForm({postOffice}) {
                             <TextField
                                 required
                                 
-                                label="required"
+                                label="Sender Email"
                                 variant="filled"
                                 type="email"
                                 className="form-control"
@@ -308,7 +308,7 @@ function RegisteredForm({postOffice}) {
                             <TextField
                                 required
                                 id="filled-full-width"
-                                label="required"
+                                label="Recipient Name"
                                 variant="filled"
                                 type="text"
                                 className="form-control"
@@ -330,7 +330,7 @@ function RegisteredForm({postOffice}) {
                             <TextField
                                 required
                                 id="filled-full-width"
-                                label="required"
+                                label="Recipient Address No"
                                 variant="filled"
                                 type="text"
                                 className="form-control"
@@ -353,7 +353,7 @@ function RegisteredForm({postOffice}) {
                             <TextField
                                 required
                                 iid="filled-full-width"
-                                label="required"
+                                label="Recipient Street1"
                                 variant="filled"
                                 type="text"
                                 className="form-control"
@@ -382,7 +382,7 @@ function RegisteredForm({postOffice}) {
                                 className="form-control"
                                 name="recipientStreet2"
                                 value={initialState.values.recipientStreet2}
-                                
+                                label="Recipient Street2"
                                 onChange={initialState.handleChange}
                                 id="filled-full-width"
                                 style={{ margin: 8 }}
@@ -400,7 +400,7 @@ function RegisteredForm({postOffice}) {
                             <TextField
                                 required
                                 
-                                label="required"
+                                label="Recipient City"
                                 variant="filled"
                                 type="text"
                                 className="form-control"
@@ -423,7 +423,7 @@ function RegisteredForm({postOffice}) {
                             <TextField
                                 required
                                
-                                label="required"
+                                label="Cost"
                                 variant="filled"
                                 type="number"
                                 className="form-control"
@@ -432,7 +432,7 @@ function RegisteredForm({postOffice}) {
                                 onChange={initialState.handleChange}
                                 id="filled-full-width"
                                 style={{ margin: 8 }}
-                                placeholder="Cost"
+                                placeholder="Cost(Rs)"
                                 fullWidth
                                 margin="normal"
                                 InputLabelProps={{

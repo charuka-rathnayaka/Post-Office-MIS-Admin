@@ -11,6 +11,10 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import { Button, TableFooter, Typography } from '@material-ui/core';
 import {removeMoneyOrderStart} from "../../views/RecepFunc/recepActions";
+import Alert from '@material-ui/lab/Alert';
+import Collapse from '@material-ui/core/Collapse';
+
+
 
 
 
@@ -86,7 +90,9 @@ export default function MOTable({moneyOrders}) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const userID = useSelector((state)=>state.homeReducer.currentUserID);
+  const dataSend = useSelector((state)=>state.postOfficeReducer.dataSend);
   const [page, setPage] = React.useState(0);
+  const [open, setOpen] = React.useState(true);
   const [rowsPerPage, setRowsPerPage] = React.useState(15);
   let MoneyOrders=[]
   for (let i=0;i<moneyOrders.length;i++){
@@ -106,7 +112,7 @@ export default function MOTable({moneyOrders}) {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
+  
   const handleChangeRowsPerPage = (event) => {
     //console.log("Ch")
     setRowsPerPage(+event.target.value);
@@ -115,8 +121,10 @@ export default function MOTable({moneyOrders}) {
   const handleSubmit=(id,userID)=> (event)=>{
     event.preventDefault();
     //console.log("handle",id)
+    
     dispatch(removeMoneyOrderStart(id,userID))
-
+    
+    
   };
 
   return (
@@ -158,7 +166,7 @@ export default function MOTable({moneyOrders}) {
                     <TableCell>
                       
                         <Button type="submit" variant="filled" style={{backgroundColor:'#000033',color:'white'}} onClick={handleSubmit(row.pid,userID)}>Pay</Button>  
-                      
+                        
                     </TableCell>
                 </TableRow>
             ))}
@@ -178,7 +186,12 @@ export default function MOTable({moneyOrders}) {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
       
-      
+    {(dataSend)?
+    <Collapse in={open}>
+    <Alert onClose={() => {setOpen(false);}}>Successfully Updated Money Order!</Alert>
+    </Collapse>
+    :<p></p>
+    } 
      
     </Paper>
   );

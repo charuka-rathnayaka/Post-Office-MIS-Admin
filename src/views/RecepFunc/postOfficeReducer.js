@@ -8,6 +8,7 @@ const initialState = {
     isLoading:false,
     moneyOrders:[],
     postOfficeID:'',
+    dataSend:false
     
     
 } 
@@ -95,17 +96,20 @@ function postOfficeReducer (state=initialState,action){
             //console.log("remove start");
             return{
                 ...state,
-                id:action.id
+                id:action.id,
+                dataSend:false
     
             }
         case types.REMOVE_MONEY_ORDER_SUCCESS:
             return{
-                ...state
+                ...state,
+                dataSend:true
             }
         case types.REMOVE_MONEY_ORDER_FAIL:
             return{
                 ...state,
-                error:action.error
+                error:action.error,
+                dataSend:false
             }
         default:
             return state;
