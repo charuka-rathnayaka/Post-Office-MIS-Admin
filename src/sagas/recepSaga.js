@@ -141,7 +141,7 @@ async function addLogiPostDetails(senderName,senderAddressNo,senderStreet1,sende
         cost:cost,
         type: "Package",
         timestamp:firebase.firestore.Timestamp.now(),
-        state:"Accept",
+        state:"Accepted",
         signature:"",
         weight:weight
     })

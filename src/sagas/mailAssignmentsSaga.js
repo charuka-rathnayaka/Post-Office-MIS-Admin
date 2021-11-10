@@ -8,7 +8,7 @@ import { arrayUnion } from "firebase/firestore";
 
 function* getMails(postOffice){
     const postOfficeRef= firestore.collection("PostOffice").doc(postOffice)
-    const ref = firestore.collection("PendingMails").where("state","==","destinationArrived").where("destinationPostoffice","==",postOfficeRef);
+    const ref = firestore.collection("PendingMails").where("state","==","DestinationArrived").where("destinationPostoffice","==",postOfficeRef);
     const channel = eventChannel((emit) => ref.onSnapshot(emit));
     const Data = yield take(channel);
     return Data.docs.map((doc) => {
