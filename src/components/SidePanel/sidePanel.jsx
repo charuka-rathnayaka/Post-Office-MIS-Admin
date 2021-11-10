@@ -21,6 +21,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import PaymentIcon from '@material-ui/icons/Payment';
 
+
 function MainDrawer(props) {
   const classes = useStyles();
   const { width } = props;
@@ -360,6 +361,42 @@ function MainDrawer(props) {
                   </label>
                 </ListItem>
               </NavLink>
+
+              <NavLink
+                to="/postmen-routes"
+                style={{
+                  color: "#f7f3f2",
+                  textDecoration: "none",
+                  fontFamily: "Mulish",
+                  fontWeight: "bold",
+                  fontSize: "16px",
+                  fontStyle: "normal",
+                }}
+                activeStyle={{
+                  color: "#030114",
+                  backgroundColor: "#e6e3fa",
+                  fontWeight: "bold",
+                  
+                }}
+                className={classes.NavButton}
+              >
+                <ListItem
+                  button
+                  className={classes.listItem}
+                  
+                >
+                  <ListItemIcon style={{ position: "relative",color:"white"}}>
+                    <DirectionsBikeIcon color='primary' style={{ color:"#727287"}}/>
+                  </ListItemIcon>
+                  <label
+                    style={{ fontFamily: "Poppins !important" }}
+                    className={classes.DrawerLables}
+                  >
+                    Postmen Routes
+                  </label>
+                </ListItem>
+              </NavLink>
+
             </div>):null
         )}
         {

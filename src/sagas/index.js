@@ -9,6 +9,7 @@ import * as statisticsActionTypes from "./../views/Statistics/statisticActionTyp
 import * as complainsActionTypes from "./../views/Complains/complainsActionTypes";
 import * as mailAssignmentsActionTypes from "./../views/MailAssignments/mailAssignmentsActionTypes";
 import * as mailTransfersActionTypes from "./../views/MailTransfers/mailTransfersActionTypes";
+import * as postmenRoutesActionTypes from "./../views/PostmenRoutes/postmenRoutesActionTypes";
 import { loginSaga,logoutSaga } from "./loginSaga.js";
 import { getUserDetailsSaga } from "./homeSaga.js";
 import { addEmployeeSaga } from "./employeeRegistrationSaga.js";
@@ -20,6 +21,7 @@ import { getCountDataSaga } from "./statisticsSaga.js";
 import { getComplainDataSaga,setComplainSolvedSaga } from "./complainsSaga.js";
 import { getMailsSaga,submitAssignmentsSaga } from "./mailAssignmentsSaga.js";
 import { confirmTransfersSaga, getTransfersSaga } from "./mailTransfersSaga.js";
+import { getPostmenRoutesDataSaga, addStreetSaga,removeStreetSaga} from "./postmenRoutesSaga.js";
 
 export default function* root() {
   yield all([
@@ -43,5 +45,8 @@ export default function* root() {
     takeEvery(mailTransfersActionTypes.GET_TRANSFERS_REQUEST,getTransfersSaga),
     takeEvery(mailTransfersActionTypes.CONFIRM_TRANSFER_REQUEST,confirmTransfersSaga),
     takeEvery(recepActionTypes.REMOVE_MONEY_ORDER_START,removeMoneyOrderSaga),
+    takeEvery(postmenRoutesActionTypes.POSTMEN_ROUTES_DATA_REQUEST,getPostmenRoutesDataSaga ),
+    takeEvery(postmenRoutesActionTypes.POSTMAN_ROUTE_SAVE_REQUEST,addStreetSaga ),
+    takeEvery(postmenRoutesActionTypes.POSTMAN_ROUTE_REMOVE_REQUEST,removeStreetSaga ),
   ]);
 }

@@ -12,7 +12,7 @@ function* getLiveLocations(data) {
   const channel = eventChannel((emit) => ref.onSnapshot(emit));
   while(true){
     try {
-        console.log("trying")
+        
         const Data = yield take(channel);
             return Data.docs.map((doc) => {
                 const data = doc.data();
